@@ -98,12 +98,14 @@ export default function Footer() {
               )}
               <div>
                 <div className="font-bold text-xl sm:text-2xl bg-admin-gradient bg-clip-text text-transparent">
-                  {themeData?.siteName?.split(' ')[0] || "Sri Jaidev"}
+                  {themeData?.siteName?.includes('Tours') 
+                    ? themeData.siteName.split('Tours')[0].trim()
+                    : themeData?.siteName?.split(' ').slice(0, 2).join(' ') || "Sri Jaidev"}
                 </div>
                 <div className="text-sm sm:text-base font-medium">
                   {themeData?.siteName?.includes('Tours') 
                     ? 'Tours & Travels' 
-                    : themeData?.siteName?.split(' ').slice(1).join(' ') || 'Tours & Travels'}
+                    : themeData?.siteName?.split(' ').slice(2).join(' ') || 'Tours & Travels'}
                 </div>
               </div>
             </Link>

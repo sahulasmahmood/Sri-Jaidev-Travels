@@ -25,11 +25,11 @@
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
 
-    /* Admin Theme Variables */
-    --admin-primary: #F59E0B;
+    /* Admin Theme Variables - Fallback (overridden by server-side injection) */
+    --admin-primary: #EF4444;
     --admin-secondary: #1F2937;
-    --admin-gradient: linear-gradient(135deg, #F59E0B 0%, #1F2937 100%);
-    --admin-primary-hsl: 45 93% 47%;
+    --admin-gradient: linear-gradient(135deg, #EF4444 0%, #1F2937 100%);
+    --admin-primary-hsl: 0 84% 60%;
     --admin-secondary-hsl: 220 39% 17%;
   }
 }

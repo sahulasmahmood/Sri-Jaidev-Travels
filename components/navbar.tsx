@@ -189,12 +189,14 @@ function NavbarContent() {
               {themeData?.siteName && (
                 <div>
                   <div className="font-bold text-sm sm:text-lg lg:text-xl xl:text-2xl bg-admin-gradient bg-clip-text text-transparent">
-                    {themeData.siteName.split(' ')[0]}
+                    {themeData.siteName.includes('Tours') 
+                      ? themeData.siteName.split('Tours')[0].trim()
+                      : themeData.siteName.split(' ').slice(0, 2).join(' ')}
                   </div>
                   <div className="text-xs sm:text-xs lg:text-sm text-gray-600 font-medium">
                     {themeData.siteName.includes('Tours') 
                       ? 'Tours & Travels' 
-                      : themeData.siteName.split(' ').slice(1).join(' ')}
+                      : themeData.siteName.split(' ').slice(2).join(' ')}
                   </div>
                 </div>
               )}

@@ -30,7 +30,7 @@ const themeSchema = new mongoose.Schema(
       required: true,
       trim: true,
       match: /^#[0-9A-F]{6}$/i,
-      default: "#F59E0B" // Gold color for travel theme
+      default: "#EF4444" // Red color matching Sri Jaidev logo
     },
     secondaryColor: {
       type: String,
@@ -69,7 +69,7 @@ const defaultThemeData = {
   siteName: "Sri Jaidev Tours & Travels",
   logo: "/SriJaidev-tours-logo.png",
   favicon: null,
-  primaryColor: "#F59E0B", // Gold color for travel theme
+  primaryColor: "#EF4444", // Red color matching Sri Jaidev logo
   secondaryColor: "#1F2937", // Dark navy/black color for travel theme
   gradientDirection: "135deg",
   isActive: true,
