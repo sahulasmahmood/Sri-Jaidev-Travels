@@ -36,7 +36,7 @@ export function useSEOMeta({ pageId, fallback }: SEOMetaOptions) {
   
   useEffect(() => {
     // Set initial values with fallback
-    const initialTitle = fallback?.title || 'Vinushree Tours & Travels'
+    const initialTitle = fallback?.title || 'Sri Jaidev Tours & Travels'
     const initialDesc = fallback?.description || 'Premium travel services in Tamil Nadu'
     const initialKeys = fallback?.keywords || 'travel services, tour packages, taxi booking'
     

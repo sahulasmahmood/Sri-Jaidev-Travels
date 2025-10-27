@@ -12,9 +12,9 @@ import { SEOProvider } from '@/components/providers/seo-provider'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Vinushree Tours & Travels - Premium Travel Services in Tamil Nadu",
-  description: "Experience Tamil Nadu with Vinushree Tours & Travels. Premium travel services including tour packages, airport taxi, day rentals, and more.",
-  keywords: "Tamil Nadu travel, tour packages, airport taxi, day rental, travel services, Vinushree Tours",
+  title: "Sri Jaidev Tours & Travels - Premium Travel Services in Tamil Nadu",
+  description: "Experience Tamil Nadu with Sri Jaidev Tours & Travels. Premium travel services including tour packages, airport taxi, day rentals, and more.",
+  keywords: "Tamil Nadu travel, tour packages, airport taxi, day rental, travel services, Sri Jaidev Travels",
   generator: 'v0.dev'
 }
 

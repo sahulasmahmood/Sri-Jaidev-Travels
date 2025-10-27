@@ -298,7 +298,7 @@ export default function CompleteHome() {
             <div>
               <Badge className="mb-4 sm:mb-6 md:mb-8 hover:bg-admin-secondary bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 py-1.5 sm:px-6 sm:py-2 md:px-8 md:py-3 text-xs sm:text-sm md:text-base rounded-full shadow-lg">
                 <Car className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 mr-2 sm:mr-3" />
-                Welcome to Vinushree Tours & Travels
+                Welcome to Sri Jaidev Tours & Travels
               </Badge>
             </div>
 
@@ -588,7 +588,7 @@ export default function CompleteHome() {
               <span className="block text-yellow-200">Since 2020</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed px-2 sm:px-4">
-              Vinushree Tours & Travels is your trusted travel partner, specializing in comfortable
+              Sri Jaidev Tours & Travels is your trusted travel partner, specializing in comfortable
               and reliable travel services that make every journey memorable with professional drivers and
               well-maintained vehicles.
             </p>

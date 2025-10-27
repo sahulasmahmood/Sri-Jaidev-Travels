@@ -7,9 +7,9 @@ export function ContactPageSeo() {
   useSEOMeta({
     pageId: 'contact',
     fallback: {
-        title: 'Contact Vinushree Tours & Travels - Book Your Taxi Now',
-        description: 'Contact Vinushree Tours & Travels for taxi booking, tour packages, and travel inquiries. Available 24/7 for all your travel needs across Tamil Nadu.',
-        keywords: 'contact vinushree tours, taxi booking, travel inquiry, phone number, whatsapp booking, 24/7 service, customer support'
+        title: 'Contact Sri Jaidev Tours & Travels - Book Your Taxi Now',
+        description: 'Contact Sri Jaidev Tours & Travels for taxi booking, tour packages, and travel inquiries. Available 24/7 for all your travel needs across Tamil Nadu.',
+        keywords: 'contact Sri Jaidev tours, taxi booking, travel inquiry, phone number, whatsapp booking, 24/7 service, customer support'
       }
   })
 

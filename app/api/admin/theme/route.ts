@@ -195,8 +195,8 @@ export async function POST() {
 
     const defaultTheme = {
       id: "default",
-      siteName: "Vinushree Tours & Travels",
-      logo: "/vinushree-tours-logo.png",
+      siteName: "Sri Jaidev Tours & Travels",
+      logo: "/SriJaidev-tours-logo.png",
       favicon: null,
       primaryColor: "#F59E0B", // Gold color for travel theme
       secondaryColor: "#1F2937", // Dark navy/black color for travel theme

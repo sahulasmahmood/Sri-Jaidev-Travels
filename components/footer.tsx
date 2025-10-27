@@ -85,7 +85,7 @@ export default function Footer() {
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/20">
                   <Image 
                     src={themeData.logo} 
-                    alt="Vinushree Tours & Travels Logo" 
+                    alt="Sri Jaidev Tours & Travels Logo" 
                     width={56} 
                     height={56} 
                     className="w-full h-full object-contain"
@@ -98,7 +98,7 @@ export default function Footer() {
               )}
               <div>
                 <div className="font-bold text-xl sm:text-2xl bg-admin-gradient bg-clip-text text-transparent">
-                  {themeData?.siteName?.split(' ')[0] || "Vinushree"}
+                  {themeData?.siteName?.split(' ')[0] || "Sri Jaidev"}
                 </div>
                 <div className="text-sm sm:text-base font-medium">
                   {themeData?.siteName?.includes('Tours') 
@@ -142,10 +142,10 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-admin-primary flex-shrink-0" />
                 <a
-                  href={`mailto:${contactInfo?.email || "info@vinushree.com"}`}
+                  href={`mailto:${contactInfo?.email || "srijaidavetravelers@gmail.com"}`}
                   className="text-gray-300 hover:text-white transition-colors text-sm font-medium break-all"
                 >
-                  {contactInfo?.email || "info@vinushree.com"}
+                  {contactInfo?.email || "srijaidavetravelers@gmail.com"}
                 </a>
               </div>
               <div className="flex items-start space-x-3">
@@ -154,7 +154,7 @@ export default function Footer() {
                   {contactInfo ? (
                     `${contactInfo.address}, ${contactInfo.city}, ${contactInfo.state}-${contactInfo.pincode}, ${contactInfo.country}`
                   ) : (
-                    "mani road, Uthangudi, Othakadai, Madurai, Tamil Nadu-625007, India"
+                    "2A, 1st Floor, Koodalnagar, Chokkalinganagar 1st Street, Madurai – 625018, Tamil Nadu"
                   )}
                 </span>
               </div>
@@ -242,7 +242,7 @@ export default function Footer() {
             {/* Desktop QR Code - Hidden on mobile */}
             <div className="hidden md:block bg-white p-4 rounded-xl mb-4 w-fit">
               <QRCodeSVG
-                value={`upi://pay?pa=vinusree@sbi&pn=${encodeURIComponent("Vinushree Tours and Travels")}`}
+                value={`upi://pay?pa=vinusree@sbi&pn=${encodeURIComponent("Sri Jaidev Tours and Travels")}`}
                 size={150}
                 level="H"
                 className="rounded-lg"
@@ -253,7 +253,7 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Mobile UPI App Link */}
               <a
-                href="upi://pay?pa=vinusree@sbi&pn=Vinushree%20Tours%20and%20Travels"
+                href="upi://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels"
                 className="md:hidden flex items-center gap-3 p-3 bg-green-500/10 hover:bg-green-500/20 rounded-lg transition-all duration-300 border border-green-500/20 hover:border-green-500/30"
               >
                 <IndianRupee className="h-5 w-5 text-green-500" />
@@ -289,21 +289,21 @@ export default function Footer() {
               {/* Payment Apps Links */}
               <div className="flex flex-wrap gap-2">
                 <a
-                  href="phonepe://pay?pa=vinusree@sbi&pn=Vinushree%20Tours%20and%20Travels"
+                 /*  href="phonepe://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
                   className="flex items-center gap-2 px-4 py-2.5 bg-admin-gradient hover:opacity-90 rounded-lg transition-all duration-300 group"
                 >
                   <span className="text-xs font-medium text-white">PhonePe</span>
                   <ArrowRight className="h-3 w-3 text-white opacity-0 group-hover:opacity-100 transition-all" />
                 </a>
                 <a
-                  href="gpay://upi/pay?pa=vinusree@sbi&pn=Vinushree%20Tours%20and%20Travels"
+                  /* href="gpay://upi/pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
                   className="flex items-center gap-2 px-4 py-2.5 bg-admin-gradient hover:opacity-90 rounded-lg transition-all duration-300 group"
                 >
                   <span className="text-xs font-medium text-white">Google Pay</span>
                   <ArrowRight className="h-3 w-3 text-white opacity-0 group-hover:opacity-100 transition-all" />
                 </a>
                 <a
-                  href="paytmmp://pay?pa=vinusree@sbi&pn=Vinushree%20Tours%20and%20Travels"
+                  /* href="paytmmp://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
                   className="flex items-center gap-2 px-4 py-2.5 bg-admin-gradient hover:opacity-90 rounded-lg transition-all duration-300 group"
                 >
                   <span className="text-xs font-medium text-white">Paytm</span>
@@ -317,7 +317,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 pb-6 sm:pb-8 text-center">
           <p className="text-gray-400 text-xs sm:text-sm leading-relaxed px-2">
-            © 2025 Vinushree Tours & Travels. All rights reserved. ❤️ 
+            © 2025 Sri Jaidev Tours & Travels. All rights reserved. ❤️ 
             <span className="block sm:inline sm:ml-1 hover:text-white transition-colors">
               <a href="https://mntfuture.com/" target="_blank" rel="noopener noreferrer">Developed by MnT</a>
             </span>

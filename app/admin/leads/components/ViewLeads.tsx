@@ -526,7 +526,7 @@ export default function ViewLeads({ lead, isOpen, onClose }: ViewLeadsProps) {
                           <Button
                             className="h-12 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-medium shadow-lg"
                             onClick={() => {
-                              const reviewMessage = `Hi ${lead.fullName}! Thank you for choosing Vinushree Tours & Travels. We hope you had a great experience with our ${lead.serviceType} service. 
+                              const reviewMessage = `Hi ${lead.fullName}! Thank you for choosing Sri Jaidev Tours & Travels. We hope you had a great experience with our ${lead.serviceType} service. 
 
 Please take a moment to share your feedback by clicking here: ${lead.reviewLink}
 

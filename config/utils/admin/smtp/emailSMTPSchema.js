@@ -41,7 +41,7 @@ const emailSMTPSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      default: "Vinushree Tours & Travels"
+      default: "Sri Jaidev Tours & Travels"
     },
     isActive: {
       type: Boolean,
@@ -79,7 +79,7 @@ const defaultSMTPData = {
   smtpUser: process.env.SMTP_USER || "",
   smtpPassword: process.env.SMTP_PASS || "",
   fromEmail: process.env.SMTP_FROM_EMAIL || "",
-  fromName: "Vinushree Tours & Travels",
+  fromName: "Sri Jaidev Tours & Travels",
   isActive: true,
   testStatus: "never",
   lastUpdated: new Date()

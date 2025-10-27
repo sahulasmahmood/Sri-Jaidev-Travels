@@ -1407,7 +1407,7 @@ export default function TariffPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, seoTitle: e.target.value })
                       }
-                      placeholder="e.g., Toyota Etios Sedan - Comfortable Travel | Vinushree Tours"
+                      placeholder="e.g., Toyota Etios Sedan - Comfortable Travel | Sri Jaidev Travels"
                       className="mt-2"
                     />
                   </div>

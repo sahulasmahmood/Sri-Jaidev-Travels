@@ -40,13 +40,13 @@ export default function EmailSMTP() {
     smtpUser: "",
     smtpPassword: "",
     fromEmail: "",
-    fromName: "Vinushree Tours & Travels",
+    fromName: "Sri Jaidev Tours & Travels",
   });
 
   const [testEmailData, setTestEmailData] = useState<TestEmailData>({
     email: "",
     message:
-      "Greetings from Vinushree Tours & Travels! This is a test email to verify our SMTP configuration is working correctly for sending travel booking confirmations and updates.",
+      "Greetings from Sri Jaidev Tours & Travels! This is a test email to verify our SMTP configuration is working correctly for sending travel booking confirmations and updates.",
   });
 
   const [isTestingConnection, setIsTestingConnection] = useState(false);
@@ -273,7 +273,7 @@ export default function EmailSMTP() {
         setTestEmailData({
           email: "",
           message:
-            "Greetings from Vinushree Tours & Travels! This is a test email to verify our SMTP configuration is working correctly for sending travel booking confirmations and updates.",
+            "Greetings from Sri Jaidev Tours & Travels! This is a test email to verify our SMTP configuration is working correctly for sending travel booking confirmations and updates.",
         });
       } else {
         toast({
@@ -424,7 +424,7 @@ export default function EmailSMTP() {
               onChange={(e) =>
                 setEmailSettings({ ...emailSettings, fromName: e.target.value })
               }
-              placeholder="Vinushree Tours & Travels"
+              placeholder="Sri Jaidev Tours & Travels"
               className="mt-2"
             />
             <p className="text-xs text-gray-500 mt-1">

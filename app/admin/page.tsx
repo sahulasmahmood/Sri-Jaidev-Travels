@@ -307,7 +307,7 @@ export default function AdminDashboard() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold mb-2">Welcome to Vinushree Tours & Travels!</h1>
+              <h1 className="text-4xl font-bold mb-2">Welcome to Sri Jaidev Tours & Travels!</h1>
               <p className="text-blue-100 text-lg">Manage your travel services, packages, and customer inquiries.</p>
               <div className="flex items-center gap-4 mt-4 text-sm text-blue-100">
                 <span>📊 {metrics.totalLeads} Total Leads</span>

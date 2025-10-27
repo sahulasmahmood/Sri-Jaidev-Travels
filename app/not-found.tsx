@@ -41,8 +41,8 @@ export default function NotFound() {
         <div className="mt-12 text-white/60 text-sm">
           <p>Need help? Contact us:</p>
           <div className="mt-2 space-y-1">
-            <div>📞 +91 98765 43210</div>
-            <div>📧 info@vinushree.com</div>
+            <div>📞 +91 93602 90811</div>
+            <div>📧 srijaidavetravelers@gmail.com</div>
           </div>
         </div>
       </div>

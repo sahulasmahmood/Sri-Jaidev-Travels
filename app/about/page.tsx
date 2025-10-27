@@ -47,7 +47,7 @@ const scaleIn = {
 export default function AboutPage() {
   const { banner } = useBanner("about")
 
-  const whyVinushree = [
+  const whySriJaidev = [
     {
       icon: <Award className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
       title: "Trusted Experience",
@@ -186,7 +186,7 @@ export default function AboutPage() {
           >
             <Badge className="mb-3 sm:mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
               <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
-              About Vinushree Tours & Travels
+              About Sri Jaidev Tours & Travels
             </Badge>
 
             {/* Optional dynamic banner title (keeps existing main heading) */}
@@ -255,7 +255,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 sm:space-y-6">
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
-                  Vinushree Tours & Travels was founded with a vision to make travel comfortable,
+                  Sri Jaidev Tours & Travels was founded with a vision to make travel comfortable,
                   safe, and memorable. Our journey began with a commitment to providing reliable transportation services
                   that connect people to rich cultural heritage and natural beauty of various destinations.
                 </p>
@@ -294,7 +294,7 @@ export default function AboutPage() {
                     <Building className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white" />
                   </div>
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
-                    Vinushree Tours & Travels
+                    Sri Jaidev Tours & Travels
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-4 sm:mb-6">
                     Your Trusted Travel Partner
@@ -414,7 +414,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why Vinushree Section */}
+      {/* Why Sri Jaidev Section */}
       <section className="py-16 sm:py-20 md:py-24 bg-white relative">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-yellow-50/50"></div>
         <div className="container mx-auto px-4 sm:px-6 md:px-8 relative max-w-7xl">
@@ -431,7 +431,7 @@ export default function AboutPage() {
             </Badge>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight">
               Why Choose
-              <span className="block text-transparent bg-clip-text bg-admin-gradient">Vinushree Tours?</span>
+              <span className="block text-transparent bg-clip-text bg-admin-gradient">Sri Jaidev Tours?</span>
             </h2>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-2 sm:px-0">
               Discover what sets us apart and makes us the preferred choice for travel services
@@ -445,7 +445,7 @@ export default function AboutPage() {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {whyVinushree.map((item, index) => (
+            {whySriJaidev.map((item, index) => (
               <motion.div key={index} variants={fadeInUp}>
                 <Card className="card-hover h-full border-0 shadow-xl overflow-hidden group">
                   <CardContent className="p-6 sm:p-8 relative">

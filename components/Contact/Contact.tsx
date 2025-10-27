@@ -157,13 +157,13 @@ export const Contact = ({ services: propServices }: ContactProps) => {
     {
       icon: <Mail className="h-5 w-5 text-white" />,
       title: "Email Address",
-      details: contactInfo?.email || "info@vinushree.com",
+      details: contactInfo?.email || "srijaidavetravelers@gmail.com",
       description: "We'll respond within 24 hours",
     },
     {
       icon: <MapPin className="h-5 w-5 text-white" />,
       title: "Address",
-      details: contactInfo?.address || "88/153, East Street, Pandiyan Nagar",
+      details: contactInfo?.address || "2A, 1st Floor, Koodalnagar, Chokkalinganagar 1st Street",
       description: `${contactInfo?.city || "South Madurai"}, ${
         contactInfo?.state || "Tamil Nadu"
       }-${contactInfo?.pincode || "625006"}`,

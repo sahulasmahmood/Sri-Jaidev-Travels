@@ -9,9 +9,9 @@ export const revalidate = 0;
 
 // Dynamic SEO metadata will be handled by the SEO provider
 export const metadata = {
-  title: "Contact Us - Travel Services | Vinushree Tours & Travels",
+  title: "Contact Us - Travel Services | Sri Jaidev Tours & Travels",
   description:
-    "Get in touch with Vinushree Tours & Travels for all your travel needs. Book your trip, get quotes, and plan your perfect journey with us.",
+    "Get in touch with Sri Jaidev Tours & Travels for all your travel needs. Book your trip, get quotes, and plan your perfect journey with us.",
   keywords:
     "contact travel services, travel booking, tour package inquiry, travel support, trip planning",
 }; 

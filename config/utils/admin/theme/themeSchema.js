@@ -13,7 +13,7 @@ const themeSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      default: "Vinushree Tours & Travels"
+      default: "Sri Jaidev Tours & Travels"
     },
     logo: {
       type: String,
@@ -63,11 +63,11 @@ themeSchema.index({ isActive: 1 });
 
 const Theme = mongoose.models.Theme || mongoose.model("Theme", themeSchema);
 
-// Default theme data for Vinushree Tours & Travels
+// Default theme data for Sri Jaidev Tours & Travels
 const defaultThemeData = {
   id: "default",
-  siteName: "Vinushree Tours & Travels",
-  logo: "/vinushree-tours-logo.png",
+  siteName: "Sri Jaidev Tours & Travels",
+  logo: "/SriJaidev-tours-logo.png",
   favicon: null,
   primaryColor: "#F59E0B", // Gold color for travel theme
   secondaryColor: "#1F2937", // Dark navy/black color for travel theme

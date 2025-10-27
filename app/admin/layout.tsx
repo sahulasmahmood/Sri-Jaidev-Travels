@@ -340,7 +340,7 @@ export default function AdminLayout({
               )}
               <div>
                 <span className="font-bold text-lg text-gray-900">Admin Panel</span>
-                <div className="text-xs text-gray-500">{themeData?.siteName || "Vinushree Tours"}</div>
+                <div className="text-xs text-gray-500">{themeData?.siteName || "Sri Jaidev Tours"}</div>
               </div>
             </div>
           </div>

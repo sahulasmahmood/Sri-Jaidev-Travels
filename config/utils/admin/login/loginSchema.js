@@ -173,23 +173,23 @@ adminSchema.statics.findByCredentials = async function (email, password) {
 // Static method to create initial admin
 adminSchema.statics.createInitialAdmin = async function () {
   try {
-    const existingAdmin = await this.findOne({ email: "vinushree0450@gmail.com" })
+    const existingAdmin = await this.findOne({ email: "srijaidavetravelers@gmail.com" })
 
     if (!existingAdmin) {
       const initialAdmin = new this({
-        firstName: "Vinushree",
+        firstName: "Sri Jaidev",
         lastName: "Tours and Travels",
-        email: "vinushree0450@gmail.com",
-        password: "Vinushree@2025",
-        phone: "+91 90037 82966",
-        location: "2/18, Uthangudi, Tamil Nadu 625107, India",
+        email: "srijaidavetravelers@gmail.com",
+        password: "Srijaidev@2025",
+        phone: "+91 93602 90811",
+        location: "2A, 1st Floor, Koodalnagar, Chokkalinganagar 1st Street, Madurai – 625018, Tamil Nadu",
         role: "Super Admin",
         emailVerified: true,
         isActive: true,
       })
 
       await initialAdmin.save()
-      console.log("Initial admin created successfully for Vinushree Tours & Travels")
+      console.log("Initial admin created successfully for Sri Jaidev Tours & Travels")
       return initialAdmin
     } else {
       console.log("Initial admin already exists")

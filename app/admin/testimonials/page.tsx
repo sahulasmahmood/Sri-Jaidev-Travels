@@ -450,7 +450,7 @@ export default function TestimonialsPage() {
             Testimonials Management
           </h1>
           <p className="text-gray-600 mt-2">
-            Manage customer testimonials and reviews for Vinushree Tours & Travels
+            Manage customer testimonials and reviews for Sri Jaidev Tours & Travels
           </p>
         </div>
         <Dialog
