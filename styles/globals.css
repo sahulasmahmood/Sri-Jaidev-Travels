@@ -37,18 +37,18 @@
     --radius: 0.5rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 45 93% 47%;
+    --sidebar-primary: 0 84% 60%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 45 93% 47%;
+    --sidebar-ring: 0 84% 60%;
 
-    /* Admin Theme Variables - Travel Business Theme (Dynamic) */
-    --admin-primary: #F59E0B;
+    /* Admin Theme Variables - Fallback (overridden by server-side injection) */
+    --admin-primary: #EF4444;
     --admin-secondary: #1F2937;
-    --admin-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-    --admin-primary-hsl: 45 93% 47%;
+    --admin-gradient: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    --admin-primary-hsl: 0 84% 60%;
     --admin-secondary-hsl: 220 39% 17%;
   }
   .dark {

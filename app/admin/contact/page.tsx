@@ -234,7 +234,7 @@ export default function ContactPage() {
                 type="email"
                 value={contactInfo.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="info@vinushreetours.com"
+                placeholder="srijaidavetravelers@gmail.com"
                 className="mt-2"
               />
             </div>
@@ -389,7 +389,7 @@ export default function ContactPage() {
                   onChange={(e) =>
                     handleInputChange("facebook", e.target.value)
                   }
-                  placeholder="https://facebook.com/vinushreetours"
+                  placeholder="https://facebook.com/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -405,7 +405,7 @@ export default function ContactPage() {
                   id="twitter"
                   value={contactInfo.twitter}
                   onChange={(e) => handleInputChange("twitter", e.target.value)}
-                  placeholder="https://twitter.com/vinushreetours"
+                  placeholder="https://twitter.com/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -423,7 +423,7 @@ export default function ContactPage() {
                   onChange={(e) =>
                     handleInputChange("linkedin", e.target.value)
                   }
-                  placeholder="https://linkedin.com/company/vinushreetours"
+                  placeholder="https://linkedin.com/company/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -441,7 +441,7 @@ export default function ContactPage() {
                   onChange={(e) =>
                     handleInputChange("instagram", e.target.value)
                   }
-                  placeholder="https://instagram.com/vinushreetours"
+                  placeholder="https://instagram.com/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -459,7 +459,7 @@ export default function ContactPage() {
                   onChange={(e) =>
                     handleInputChange("youtube", e.target.value)
                   }
-                  placeholder="https://youtube.com/c/vinushreetours"
+                  placeholder="https://youtube.com/c/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -495,7 +495,7 @@ export default function ContactPage() {
                   onChange={(e) =>
                     handleInputChange("telegram", e.target.value)
                   }
-                  placeholder="https://t.me/vinushreetours"
+                  placeholder="https://t.me/SriJaidevtours"
                   className="mt-2"
                 />
               </div>
@@ -577,7 +577,7 @@ export default function ContactPage() {
                 id="pageTitle"
                 value={contactInfo.pageTitle}
                 onChange={(e) => handleInputChange("pageTitle", e.target.value)}
-                placeholder="Get in Touch with Vinushree Tours & Travels"
+                placeholder="Get in Touch with Sri Jaidev Tours & Travels"
                 className="mt-2"
               />
             </div>

@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 // SEO metadata
 export const metadata = {
-  title: "Tour Packages - Vinushree Tours & Travels",
+  title: "Tour Packages - Sri Jaidev Tours & Travels",
   description:
     "Discover amazing tour packages to beautiful destinations. Explore temples, hill stations, beaches, and cultural sites with our customized travel packages.",
   keywords:

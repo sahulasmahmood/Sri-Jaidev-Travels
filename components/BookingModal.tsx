@@ -6,8 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { MapPin, Navigation } from "lucide-react";
-import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { MapPin, Navigation, Calendar, Clock, User, Phone as PhoneIcon, Send, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useContact } from "@/hooks/use-contact";
 
@@ -22,8 +21,7 @@ export default function BookingModal({ isOpen, onClose, prefilledService, prefil
   const { toast } = useToast();
   const { contactInfo } = useContact();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [locations, setLocations] = useState<string[]>([]);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -36,42 +34,17 @@ export default function BookingModal({ isOpen, onClose, prefilledService, prefil
   });
 
   // Get dynamic services from contact info or use fallback
-  const services = contactInfo?.servicesOffered 
+  const services = contactInfo?.servicesOffered
     ? contactInfo.servicesOffered.split(',').map(s => s.trim()).filter(s => s.length > 0)
     : [
-        "One-way Trip",
-        "Round Trip", 
-        "Airport Taxi",
-        "Day Rental",
-        "Hourly Package",
-        "Local Pickup/Drop",
-        "Tour Package"
-      ];
-
-  // Fetch locations from API
-  useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        const response = await fetch('/api/locations');
-        const result = await response.json();
-        
-        if (result.success) {
-          setLocations(result.data.map((loc: any) => loc.name));
-        }
-      } catch (error) {
-        console.error('Error fetching locations:', error);
-        // Fallback locations if API fails
-        setLocations([
-          "Madurai", "Chennai", "Mumbai", "Delhi", "Bangalore",
-          "Coimbatore", "Trichy", "Salem", "Erode", "Tirunelveli"
-        ]);
-      }
-    };
-
-    fetchLocations();
-  }, []);
-
-
+      "One-way Trip",
+      "Round Trip",
+      "Airport Taxi",
+      "Day Rental",
+      "Hourly Package",
+      "Local Pickup/Drop",
+      "Tour Package"
+    ];
 
   // Reset form when modal opens with prefilled data
   useEffect(() => {
@@ -179,7 +152,7 @@ export default function BookingModal({ isOpen, onClose, prefilledService, prefil
 Please confirm availability and provide final pricing.`;
 
       // Open WhatsApp
-      const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919876543210';
+      const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
       const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
 
@@ -215,24 +188,34 @@ Please confirm availability and provide final pricing.`;
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-gray-900 flex items-center">
-            <WhatsAppIcon className="h-6 w-6 mr-2 text-admin-primary" />
+        <DialogHeader className="space-y-3 pb-2">
+          <div className="flex items-center justify-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-xl shadow-lg">
+              <Sparkles className="h-6 w-6 text-admin-primary" />
+            </div>
+          </div>
+          <DialogTitle className="text-xl sm:text-2xl font-bold text-gray-900 text-center">
             Book Your Travel
             {prefilledTitle && (
-              <span className="text-lg font-normal text-gray-600 ml-2">
-                - {prefilledTitle}
+              <span className="block text-base font-normal text-gray-600 mt-1">
+                {prefilledTitle}
               </span>
             )}
           </DialogTitle>
+          <p className="text-xs text-gray-600 text-center">
+            Fill in your details and get instant confirmation via WhatsApp
+          </p>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
           {/* Personal Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name" className="text-gray-700 font-medium">
-                Full Name *
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="name" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-blue-100 to-blue-200">
+                  <User className="h-3 w-3 text-blue-600" />
+                </div>
+                Full Name <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="name"
@@ -240,13 +223,16 @@ Please confirm availability and provide final pricing.`;
                 required
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
-                placeholder="Enter your full name"
-                className="mt-1"
+                placeholder="John Doe"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
               />
             </div>
-            <div>
-              <Label htmlFor="phone" className="text-gray-700 font-medium">
-                Phone Number *
+            <div className="space-y-1.5">
+              <Label htmlFor="phone" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-green-100 to-green-200">
+                  <PhoneIcon className="h-3 w-3 text-green-600" />
+                </div>
+                Phone Number <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="phone"
@@ -254,30 +240,29 @@ Please confirm availability and provide final pricing.`;
                 required
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                placeholder="Enter phone number"
-                className="mt-1"
+                placeholder="+91 98765 43210"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
               />
             </div>
           </div>
 
-
-
           {/* Service Selection */}
-          <div>
-            <Label htmlFor="service" className="text-gray-700 font-medium">
-              Service Type *
+          <div className="space-y-1.5">
+            <Label htmlFor="service" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+              <span className="w-0.5 h-3.5 bg-admin-gradient rounded-full"></span>
+              Service Type <span className="text-red-500">*</span>
             </Label>
             <Select
               value={formData.service}
               onValueChange={(value) => handleInputChange("service", value)}
               required
             >
-              <SelectTrigger className="mt-1">
-                <SelectValue placeholder="Select service type" />
+              <SelectTrigger className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none focus:ring-0 focus:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg [&[data-state=open]]:border-orange-500 [&[data-state=open]]:ring-0">
+                <SelectValue placeholder="Select your service" />
               </SelectTrigger>
               <SelectContent>
                 {services.map((service) => (
-                  <SelectItem key={service} value={service}>
+                  <SelectItem key={service} value={service} className="text-sm">
                     {service}
                   </SelectItem>
                 ))}
@@ -286,11 +271,13 @@ Please confirm availability and provide final pricing.`;
           </div>
 
           {/* Location Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="pickupLocation" className="text-gray-700 font-medium flex items-center">
-                <Navigation className="h-4 w-4 mr-1 text-green-500" />
-                Pickup Location *
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="pickupLocation" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-green-100 to-emerald-200">
+                  <Navigation className="h-3 w-3 text-green-600" />
+                </div>
+                Pickup Location <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="pickupLocation"
@@ -299,13 +286,15 @@ Please confirm availability and provide final pricing.`;
                 value={formData.pickupLocation}
                 onChange={(e) => handleInputChange("pickupLocation", e.target.value)}
                 placeholder="Enter pickup location"
-                className="mt-1"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
               />
             </div>
-            <div>
-              <Label htmlFor="dropLocation" className="text-gray-700 font-medium flex items-center">
-                <MapPin className="h-4 w-4 mr-1 text-red-500" />
-                Drop Location *
+            <div className="space-y-1.5">
+              <Label htmlFor="dropLocation" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-red-100 to-pink-200">
+                  <MapPin className="h-3 w-3 text-red-600" />
+                </div>
+                Drop Location <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="dropLocation"
@@ -314,16 +303,19 @@ Please confirm availability and provide final pricing.`;
                 value={formData.dropLocation}
                 onChange={(e) => handleInputChange("dropLocation", e.target.value)}
                 placeholder="Enter drop location"
-                className="mt-1"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
               />
             </div>
           </div>
 
           {/* Travel Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="travelDate" className="text-gray-700 font-medium">
-                Pickup Date *
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="travelDate" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-purple-100 to-purple-200">
+                  <Calendar className="h-3 w-3 text-purple-600" />
+                </div>
+                Pickup Date <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="travelDate"
@@ -331,68 +323,88 @@ Please confirm availability and provide final pricing.`;
                 required
                 value={formData.travelDate}
                 onChange={(e) => handleInputChange("travelDate", e.target.value)}
-                className="mt-1"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
                 min={new Date().toISOString().split('T')[0]}
               />
             </div>
-            <div>
-              <Label htmlFor="travelTime" className="text-gray-700 font-medium">
-                Pickup Time
+            <div className="space-y-1.5">
+              <Label htmlFor="travelTime" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-indigo-100 to-indigo-200">
+                  <Clock className="h-3 w-3 text-indigo-600" />
+                </div>
+                Pickup Time <span className="text-gray-400 text-xs font-normal ml-0.5">(Optional)</span>
               </Label>
               <Input
                 id="travelTime"
                 type="time"
                 value={formData.travelTime}
                 onChange={(e) => handleInputChange("travelTime", e.target.value)}
-                className="mt-1"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
               />
             </div>
           </div>
 
           {/* Return Date (Optional) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="returnDate" className="text-gray-700 font-medium">
-                Return Date {formData.service === "Round Trip" ? "*" : "(Optional)"}
-              </Label>
-              <Input
-                id="returnDate"
-                type="date"
-                required={formData.service === "Round Trip"}
-                value={formData.returnDate}
-                onChange={(e) => handleInputChange("returnDate", e.target.value)}
-                className="mt-1"
-                min={formData.travelDate || new Date().toISOString().split('T')[0]}
-                placeholder="Select return date if needed"
-              />
-            </div>
-            <div></div>
+          <div className="space-y-1.5">
+            <Label htmlFor="returnDate" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+              <div className="p-0.5 rounded bg-gradient-to-br from-orange-100 to-yellow-200">
+                <Calendar className="h-3 w-3 text-orange-600" />
+              </div>
+              Return Date
+              {formData.service === "Round Trip" ? (
+                <span className="text-red-500 ml-0.5">*</span>
+              ) : (
+                <span className="text-gray-400 text-xs font-normal ml-0.5">(Optional)</span>
+              )}
+            </Label>
+            <Input
+              id="returnDate"
+              type="date"
+              required={formData.service === "Round Trip"}
+              value={formData.returnDate}
+              onChange={(e) => handleInputChange("returnDate", e.target.value)}
+              className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
+              min={formData.travelDate || new Date().toISOString().split('T')[0]}
+              placeholder="Select return date if needed"
+            />
           </div>
 
-          {/* Submit Button */}
-          <div className="flex gap-4 pt-4">
+          {/* Info box */}
+          <div className="flex items-center gap-2 p-3 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200/50">
+            <div className="p-1 rounded-full bg-blue-200 flex-shrink-0">
+              <svg className="w-3 h-3 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <p className="text-xs text-blue-700 leading-snug flex-1">
+              Your booking request will be sent via WhatsApp. We'll respond within minutes!
+            </p>
+          </div>
+
+          {/* Submit Buttons */}
+          <div className="flex gap-3 pt-2">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1"
+              className="flex-1 h-10 border-2 border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-admin-gradient text-white hover:opacity-90"
+              className="flex-1 h-10 bg-admin-gradient text-white hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <>
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Submitting...
+                  <span>Submitting...</span>
                 </>
               ) : (
                 <>
-                  <WhatsAppIcon className="h-4 w-4 mr-2" />
-                  Submit Now
+                  <Send className="h-4 w-4 mr-2" />
+                  <span>Get Instant Quote</span>
                 </>
               )}
             </Button>

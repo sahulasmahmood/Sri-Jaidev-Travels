@@ -7,9 +7,9 @@ import { HomeSeo } from "@/components/Home/HomeSeo";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Vinushree Tours & Travels - Premium Travel Services',
-  description: 'Experience premium travel services with Vinushree Tours & Travels. Offering one-way trips, round trips, airport taxi, day rentals, hourly packages, and tour packages.',
-  keywords: 'travel services, tour packages, airport taxi, day rental, one way trip, round trip, Vinushree Tours'
+  title: 'Sri Jaidev Tours & Travels - Premium Travel Services',
+  description: 'Experience premium travel services with Sri Jaidev Tours & Travels. Offering one-way trips, round trips, airport taxi, day rentals, hourly packages, and tour packages.',
+  keywords: 'travel services, tour packages, airport taxi, day rental, one way trip, round trip, Sri Jaidev Travels'
 };
 
 // Static data for travel services

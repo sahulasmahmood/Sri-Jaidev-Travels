@@ -77,15 +77,15 @@ export async function generateMetadata({ params }: PageProps) {
   
   if (!packageData) {
     return {
-      title: 'Package Not Found - Vinushree Tours & Travels',
+      title: 'Package Not Found - Sri Jaidev Tours & Travels',
       description: 'The requested tour package could not be found.',
     };
   }
 
   return {
-    title: packageData.seoTitle || `${packageData.title} - Vinushree Tours & Travels`,
+    title: packageData.seoTitle || `${packageData.title} - Sri Jaidev Tours & Travels`,
     description: packageData.seoDescription || packageData.description,
-    keywords: packageData.seoKeywords || `${packageData.title}, Tamil Nadu tour, ${packageData.category}, travel package, Vinushree Tours`,
+    keywords: packageData.seoKeywords || `${packageData.title}, Tamil Nadu tour, ${packageData.category}, travel package, Sri Jaidev Tours`,
   };
 }
 

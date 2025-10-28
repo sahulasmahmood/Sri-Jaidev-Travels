@@ -117,7 +117,7 @@ const sampleTariffs = [
     status: "active",
     featured: true,
     additionalCharges: ["Toll fees extra", "Inter-State Permit charges extra", "Waiting charges ₹100 per hour"],
-    seoTitle: "Sedan Taxi Service - Dzire & Etios | Vinushree Tours",
+    seoTitle: "Sedan Taxi Service - Dzire & Etios | Sri Jaidev Tours",
     seoDescription: "Book comfortable sedan taxis (Dzire/Etios) for outstation trips. Starting from ₹14 per km one way.",
     seoKeywords: "sedan taxi, dzire taxi, etios taxi, outstation taxi"
   },
@@ -134,7 +134,7 @@ const sampleTariffs = [
     status: "active",
     featured: true,
     additionalCharges: ["Toll fees extra", "Inter-State Permit charges extra", "Hill station charges ₹300"],
-    seoTitle: "SUV Taxi Service - Xylo & Ertiga | Vinushree Tours",
+    seoTitle: "SUV Taxi Service - Xylo & Ertiga | Sri Jaidev Tours",
     seoDescription: "Book spacious SUV taxis (Xylo/Ertiga) for group travel. Starting from ₹19 per km one way.",
     seoKeywords: "suv taxi, ertiga taxi, xylo taxi, group travel"
   },
@@ -151,7 +151,7 @@ const sampleTariffs = [
     status: "active",
     featured: true,
     additionalCharges: ["Toll fees extra", "Inter-State Permit charges extra", "Premium service guarantee"],
-    seoTitle: "Premium Innova Taxi Service | Vinushree Tours",
+    seoTitle: "Premium Innova Taxi Service | Sri Jaidev Tours",
     seoDescription: "Book premium Toyota Innova for luxury outstation travel. Starting from ₹20 per km one way.",
     seoKeywords: "innova taxi, premium taxi, luxury taxi, toyota innova"
   },
@@ -168,7 +168,7 @@ const sampleTariffs = [
     status: "active",
     featured: false,
     additionalCharges: ["Toll fees extra", "Inter-State Permit charges extra", "VIP service charges", "Airport pickup/drop priority"],
-    seoTitle: "Luxury Sedan Taxi Service - Camry & Accord | Vinushree Tours",
+    seoTitle: "Luxury Sedan Taxi Service - Camry & Accord | Sri Jaidev Tours",
     seoDescription: "Book luxury sedan taxis (Camry/Accord) for VIP travel. Starting from ₹25 per km one way.",
     seoKeywords: "luxury taxi, camry taxi, accord taxi, vip travel, executive taxi"
   },
@@ -185,7 +185,7 @@ const sampleTariffs = [
     status: "active",
     featured: false,
     additionalCharges: ["Toll fees extra", "Inter-State Permit charges extra", "Driver accommodation for outstation trips", "Group travel discount available"],
-    seoTitle: "Tempo Traveller Rental - 12-17 Seater | Vinushree Tours",
+    seoTitle: "Tempo Traveller Rental - 12-17 Seater | Sri Jaidev Tours",
     seoDescription: "Book tempo travellers for large group travel. 12-17 seater vehicles starting from ₹22 per km one way.",
     seoKeywords: "tempo traveller, group travel, 12 seater, 17 seater, large group taxi"
   }

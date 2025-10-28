@@ -269,7 +269,7 @@ export default function AdminLayout({
             </div>
           ) : (
             <div className="w-16 h-16 bg-admin-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
-              <span className="text-white font-bold text-2xl">V</span>
+              <span className="text-white font-bold text-2xl">SJ</span>
             </div>
           )}
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-admin-primary mx-auto mb-2"></div>
@@ -340,7 +340,7 @@ export default function AdminLayout({
               )}
               <div>
                 <span className="font-bold text-lg text-gray-900">Admin Panel</span>
-                <div className="text-xs text-gray-500">{themeData?.siteName || "Vinushree Tours"}</div>
+                <div className="text-xs text-gray-500">{themeData?.siteName || "Sri Jaidev Tours"}</div>
               </div>
             </div>
           </div>

@@ -14,12 +14,33 @@ import {
   Calendar,
   Phone,
   Star,
-  Camera
+  Camera,
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { useContact } from "@/hooks/use-contact";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1 }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 interface PackageData {
   id: number;
@@ -62,22 +83,49 @@ I'm interested in booking this package. Please provide:
 
 Thank you!`;
 
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919876543210';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleCallNow = () => {
-    const phoneNumber = contactInfo?.primaryPhone || '+919876543210';
+    const phoneNumber = contactInfo?.primaryPhone || '+919360290811';
     window.open(`tel:${phoneNumber}`, '_self');
   };
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-admin-gradient text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 sm:py-20 lg:py-28 overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+        
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,45 +133,73 @@ Thank you!`;
           >
             <Link
               href="/packages"
-              className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors"
+              className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors group"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Packages
+              <div className="p-2 rounded-lg bg-white/10 backdrop-blur-sm mr-2 group-hover:bg-white/20 transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+              </div>
+              <span className="font-medium">Back to Packages</span>
             </Link>
             
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <Badge className="mb-4 bg-white/20 text-white border-white/30 px-4 py-2">
-                  <MapPin className="h-4 w-4 mr-2" />
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-center">
+              <div className="lg:pr-8">
+                <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-md px-5 py-2.5 text-sm shadow-lg inline-flex items-center gap-2">
+                  <div className="p-1 rounded-full bg-white/20">
+                    <MapPin className="h-4 w-4" />
+                  </div>
                   {packageData.category} Package
                 </Badge>
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                
+                <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight break-words">
                   {packageData.title}
+                  {packageData.featured && (
+                    <span className="block text-2xl sm:text-3xl mt-3 text-yellow-400 flex items-center gap-2">
+                      <Star className="h-6 w-6 fill-current" />
+                      Featured Package
+                    </span>
+                  )}
                 </h1>
-                <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                
+                <p className="text-lg sm:text-xl text-white/80 mb-10 leading-relaxed">
                   {packageData.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-6 mb-8">
-                  <div className="flex items-center">
-                    <Clock className="h-5 w-5 mr-2" />
-                    <span className="font-semibold">{packageData.duration}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Users className="h-5 w-5 mr-2" />
-                    <span className="font-semibold">All Group Sizes</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Star className="h-5 w-5 mr-2 text-yellow-400" />
-                    <span className="font-semibold">4.8 Rating</span>
-                  </div>
+                {/* Info badges */}
+                <div className="grid grid-cols-2 gap-4 mb-10">
+                  <motion.div 
+                    className="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="h-5 w-5 text-blue-400" />
+                      <span className="text-xs text-white/70 font-medium uppercase tracking-wide">Duration</span>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">
+                      {packageData.duration}
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Star className="h-5 w-5 text-yellow-400 fill-current" />
+                      <span className="text-xs text-white/70 font-medium uppercase tracking-wide">Rating</span>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">
+                      4.8/5
+                    </div>
+                  </motion.div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
                     onClick={handleBookPackage}
                     size="lg"
-                    className="bg-white text-admin-primary hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+                    className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
                   >
                     <WhatsAppIcon className="h-5 w-5 mr-2" />
                     Book via WhatsApp
@@ -132,7 +208,7 @@ Thank you!`;
                     onClick={handleCallNow}
                     size="lg"
                     variant="outline"
-                    className="border-white/50 text-white hover:bg-white hover:text-admin-primary hover:border-white px-8 py-3 text-lg font-semibold transition-all duration-300 bg-white/10 backdrop-blur-sm"
+                    className="border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 hover:border-white px-8 py-6 text-lg font-semibold transition-all duration-300 bg-white/5 backdrop-blur-sm"
                   >
                     <Phone className="h-5 w-5 mr-2" />
                     Call Now
@@ -141,20 +217,45 @@ Thank you!`;
               </div>
 
               <div className="relative">
-                <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <motion.div 
+                  className="relative h-[400px] sm:h-[500px] rounded-3xl overflow-hidden shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   <Image
                     src={packageData.image || "/kodaikanal-hill-station.png"}
                     alt={packageData.title}
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">
-                      {packageData.price}
-                    </Badge>
-                  </div>
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                  
+                  {/* Floating badge */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    <div className="p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-xl bg-admin-gradient">
+                          <Star className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900">Premium Experience</div>
+                          <div className="text-xs text-gray-600">Trusted by 5000+ travelers</div>
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -163,56 +264,98 @@ Thank you!`;
 
       {/* Gallery Section */}
       {packageData.gallery && packageData.gallery.length > 0 && (
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center justify-center w-16 h-16 bg-admin-gradient rounded-2xl mb-6 shadow-lg"
+              >
+                <Camera className="h-8 w-8 text-white" />
+              </motion.div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Package Gallery
               </h2>
-              <p className="text-gray-600">
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Explore the beautiful destinations and experiences included in this package
               </p>
             </motion.div>
             
-            <div className={`grid gap-4 ${
-              packageData.gallery.length === 1 ? 'grid-cols-1 max-w-md mx-auto' :
-              packageData.gallery.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-2xl mx-auto' :
-              packageData.gallery.length === 3 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto' :
-              'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-            }`}>
+            <motion.div 
+              className={`grid gap-6 ${
+                packageData.gallery.length === 1 ? 'grid-cols-1 max-w-md mx-auto' :
+                packageData.gallery.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-2xl mx-auto' :
+                packageData.gallery.length === 3 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto' :
+                'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+              }`}
+              initial="hidden"
+              whileInView="visible"
+              variants={staggerContainer}
+              viewport={{ once: true }}
+            >
               {packageData.gallery.filter(image => image && image.trim() !== '').map((image, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group cursor-pointer"
+                  variants={scaleIn}
+                  className="relative aspect-square rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer"
+                  whileHover={{ y: -8 }}
                 >
                   <Image
                     src={image}
                     alt={`Gallery image ${index + 1}`}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/30 rounded-2xl transition-all duration-300"></div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}
 
       {/* Package Details */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12">
+      <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-48 h-48 bg-gradient-to-r from-purple-200/20 to-pink-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-64 h-64 bg-gradient-to-r from-blue-200/20 to-cyan-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1.1, 1, 1.1],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">
               {/* Highlights */}
@@ -222,18 +365,41 @@ Thank you!`;
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg border-0">
-                  <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <Star className="h-6 w-6 mr-3 text-admin-primary" />
-                      Package Highlights
-                    </h2>
+                <Card className="shadow-xl border-0 overflow-hidden relative group">
+                  {/* Gradient accent border on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" 
+                       style={{ padding: '2px' }}>
+                    <div className="absolute inset-[2px] bg-white rounded-lg"></div>
+                  </div>
+                  
+                  <CardContent className="p-6 sm:p-8 lg:p-10">
+                    <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
+                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 mr-3 group-hover:from-purple-200 group-hover:to-pink-200 transition-colors duration-300">
+                          <Star className="h-6 w-6 text-admin-primary" />
+                        </div>
+                        Package Highlights
+                      </h2>
+                      <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 px-3 py-1 text-xs font-semibold shadow-lg">
+                        Premium Features
+                      </Badge>
+                    </div>
+                    
                     <div className="grid md:grid-cols-2 gap-4">
                       {packageData.highlights.map((highlight, index) => (
-                        <div key={index} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                          <span className="text-gray-700">{highlight}</span>
-                        </div>
+                        <motion.div
+                          key={index}
+                          className="flex items-center p-3 rounded-xl hover:bg-purple-50 transition-colors duration-200 group/item"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <div className="p-1.5 rounded-full bg-purple-100 mr-3 flex-shrink-0 group-hover/item:bg-purple-200 transition-colors">
+                            <CheckCircle className="h-5 w-5 text-purple-600" />
+                          </div>
+                          <span className="text-gray-700 font-medium">{highlight}</span>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
@@ -247,25 +413,44 @@ Thank you!`;
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg border-0">
-                  <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <Calendar className="h-6 w-6 mr-3 text-admin-primary" />
-                      Travel Places
-                    </h2>
+                <Card className="shadow-xl border-0 overflow-hidden relative group bg-white/80 backdrop-blur-sm">
+                  {/* Gradient accent on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <CardContent className="p-8 sm:p-10 relative z-10">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-100 to-cyan-100 group-hover:from-blue-200 group-hover:to-cyan-200 transition-colors duration-300">
+                        <Calendar className="h-7 w-7 text-blue-600" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Travel Places</h2>
+                        <p className="text-sm text-gray-600">Explore amazing destinations</p>
+                      </div>
+                    </div>
+                    
                     <div className="space-y-4">
                       {packageData.itinerary.map((item, index) => (
-                        <div key={index} className="flex items-start">
-                          <div className="bg-admin-gradient text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
-                            {index + 1}
-                          </div>
-                          <div>
-                            <div className="font-semibold text-admin-primary mb-1">
-                              {item.time}
+                        <motion.div
+                          key={index}
+                          className="relative bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 group/item"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                          whileHover={{ scale: 1.01, x: 4 }}
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 text-white font-bold text-lg shadow-lg group-hover/item:scale-110 transition-transform duration-300 flex-shrink-0">
+                              {index + 1}
                             </div>
-                            <div className="text-gray-700">{item.activity}</div>
+                            <div className="flex-1">
+                              <div className="font-bold text-blue-900 mb-2 text-lg">
+                                {item.time}
+                              </div>
+                              <div className="text-gray-700 leading-relaxed">{item.activity}</div>
+                            </div>
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
@@ -279,40 +464,99 @@ Thank you!`;
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="grid md:grid-cols-2 gap-8">
-                  <Card className="shadow-lg border-0">
-                    <CardContent className="p-8">
-                      <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-                        <CheckCircle className="h-5 w-5 mr-3 text-green-500" />
-                        Inclusions
-                      </h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Inclusions */}
+                  <motion.div 
+                    className="relative bg-gradient-to-br from-green-50 via-green-100 to-emerald-100 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group/card overflow-hidden"
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Animated gradient overlay */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-tr from-green-400/20 via-transparent to-emerald-400/20"
+                      animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-green-900">What's Included</h3>
+                        <div className="p-2 rounded-lg bg-white/50 backdrop-blur-sm">
+                          <CheckCircle className="h-5 w-5 text-green-600" />
+                        </div>
+                      </div>
                       <div className="space-y-3">
                         {packageData.inclusions.map((inclusion, index) => (
-                          <div key={index} className="flex items-center">
-                            <CheckCircle className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
-                            <span className="text-gray-700">{inclusion}</span>
-                          </div>
+                          <motion.div 
+                            key={index} 
+                            className="flex items-center p-2 rounded-lg hover:bg-white/50 transition-colors"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="p-1 rounded-full bg-green-200 mr-3 flex-shrink-0">
+                              <CheckCircle className="h-4 w-4 text-green-700" />
+                            </div>
+                            <span className="text-gray-700 font-medium">{inclusion}</span>
+                          </motion.div>
                         ))}
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </motion.div>
 
-                  <Card className="shadow-lg border-0">
-                    <CardContent className="p-8">
-                      <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-                        <X className="h-5 w-5 mr-3 text-red-500" />
-                        Exclusions
-                      </h3>
+                  {/* Exclusions */}
+                  <motion.div 
+                    className="relative bg-gradient-to-br from-red-50 via-red-100 to-rose-100 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group/card overflow-hidden"
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Animated gradient overlay */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-tr from-red-400/20 via-transparent to-rose-400/20"
+                      animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                        delay: 0.5,
+                      }}
+                    />
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-red-900">Not Included</h3>
+                        <div className="p-2 rounded-lg bg-white/50 backdrop-blur-sm">
+                          <X className="h-5 w-5 text-red-600" />
+                        </div>
+                      </div>
                       <div className="space-y-3">
                         {packageData.exclusions.map((exclusion, index) => (
-                          <div key={index} className="flex items-center">
-                            <X className="h-4 w-4 text-red-500 mr-3 flex-shrink-0" />
-                            <span className="text-gray-700">{exclusion}</span>
-                          </div>
+                          <motion.div 
+                            key={index} 
+                            className="flex items-center p-2 rounded-lg hover:bg-white/50 transition-colors"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="p-1 rounded-full bg-red-200 mr-3 flex-shrink-0">
+                              <X className="h-4 w-4 text-red-700" />
+                            </div>
+                            <span className="text-gray-700 font-medium">{exclusion}</span>
+                          </motion.div>
                         ))}
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
@@ -326,38 +570,68 @@ Thank you!`;
                 viewport={{ once: true }}
                 className="sticky top-8"
               >
-                <Card className="shadow-2xl border-0">
-                  <CardContent className="p-8">
+                <Card className="shadow-2xl border-0 overflow-hidden relative group/sidebar">
+                  {/* Gradient accent on hover */}
+                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-500 -z-10" 
+                       style={{ padding: '2px' }}>
+                    <div className="absolute inset-[2px] bg-white rounded-lg"></div>
+                  </div>
+                  
+                  <CardContent className="p-6 sm:p-8">
+                    {/* Enhanced pricing display with gradient backgrounds */}
                     <div className="text-center mb-8">
-                      <div className="text-3xl font-bold text-admin-primary mb-2">
-                        {packageData.price}
-                      </div>
-                      <div className="text-gray-600">per person</div>
+                      <motion.div 
+                        className="p-6 bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-100 rounded-2xl shadow-md"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="text-xs font-semibold text-admin-primary uppercase tracking-wide mb-2">Package Price</div>
+                        <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-admin-gradient mb-1">
+                          {packageData.price}
+                        </div>
+                        <div className="text-sm font-medium text-admin-primary">per person</div>
+                      </motion.div>
                     </div>
 
-                    <div className="space-y-4 mb-8">
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Duration</span>
-                        <span className="font-semibold">{packageData.duration}</span>
+                    {/* Enhanced details list with gradient accents */}
+                    <div className="space-y-3 mb-8">
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <Clock className="h-4 w-4 mr-2 text-gray-400 group-hover/item:text-admin-primary transition-colors" />
+                          Duration
+                        </span>
+                        <span className="font-bold text-gray-900">{packageData.duration}</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Category</span>
-                        <span className="font-semibold">{packageData.category}</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <MapPin className="h-4 w-4 mr-2 text-gray-400 group-hover/item:text-admin-primary transition-colors" />
+                          Category
+                        </span>
+                        <span className="font-bold text-gray-900">{packageData.category}</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Group Size</span>
-                        <span className="font-semibold">Any Size</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <Users className="h-4 w-4 mr-2 text-gray-400 group-hover/item:text-admin-primary transition-colors" />
+                          Group Size
+                        </span>
+                        <span className="font-bold text-gray-900">Any Size</span>
                       </div>
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-gray-600">Booking</span>
-                        <span className="font-semibold text-green-600">Available</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                          Booking
+                        </span>
+                        <span className="font-bold text-green-600 flex items-center">
+                          <span className="w-2 h-2 bg-green-600 rounded-full mr-2 animate-pulse"></span>
+                          Available
+                        </span>
                       </div>
                     </div>
 
                     <div className="space-y-4">
                       <Button
                         onClick={handleBookPackage}
-                        className="w-full bg-admin-gradient text-white hover:opacity-90 py-3 text-lg font-semibold"
+                        className="w-full bg-admin-gradient text-white hover:opacity-90 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <WhatsAppIcon className="h-5 w-5 mr-2" />
                         Book via WhatsApp
@@ -365,29 +639,40 @@ Thank you!`;
                       <Button
                         onClick={handleCallNow}
                         variant="outline"
-                        className="w-full border-admin-primary text-admin-primary hover:bg-admin-primary hover:text-white py-3 text-lg font-semibold"
+                        className="w-full border-2 border-admin-primary text-admin-primary hover:bg-admin-primary hover:text-white py-6 text-lg font-semibold transition-all duration-300"
                       >
                         <Phone className="h-5 w-5 mr-2" />
                         Call for Details
                       </Button>
                     </div>
 
-                    <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-900 mb-2">Need Help?</h4>
-                      <p className="text-sm text-gray-600 mb-3">
+                    <motion.div 
+                      className="mt-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="flex items-center mb-3">
+                        <div className="w-8 h-8 bg-admin-gradient rounded-lg flex items-center justify-center mr-3">
+                          <Phone className="h-4 w-4 text-white" />
+                        </div>
+                        <h4 className="font-bold text-gray-900">Need Help?</h4>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                         Our travel experts are here to help you plan your perfect trip.
                       </p>
-                      <div className="text-sm">
-                        <div className="flex items-center mb-1">
-                          <Phone className="h-4 w-4 mr-2 text-admin-primary" />
-                          <span>{contactInfo?.primaryPhone || '+91 98765 43210'}</span>
+                      <div className="space-y-2.5">
+                        <div className="flex items-center text-sm bg-white p-3 rounded-lg shadow-sm">
+                          <Phone className="h-4 w-4 mr-2.5 text-admin-primary flex-shrink-0" />
+                          <span className="font-medium text-gray-900">{contactInfo?.primaryPhone || '+91 98765 43210'}</span>
                         </div>
-                        <div className="flex items-center">
-                          <WhatsAppIcon className="h-4 w-4 mr-2 text-green-500" />
-                          <span>WhatsApp Support</span>
+                        <div className="flex items-center text-sm bg-white p-3 rounded-lg shadow-sm">
+                          <WhatsAppIcon className="h-4 w-4 mr-2.5 text-green-500 flex-shrink-0" />
+                          <span className="font-medium text-gray-900">WhatsApp Support</span>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </CardContent>
                 </Card>
               </motion.div>

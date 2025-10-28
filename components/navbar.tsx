@@ -152,179 +152,237 @@ function NavbarContent() {
 
   return (
     <>
-      {/* Top Bar with Dynamic Contact Info - Responsive */}
-      <div className="bg-admin-gradient text-white py-1.5 sm:py-2 px-2 sm:px-4 text-xs sm:text-sm">
-        <div className="container mx-auto flex flex-col sm:flex-row lg:flex-row justify-between items-center gap-1 sm:gap-2">
+      {/* Top Bar with Dynamic Contact Info - Compact design */}
+      <div className="relative overflow-hidden bg-admin-gradient text-white py-1.5 sm:py-2 px-3 sm:px-4 text-xs">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)] opacity-50"></div>
+        <div className="container mx-auto flex flex-col sm:flex-row lg:flex-row justify-between items-center gap-1.5 sm:gap-2 relative z-10">
           {renderContactInfo()}
           {renderAddress()}
         </div>
       </div>
 
-      {/* Main Navigation - Responsive */}
+      {/* Main Navigation - Compact floating design */}
       <nav
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100"
-            : "bg-white/98 backdrop-blur-sm shadow-lg"
+            ? "py-1.5 sm:py-2"
+            : "py-2 sm:py-2.5"
         }`}
       >
         <div className="container mx-auto px-2 sm:px-4">
-          <div className="flex justify-between items-center h-14 sm:h-16 lg:h-20">
-            {/* Logo - Responsive */}
+          <div className={`flex justify-between items-center transition-all duration-500 rounded-2xl lg:rounded-full ${
+            isScrolled
+              ? "bg-white/80 backdrop-blur-3xl shadow-2xl shadow-gray-900/10 border border-gray-200/60 px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3"
+              : "bg-white/70 backdrop-blur-2xl shadow-xl shadow-gray-900/5 border border-gray-100/50 px-3 sm:px-4 lg:px-6 py-2.5 sm:py-3 lg:py-3.5"
+          }`}>
+            {/* Logo - Prominent design with better sizing */}
             <Link
               href="/"
-              className="flex items-center space-x-1.5 sm:space-x-2 lg:space-x-3 group"
+              className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 group relative"
             >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl sm:rounded-2xl overflow-hidden flex items-center justify-center bg-white shadow-md">
-                {themeData?.logo && (
-                  <Image
-                    src={themeData.logo}
-                    alt={`${themeData?.siteName || ''} Logo`}
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
-                )}
+              <div className="relative">
+                {/* Glow effect behind logo */}
+                <div className="absolute inset-0 bg-admin-primary/40 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                <div className="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 shadow-md group-hover:shadow-lg transition-all duration-500 group-hover:scale-105 ring-2 ring-gray-200/50 group-hover:ring-admin-primary/30 group-hover:ring-3">
+                  {themeData?.logo && (
+                    <Image
+                      src={themeData.logo}
+                      alt={`${themeData?.siteName || ''} Logo`}
+                      width={56}
+                      height={56}
+                      className="w-full h-full object-contain p-1 group-hover:rotate-6 transition-transform duration-500"
+                    />
+                  )}
+                </div>
               </div>
               {themeData?.siteName && (
-                <div>
-                  <div className="font-bold text-sm sm:text-lg lg:text-xl xl:text-2xl bg-admin-gradient bg-clip-text text-transparent">
-                    {themeData.siteName.split(' ')[0]}
+                <div className="transition-all duration-300">
+                  <div className="font-extrabold text-base sm:text-lg lg:text-xl xl:text-2xl bg-admin-gradient bg-clip-text text-transparent transition-all duration-300">
+                    {themeData.siteName.includes('Tours') 
+                      ? themeData.siteName.split('Tours')[0].trim()
+                      : themeData.siteName.split(' ').slice(0, 2).join(' ')}
                   </div>
-                  <div className="text-xs sm:text-xs lg:text-sm text-gray-600 font-medium">
+                  <div className="text-[11px] sm:text-xs lg:text-sm text-gray-700 font-bold tracking-wide group-hover:text-admin-primary transition-colors duration-300">
                     {themeData.siteName.includes('Tours') 
                       ? 'Tours & Travels' 
-                      : themeData.siteName.split(' ').slice(1).join(' ')}
+                      : themeData.siteName.split(' ').slice(2).join(' ')}
                   </div>
                 </div>
               )}
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`transition-all font-semibold text-base xl:text-lg relative group ${
-                    isActive(item.href)
-                      ? "text-transparent bg-clip-text bg-admin-gradient"
-                      : "text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-admin-gradient"
-                  }`}
-                >
-                  {item.name}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-admin-gradient transition-all duration-300 ${
+            {/* Desktop Navigation - Compact pill design */}
+            <div className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+              {/* Navigation pills container */}
+              <div className="flex items-center gap-0.5 bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-full px-1.5 py-1.5 shadow-inner">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`relative px-3.5 xl:px-4 py-1.5 xl:py-2 rounded-full font-bold text-xs xl:text-sm transition-all duration-300 ${
                       isActive(item.href)
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
+                        ? "text-white shadow-md"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-white/60"
                     }`}
-                  ></span>
-                </Link>
-              ))}
+                  >
+                    {/* Active background with gradient */}
+                    {isActive(item.href) && (
+                      <motion.div
+                        layoutId="navbar-pill"
+                        className="absolute inset-0 bg-admin-gradient rounded-full shadow-md"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.name}</span>
+                  </Link>
+                ))}
+              </div>
 
-              <Button
-                onClick={handleBookNow}
-                className="bg-admin-gradient text-white border-0 px-4 xl:px-6 py-2 font-semibold text-sm xl:text-base transition-all duration-300 hover:shadow-lg hover:scale-105"
-              >
-                Book Now
-              </Button>
-              {/* WhatsApp Button */}
-              <Button
-                onClick={() => {
-                  if (contactInfo?.whatsappNumber || contactInfo?.primaryPhone) {
-                    const number = (contactInfo.whatsappNumber || contactInfo.primaryPhone).replace(/[^0-9]/g, '');
-                    window.open(`https://wa.me/${number}?text=Hi, I'm interested in your travel services`, '_blank');
-                  }
-                }}
-                variant="outline"
-                className="border-admin-primary text-admin-primary hover:bg-admin-gradient hover:text-white px-4 xl:px-6 py-2 font-semibold text-sm xl:text-base transition-all duration-300 hover:shadow-lg hover:scale-105"
-                disabled={!contactInfo}
-              >
-                <Phone className="h-4 w-4 mr-2" />
-                WhatsApp
-              </Button>
+              {/* Action buttons - Compact */}
+              <div className="flex items-center gap-1.5 xl:gap-2 ml-1.5">
+                {/* WhatsApp Button - Icon only */}
+                <Button
+                  onClick={() => {
+                    if (contactInfo?.whatsappNumber || contactInfo?.primaryPhone) {
+                      const number = (contactInfo.whatsappNumber || contactInfo.primaryPhone).replace(/[^0-9]/g, '');
+                      window.open(`https://wa.me/${number}?text=Hi, I'm interested in your travel services`, '_blank');
+                    }
+                  }}
+                  variant="outline"
+                  className="relative overflow-hidden border-2 border-green-500 text-green-600 hover:text-white px-2.5 xl:px-3 py-1.5 xl:py-2 font-bold text-xs xl:text-sm transition-all duration-300 hover:shadow-lg hover:shadow-green-500/30 hover:scale-105 rounded-full group"
+                  disabled={!contactInfo}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                  <Phone className="h-3.5 w-3.5 relative z-10" />
+                </Button>
+
+                {/* Book Now Button - Compact */}
+                <Button
+                  onClick={handleBookNow}
+                  className="relative overflow-hidden bg-admin-gradient hover:opacity-90 text-white border-0 px-5 xl:px-6 py-1.5 xl:py-2 font-bold text-xs xl:text-sm transition-all duration-300 hover:shadow-xl hover:shadow-admin-primary/40 hover:scale-105 rounded-full group"
+                >
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    Book Now
+                    <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                </Button>
+              </div>
             </div>
 
-            {/* Mobile Menu Button - Responsive */}
+            {/* Mobile Menu Button - Compact circular design */}
             <button
-              className="lg:hidden p-1.5 sm:p-2 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors"
+              className="lg:hidden relative p-2 sm:p-2.5 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 border-2 border-gray-200/50 hover:border-admin-primary/50"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
-              {isOpen ? (
-                <X className="h-5 w-5 sm:h-6 sm:w-6" />
-              ) : (
-                <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
-              )}
+              <div className="relative z-10">
+                {isOpen ? (
+                  <X className="h-5 w-5 sm:h-6 sm:w-6 text-admin-primary" />
+                ) : (
+                  <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-admin-primary" />
+                )}
+              </div>
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation - Responsive */}
+        {/* Mobile Navigation - Modern card-based design */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden bg-white/98 backdrop-blur-xl border-t border-gray-100 shadow-xl"
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              className="lg:hidden mt-3"
             >
-              <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`block transition-all font-semibold text-base sm:text-lg py-2.5 sm:py-3 px-2 rounded-lg hover:bg-gray-50 ${
-                        isActive(item.href)
-                          ? "text-transparent bg-clip-text bg-admin-gradient"
-                          : "text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-admin-gradient"
-                      }`}
-                      onClick={() => setIsOpen(false)}
+              <div className="container mx-auto px-2 sm:px-4">
+                <div className="bg-white/90 backdrop-blur-3xl rounded-3xl shadow-2xl border border-gray-200/60 overflow-hidden">
+                  <div className="px-4 sm:px-6 py-6 sm:py-8 space-y-2">
+                    {navItems.map((item, index) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -40, scale: 0.95 }}
+                        animate={{ opacity: 1, x: 0, scale: 1 }}
+                        transition={{ 
+                          delay: index * 0.07,
+                          duration: 0.5,
+                          ease: [0.4, 0, 0.2, 1]
+                        }}
+                      >
+                        <Link
+                          href={item.href}
+                          className={`relative block overflow-hidden transition-all duration-300 font-bold text-lg sm:text-xl py-4 sm:py-5 px-5 rounded-2xl group ${
+                            isActive(item.href)
+                              ? "text-white shadow-lg"
+                              : "text-gray-700 hover:text-gray-900"
+                          }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {/* Active/Hover background */}
+                          <div className={`absolute inset-0 transition-all duration-300 ${
+                            isActive(item.href)
+                              ? "bg-admin-gradient"
+                              : "bg-gradient-to-r from-gray-50 to-gray-100 translate-x-[-100%] group-hover:translate-x-0"
+                          }`}></div>
+                          
+                          {/* Content */}
+                          <span className="relative z-10 flex items-center justify-between">
+                            {item.name}
+                            <svg className={`w-5 h-5 transition-transform duration-300 ${isActive(item.href) ? 'translate-x-0' : 'translate-x-[-10px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+
+                    {/* Action buttons section */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        delay: navItems.length * 0.07,
+                        duration: 0.5,
+                        ease: [0.4, 0, 0.2, 1]
+                      }}
+                      className="pt-4 space-y-3"
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
+                      {/* Book Now Button */}
+                      <Button
+                        onClick={handleBookNow}
+                        className="w-full relative overflow-hidden bg-admin-gradient hover:opacity-90 text-white border-0 py-5 sm:py-6 font-bold text-base sm:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-admin-primary/40 rounded-2xl group"
+                      >
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                          Book Now
+                          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </span>
+                      </Button>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (navItems.length + 1) * 0.1 }}
-                >
-                  <Button
-                    onClick={handleBookNow}
-                    className="w-full bg-admin-gradient hover:opacity-90 text-white border-0 py-2.5 sm:py-3 font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-lg"
-                  >
-                    Book Now
-                  </Button>
-                </motion.div>
-
-                {/* Mobile Get Brochure Button */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  className="pt-3 sm:pt-4 border-t border-gray-200"
-                >
-                  <Button
-                    onClick={() => {
-                      const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
-                      window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hi, I'm interested in your travel services`, '_blank');
-                    }}
-                    variant="outline"
-                    className="w-full border-admin-primary text-admin-primary hover:bg-admin-gradient hover:text-white py-2.5 sm:py-3 font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-lg mb-3"
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    WhatsApp
-                  </Button>
-                </motion.div>
+                      {/* WhatsApp Button */}
+                      <Button
+                        onClick={() => {
+                          const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
+                          window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hi, I'm interested in your travel services`, '_blank');
+                          setIsOpen(false);
+                        }}
+                        variant="outline"
+                        className="w-full relative overflow-hidden border-2 border-green-500 text-green-600 hover:text-white py-5 sm:py-6 font-bold text-base sm:text-lg transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/30 rounded-2xl group"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          WhatsApp
+                        </span>
+                      </Button>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}

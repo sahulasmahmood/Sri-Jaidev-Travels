@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     
     if (!response.ok) {
       return {
-        title: "Tariff Not Found - Vinushree Tours & Travels",
+        title: "Tariff Not Found - Sri Jaidev Tours & Travels",
       };
     }
     
@@ -29,18 +29,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     
     if (!tariff) {
       return {
-        title: "Tariff Not Found - Vinushree Tours & Travels",
+        title: "Tariff Not Found - Sri Jaidev Tours & Travels",
       };
     }
     
     return {
-      title: tariff.seoTitle || `${tariff.vehicleName} - Tariff & Pricing | Vinushree Tours & Travels`,
+      title: tariff.seoTitle || `${tariff.vehicleName} - Tariff & Pricing | Sri Jaidev Tours & Travels`,
       description: tariff.seoDescription || `Book ${tariff.vehicleName} for your travel needs. One-way: ₹${tariff.oneWayRate}/km, Round trip: ₹${tariff.roundTripRate}/km. Professional drivers and clean vehicles.`,
       keywords: tariff.seoKeywords || `${tariff.vehicleName}, ${tariff.vehicleType}, taxi booking, travel tariff, Tamil Nadu taxi`,
     };
   } catch (error) {
     return {
-      title: "Tariff Not Found - Vinushree Tours & Travels",
+      title: "Tariff Not Found - Sri Jaidev Tours & Travels",
     };
   }
 }

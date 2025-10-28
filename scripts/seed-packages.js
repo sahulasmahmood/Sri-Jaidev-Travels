@@ -18,7 +18,7 @@ async function seedPackages() {
       return
     }
 
-    // Sample packages data for Vinushree Tours & Travels
+    // Sample packages data for Sri Jaidev Tours & Travels
     const samplePackages = [
       {
         title: "Ooty Hill Station Tour",

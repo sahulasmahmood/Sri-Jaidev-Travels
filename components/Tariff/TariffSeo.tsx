@@ -7,7 +7,7 @@ export function TariffPageSeo() {
   useSEOMeta({
     pageId: 'tariff',
     fallback: {
-      title: 'Taxi Tariff & Pricing - Vinushree Tours & Travels',
+      title: 'Taxi Tariff & Pricing - Sri Jaidev Tours & Travels',
       description: 'Check our competitive taxi tariff and pricing for one-way trips, round trips, airport taxi, and hourly packages. Transparent pricing with no hidden charges.',
       keywords: 'taxi tariff, taxi pricing, one way taxi rates, round trip rates, airport taxi charges, hourly package rates, transparent pricing'
     }

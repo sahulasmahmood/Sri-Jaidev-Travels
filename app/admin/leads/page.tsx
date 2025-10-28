@@ -589,7 +589,7 @@ export default function LeadManager() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `vinushree-leads-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `SriJaidev-leads-${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1234,7 +1234,7 @@ export default function LeadManager() {
                                 size="sm"
                                 variant="outline"
                                 onClick={() => {
-                                  const reviewMessage = `Hi ${lead.fullName}! Thank you for choosing Vinushree Tours & Travels. We hope you had a great experience with our ${lead.serviceType} service. 
+                                  const reviewMessage = `Hi ${lead.fullName}! Thank you for choosing Sri Jaidev Tours & Travels. We hope you had a great experience with our ${lead.serviceType} service. 
 
 Please take a moment to share your feedback by clicking here: ${lead.reviewLink}
 

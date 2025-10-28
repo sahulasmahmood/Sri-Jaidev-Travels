@@ -32,10 +32,10 @@ export default function ThemePage() {
   const { toast } = useToast();
   const { themeData, loading: themeLoading, refreshTheme } = useTheme();
   
-  const [siteName, setSiteName] = useState("Vinushree Tours & Travels");
+  const [siteName, setSiteName] = useState("Sri Jaidev Tours & Travels");
   const [logo, setLogo] = useState<string | null>(null);
   const [favicon, setFavicon] = useState<string | null>(null);
-  const [primaryColor, setPrimaryColor] = useState("#F59E0B"); // Gold for travel theme
+  const [primaryColor, setPrimaryColor] = useState("#EF4444"); // Red matching Sri Jaidev logo
   const [secondaryColor, setSecondaryColor] = useState("#1F2937"); // Dark navy for travel theme
   const [previewDevice, setPreviewDevice] = useState("desktop");
   const [loading, setLoading] = useState(false);
@@ -107,10 +107,10 @@ export default function ThemePage() {
 
       if (result.success) {
         // Update local state with default values
-        setSiteName("Vinushree Tours & Travels");
-        setPrimaryColor("#F59E0B");
+        setSiteName("Sri Jaidev Tours & Travels");
+        setPrimaryColor("#EF4444");
         setSecondaryColor("#1F2937");
-        setLogo("/vinushree-tours-logo.png");
+        setLogo("/SriJaidev-tours-logo.png");
         setFavicon(null);
         
         toast({
@@ -413,11 +413,11 @@ export default function ThemePage() {
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       {
-                        name: "Vinushree Gold",
-                        primary: "#F59E0B",
+                        name: "Sri Jaidev Red",
+                        primary: "#EF4444",
                         secondary: "#1F2937",
                         description: "Brand Colors",
-                        icon: "⭐",
+                        icon: "🔴",
                       },
                       {
                         name: "Ocean Breeze",
@@ -747,10 +747,12 @@ export default function ThemePage() {
                             className="text-lg font-bold"
                             style={{ color: primaryColor }}
                           >
-                            {siteName.split(' ')[0] || 'Vinushree'}
+                            {siteName.includes('Tours') 
+                              ? siteName.split('Tours')[0].trim()
+                              : siteName.split(' ').slice(0, 2).join(' ') || 'Sri Jaidev'}
                           </div>
                           <div className="text-sm text-gray-600">
-                            {siteName.includes('Tours') ? 'Tours & Travels' : siteName.split(' ').slice(1).join(' ') || 'Tours & Travels'}
+                            {siteName.includes('Tours') ? 'Tours & Travels' : siteName.split(' ').slice(2).join(' ') || 'Tours & Travels'}
                           </div>
                         </div>
                       </div>
@@ -878,11 +880,11 @@ export default function ThemePage() {
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Mail className="w-4 h-4" />
-                        info@vinushree.com
+                        srijaidavetravelers@gmail.com
                       </div>
                     </div>
                     <div className="text-xs opacity-90">
-                      © 2024 Vinushree Tours & Travels. All rights reserved.
+                      © 2024 Sri Jaidev Tours & Travels. All rights reserved.
                     </div>
                   </div>
                 </div>

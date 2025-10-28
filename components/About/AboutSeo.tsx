@@ -7,9 +7,9 @@ export function AboutPageSeo() {
   useSEOMeta({
     pageId: 'about',
     fallback: {
-      title: 'About Vinushree Tours & Travels - Your Trusted Travel Partner',
-      description: 'Learn about Vinushree Tours & Travels, your trusted travel partner in Tamil Nadu. We provide reliable taxi services, tour packages, and travel solutions since 2020.',
-      keywords: 'about vinushree tours, travel company tamil nadu, trusted taxi service, travel partner, company history, reliable transport'
+      title: 'About Sri Jaidev Tours & Travels - Your Trusted Travel Partner',
+      description: 'Learn about Sri Jaidev Tours & Travels, your trusted travel partner in Tamil Nadu. We provide reliable taxi services, tour packages, and travel solutions since 2020.',
+      keywords: 'about Sri Jaidev tours, travel company tamil nadu, trusted taxi service, travel partner, company history, reliable transport'
     }
   })
 

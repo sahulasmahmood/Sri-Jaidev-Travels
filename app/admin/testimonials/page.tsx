@@ -450,7 +450,7 @@ export default function TestimonialsPage() {
             Testimonials Management
           </h1>
           <p className="text-gray-600 mt-2">
-            Manage customer testimonials and reviews for Vinushree Tours & Travels
+            Manage customer testimonials and reviews for Sri Jaidev Tours & Travels
           </p>
         </div>
         <Dialog
@@ -891,14 +891,6 @@ export default function TestimonialsPage() {
               {loading ? 'Loading testimonials...' : 'Loading services...'}
             </span>
           </div>
-        ) : testimonials.length === 0 ? (
-          <Card className="shadow-xl border-0">
-            <CardContent className="p-12 text-center">
-              <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Testimonials Found</h3>
-              <p className="text-gray-500">Start by adding your first customer testimonial.</p>
-            </CardContent>
-          </Card>
         ) : (
           testimonials.map((testimonial) => (
           <Card

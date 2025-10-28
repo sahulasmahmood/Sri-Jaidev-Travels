@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 // SEO metadata
 export const metadata = {
-  title: "Travel Tariff & Pricing - Vinushree Tours & Travels",
+  title: "Travel Tariff & Pricing - Sri Jaidev Tours & Travels",
   description:
     "Explore our competitive travel tariff and pricing for one-way trips, round trips, airport taxi, day rentals, hourly packages for all destinations.",
   keywords:
