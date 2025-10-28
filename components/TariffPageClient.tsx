@@ -139,19 +139,19 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm px-4 py-2">
-              <Car className="h-4 w-4 mr-2" />
+            <Badge className="mb-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <Car className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
               Travel Tariff & Pricing
             </Badge>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Transparent Pricing
-              <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 font-normal">
-                For All Your Travel Needs
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-relaxed">
+              Affordable Rates
+              <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 sm:mt-3 font-normal">
+                For Every Destination
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              Discover our competitive rates for all travel services. 
-              No hidden charges, just honest pricing for quality service.
+              Explore our competitive pricing for premium travel services. 
+              Clear rates, no surprises, just quality service you can trust.
             </p>
           </motion.div>
         </div>

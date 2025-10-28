@@ -79,8 +79,8 @@ export default function CompleteHome() {
             key={service._id || `service-${index}`}
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 0.6, 
+            transition={{
+              duration: 0.6,
               delay: index * 0.1,
               ease: "easeOut"
             }}
@@ -189,8 +189,8 @@ export default function CompleteHome() {
             key={pkg._id || `package-${index}`}
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 0.6, 
+            transition={{
+              duration: 0.6,
               delay: index * 0.1,
               ease: "easeOut"
             }}
@@ -396,9 +396,9 @@ export default function CompleteHome() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Badge className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-3 bg-white/10 text-white border border-white/20 backdrop-blur-md px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 text-xs sm:text-sm md:text-base rounded-full shadow-2xl hover:bg-white/20 hover:scale-105 transition-all duration-300">
-                <Car className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
-                <span className="font-medium">Welcome to Sri Jaidev Tours & Travels</span>
+              <Badge className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <Car className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                <span className="font-semibold">Welcome to Sri Jaidev Tours & Travels</span>
               </Badge>
             </motion.div>
 
@@ -420,23 +420,23 @@ export default function CompleteHome() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
-                <span className="block mb-2 sm:mb-3">Travel With Us</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 drop-shadow-2xl">
-                  In Comfort
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
+                <span className="block mb-2 sm:mb-3">Your Journey Begins</span>
+                <span className="block text-transparent bg-clip-text bg-admin-gradient drop-shadow-2xl">
+                  With Excellence
                 </span>
               </h1>
             </motion.div>
 
             {/* Description with Better Spacing */}
             <motion.p
-              className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-8 sm:mb-10 md:mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4"
+              className="text-sm sm:text-base md:text-lg lg:text-xl mb-8 sm:mb-10 md:mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              Experience professional travel services with comfort and reliability. From airport transfers to
-              complete tour packages, we ensure safe, comfortable, and memorable journeys to your destinations.
+              Discover seamless travel experiences across Tamil Nadu with our premium taxi services and curated tour packages.
+              We deliver comfort, safety, and reliability on every journey.
             </motion.p>
 
             {/* Enhanced CTA Buttons with Better Layout */}
@@ -571,9 +571,9 @@ export default function CompleteHome() {
                 key={index}
                 variants={{
                   initial: { opacity: 0, y: 50, scale: 0.8 },
-                  animate: { 
-                    opacity: 1, 
-                    y: 0, 
+                  animate: {
+                    opacity: 1,
+                    y: 0,
                     scale: 1,
                     transition: {
                       duration: 0.6,
@@ -587,21 +587,21 @@ export default function CompleteHome() {
                     {/* Enhanced animated icon container */}
                     <motion.div
                       className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-3 sm:mb-4 md:mb-5"
-                      whileHover={{ 
-                        scale: 1.15, 
+                      whileHover={{
+                        scale: 1.15,
                         rotate: 360,
                       }}
-                      transition={{ 
+                      transition={{
                         duration: 0.6,
                         ease: "easeInOut",
                       }}
                     >
                       {/* Glassmorphic background ring */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-lg" />
-                      
+
                       {/* Gradient background */}
                       <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-300`} />
-                      
+
                       {/* Animated glow effect */}
                       <motion.div
                         className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300`}
@@ -614,7 +614,7 @@ export default function CompleteHome() {
                           ease: "easeInOut",
                         }}
                       />
-                      
+
                       {/* Icon */}
                       <div className="absolute inset-0 flex items-center justify-center text-white z-10">
                         {stat.icon}
@@ -626,8 +626,8 @@ export default function CompleteHome() {
                       className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-admin-gradient bg-clip-text text-transparent mb-1 sm:mb-2"
                       initial={{ opacity: 0, scale: 0.5 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ 
-                        duration: 0.6, 
+                      transition={{
+                        duration: 0.6,
                         delay: index * 0.15 + 0.3,
                         ease: "easeOut",
                       }}

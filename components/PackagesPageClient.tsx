@@ -109,19 +109,19 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm px-4 py-2">
-              <MapPin className="h-4 w-4 mr-2" />
+            <Badge className="mb-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
               Tour Packages
             </Badge>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Discover Amazing Destinations
-              <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 font-normal">
-                Unforgettable Travel Experiences
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-relaxed">
+              Curated Travel Experiences
+              <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 sm:mt-3 font-normal">
+                For Every Explorer
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              Experience rich culture, stunning landscapes, and spiritual heritage 
-              with our expertly designed travel packages.
+              Discover handpicked destinations with expertly crafted tour packages. 
+              From cultural treasures to scenic wonders, we make every journey memorable.
             </p>
           </motion.div>
         </div>

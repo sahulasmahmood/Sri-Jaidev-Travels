@@ -47,17 +47,17 @@ export const Contact = ({ services: propServices }: ContactProps) => {
   const { contactInfo } = useContact()
 
   // Get dynamic services from contact info or use prop services or fallback
-  const services = contactInfo?.servicesOffered 
+  const services = contactInfo?.servicesOffered
     ? contactInfo.servicesOffered.split(',').map(s => s.trim()).filter(s => s.length > 0)
     : propServices || [
-        "One-way Trip",
-        "Round Trip", 
-        "Airport Taxi",
-        "Day Rental",
-        "Hourly Package",
-        "Local Pickup/Drop",
-        "Tour Package"
-      ]
+      "One-way Trip",
+      "Round Trip",
+      "Airport Taxi",
+      "Day Rental",
+      "Hourly Package",
+      "Local Pickup/Drop",
+      "Tour Package"
+    ]
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -164,9 +164,8 @@ export const Contact = ({ services: propServices }: ContactProps) => {
       icon: <MapPin className="h-5 w-5 text-white" />,
       title: "Address",
       details: contactInfo?.address || "2A, 1st Floor, Koodalnagar, Chokkalinganagar 1st Street",
-      description: `${contactInfo?.city || "South Madurai"}, ${
-        contactInfo?.state || "Tamil Nadu"
-      }-${contactInfo?.pincode || "625006"}`,
+      description: `${contactInfo?.city || "South Madurai"}, ${contactInfo?.state || "Tamil Nadu"
+        }-${contactInfo?.pincode || "625006"}`,
     },
   ]
 
@@ -175,7 +174,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
   return (
     <>
       {/* Hero Section */}
-  <section className="relative bg-admin-gradient text-white py-16 sm:py-20 lg:py-24 flex items-center justify-center overflow-hidden">
+      <section className="relative bg-admin-gradient text-white py-16 sm:py-20 lg:py-24 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0">
             {/* Image Layer */}
@@ -186,16 +185,16 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                 className="w-full h-full object-cover"
               />
             </div>
-            
+
             {/* Dark Overlay Layer */}
             <div className="absolute inset-0 bg-black/50" />
-            
+
             {/* Gradient Overlay Layer */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-transparent" />
-            
+
             {/* Admin Gradient Layer */}
             <div className="absolute inset-0 bg-admin-gradient/20" />
-            
+
             {/* Animated Gradient Layers */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-tr from-yellow-600/20 via-transparent to-orange-600/20"
@@ -230,8 +229,8 @@ export const Contact = ({ services: propServices }: ContactProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge className="mb-3 sm:mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm">
-              <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+            <Badge className="mb-3 sm:mb-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
               Get In Touch
             </Badge>
 
@@ -239,7 +238,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
               <p className="text-white/90 text-base sm:text-lg md:text-xl mb-2 sm:mb-3">{banner.title}</p>
             )}
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight px-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed px-2">
               {contactInfo?.pageTitle || "Plan Your Perfect Journey"}
             </h1>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
@@ -255,20 +254,20 @@ export const Contact = ({ services: propServices }: ContactProps) => {
         <div className="container mx-auto px-3 sm:px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 max-w-7xl mx-auto">
             {/* Contact Form */}
-            <motion.div 
-              variants={fadeInUp} 
-              initial="initial" 
-              whileInView="animate" 
+            <motion.div
+              variants={fadeInUp}
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true }}
               className="h-full"
             >
               <Card className="h-full transition-all duration-500 border-0 shadow-xl overflow-hidden group flex flex-col relative hover:shadow-2xl hover:shadow-orange-500/10">
                 {/* Gradient border effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" 
-                     style={{ padding: '2px' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                  style={{ padding: '2px' }}>
                   <div className="absolute inset-[2px] bg-white rounded-lg"></div>
                 </div>
-                
+
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-orange-500/5 via-yellow-500/5 to-orange-600/5"></div>
 
@@ -287,12 +286,12 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                       Fill out the form below and we'll get back to you within 24 hours
                     </p>
                   </div>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                     <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                       <div className="space-y-2">
-                        <Label 
-                          htmlFor="fullName" 
+                        <Label
+                          htmlFor="fullName"
                           className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-1.5"
                         >
                           <span className="w-1 h-4 bg-admin-gradient rounded-full"></span>
@@ -312,8 +311,8 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label 
-                          htmlFor="email" 
+                        <Label
+                          htmlFor="email"
                           className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-1.5"
                         >
                           <span className="w-1 h-4 bg-admin-gradient rounded-full"></span>
@@ -336,8 +335,8 @@ export const Contact = ({ services: propServices }: ContactProps) => {
 
                     <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                       <div className="space-y-2">
-                        <Label 
-                          htmlFor="phone" 
+                        <Label
+                          htmlFor="phone"
                           className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-1.5"
                         >
                           <span className="w-1 h-4 bg-admin-gradient rounded-full"></span>
@@ -362,16 +361,16 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label 
-                          htmlFor="service" 
+                        <Label
+                          htmlFor="service"
                           className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-1.5"
                         >
                           <span className="w-1 h-4 bg-admin-gradient rounded-full"></span>
                           Service of Interest
                           <span className="text-red-500 text-base">*</span>
                         </Label>
-                        <Select 
-                          value={formData.service} 
+                        <Select
+                          value={formData.service}
                           onValueChange={(value) => handleInputChange("service", value)}
                           required
                         >
@@ -390,8 +389,8 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label 
-                        htmlFor="message" 
+                      <Label
+                        htmlFor="message"
                         className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-1.5"
                       >
                         <span className="w-1 h-4 bg-admin-gradient rounded-full"></span>
@@ -440,7 +439,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                         </>
                       )}
                     </Button>
-                    
+
                     {/* Privacy notice with better styling */}
                     <div className="flex items-center justify-center gap-2 pt-2">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
@@ -473,25 +472,25 @@ export const Contact = ({ services: propServices }: ContactProps) => {
               </motion.div>
 
               {contactDetails.map((info, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   variants={fadeInUp}
                   whileHover={{ scale: 1.02, y: -4 }}
                   transition={{ duration: 0.3 }}
                 >
                   <Card className="hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-500 border-0 shadow-xl group overflow-hidden relative">
                     {/* Gradient border effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 via-yellow-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" 
-                         style={{ padding: '2px' }}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400 via-yellow-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                      style={{ padding: '2px' }}>
                       <div className="absolute inset-[2px] bg-white rounded-lg"></div>
                     </div>
-                    
+
                     {/* Hover glow effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-orange-500/5 via-yellow-500/5 to-orange-600/5"></div>
 
                     <CardContent className="p-4 sm:p-5 lg:p-6 relative">
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <motion.div 
+                        <motion.div
                           className="w-12 h-12 sm:w-14 sm:h-14 bg-admin-gradient rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-xl group-hover:shadow-orange-500/30 transition-all duration-300"
                           whileHover={{ rotate: 360 }}
                           transition={{ duration: 0.6 }}
@@ -562,13 +561,13 @@ export const Contact = ({ services: propServices }: ContactProps) => {
             <div className="relative group">
               {/* Enhanced gradient border effect */}
               <div className="absolute -inset-1 bg-gradient-to-br from-orange-400 via-yellow-500 to-orange-600 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 blur-sm transition-all duration-500"></div>
-              
+
               {/* Main container with enhanced styling */}
               <div className="relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-gray-100 group-hover:border-transparent">
                 {/* Decorative corner accents */}
                 <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-orange-500/10 to-transparent rounded-br-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-yellow-500/10 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 {/* Map content */}
                 {contactInfo?.mapEmbedCode ? (
                   <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[550px] relative">
@@ -576,7 +575,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                       className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-0"
                       dangerouslySetInnerHTML={{ __html: contactInfo.mapEmbedCode }}
                     />
-                    
+
                     {/* Subtle overlay gradient on edges for depth */}
                     <div className="absolute inset-0 pointer-events-none">
                       <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-white/20 to-transparent"></div>
@@ -603,7 +602,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                         backgroundSize: "30px 30px",
                       }}
                     />
-                    
+
                     <div className="text-center relative z-10">
                       <motion.div
                         className="inline-block p-6 rounded-full bg-gradient-to-br from-orange-100 to-yellow-100 mb-6 shadow-lg"

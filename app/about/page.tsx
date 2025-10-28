@@ -209,8 +209,8 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Badge className="mb-3 sm:mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm">
-              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+            <Badge className="mb-3 sm:mb-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-2" />
               About Sri Jaidev Tours & Travels
             </Badge>
 
@@ -219,15 +219,15 @@ export default function AboutPage() {
               <p className="text-white/90 text-base sm:text-lg md:text-xl mb-2 sm:mb-3">{banner.title}</p>
             )}
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              Your Trusted Travel Partner
-              <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl mt-1 sm:mt-2 font-normal">
-                For All Destinations
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-relaxed">
+              Your Trusted Partner
+              <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl mt-2 sm:mt-3 font-normal">
+                For Every Journey
               </span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
-              Discover the story behind our commitment to providing exceptional travel experiences to
-              beautiful destinations with comfort, safety, and personalized service.
+              Experience premium travel services that blend comfort, safety, and reliability. 
+              We're committed to making every journey memorable with personalized care and professional service.
             </p>
           </motion.div>
         </div>
