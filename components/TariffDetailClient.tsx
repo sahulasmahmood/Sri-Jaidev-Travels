@@ -64,13 +64,13 @@ I'm interested in booking this vehicle. Please provide:
 
 Thank you!`;
 
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleCallNow = () => {
-    const phoneNumber = contactInfo?.primaryPhone || '+919003782966';
+    const phoneNumber = contactInfo?.primaryPhone || '+919360290811';
     window.open(`tel:${phoneNumber}`, '_self');
   };
 

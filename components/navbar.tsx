@@ -367,7 +367,7 @@ function NavbarContent() {
                       {/* WhatsApp Button */}
                       <Button
                         onClick={() => {
-                          const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+                          const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
                           window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hi, I'm interested in your travel services`, '_blank');
                           setIsOpen(false);
                         }}

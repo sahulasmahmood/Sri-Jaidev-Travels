@@ -56,13 +56,13 @@ export default function Footer() {
 
   const handleWhatsAppClick = () => {
     const message = "Hi! I'm interested in your travel services. Please provide more details.";
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleCallClick = () => {
-    window.open(`tel:${contactInfo?.primaryPhone || '+919003782966'}`, '_self');
+    window.open(`tel:${contactInfo?.primaryPhone || '+919360290811'}`, '_self');
   };
 
   return (
@@ -133,7 +133,7 @@ export default function Footer() {
                   <Phone className="h-5 w-5 text-admin-primary flex-shrink-0" />
                 </div>
                 <a
-                  href={`tel:${contactInfo?.primaryPhone || "+919003782966"}`}
+                  href={`tel:${contactInfo?.primaryPhone || "+919360290811"}`}
                   className="text-gray-300 hover:text-white transition-colors text-base font-medium group-hover:translate-x-1 transition-transform duration-300"
                 >
                   {contactInfo?.primaryPhone || "+91 90037 82966"}

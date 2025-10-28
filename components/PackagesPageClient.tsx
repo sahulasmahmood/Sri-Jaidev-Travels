@@ -3,12 +3,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Phone } from "lucide-react";
+import { MapPin, Clock, Phone, Compass } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import PopularRoutes from "@/components/PopularRoutes";
 import { useBanner } from "@/hooks/use-banner";
 import { useContact } from "@/hooks/use-contact";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 
 interface PackageItem {
   id: number;
@@ -34,10 +35,22 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
   
   const handleBookPackage = (packageTitle: string) => {
     const message = `Hi, I'm interested in the ${packageTitle} package. Please provide more details and availability.`;
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
+
+  const handleCallNow = () => {
+    const phoneNumber = contactInfo?.primaryPhone || '+919360290811';
+    window.open(`tel:${phoneNumber}`, "_self")
+  }
+
+  const handleWhatsAppCustom = () => {
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
+    const message = 'Hi, I would like to plan a personalized trip. Please help me create a custom travel package.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  }
 
   return (
     <>
@@ -279,37 +292,98 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
       {/* Popular Routes Section */}
       <PopularRoutes showAll={true} />
 
-      {/* Custom Package Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center max-w-7xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Want a Personalized Trip?
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Let us create a custom travel experience tailored to your interests, budget, and schedule
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => {
-                const phoneNumber = contactInfo?.primaryPhone || '+919003782966';
-                window.open(`tel:${phoneNumber}`, '_blank');
-              }}
-              className="bg-admin-gradient text-white hover:opacity-90"
+      {/* Custom Package CTA Section - Redesigned with Dark Background */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            {/* Icon */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mb-6"
             >
-              <Phone className="h-4 w-4 mr-2" />
-              Call for Custom Trip
-            </Button>
-            <Button
-              onClick={() => {
-                const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
-                window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hi, I would like to plan a personalized trip. Please help me create a custom travel package.`, '_blank');
-              }}
-              variant="outline"
-              className="border-admin-primary text-admin-primary hover:bg-admin-gradient hover:text-white"
-            >
-              WhatsApp Us
-            </Button>
-          </div>
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-admin-gradient rounded-2xl mb-4 shadow-2xl">
+                <Compass className="h-8 w-8 text-white" />
+              </div>
+            </motion.div>
+
+            <Badge className="mb-4 sm:mb-6 bg-white/10 text-white border-white/20 backdrop-blur-md px-4 sm:px-6 py-2 text-xs sm:text-sm shadow-lg">
+              Want a Personalized Trip?
+            </Badge>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white leading-tight">
+              Create Your Dream Journey
+              <span className="block text-transparent bg-clip-text bg-admin-gradient mt-2">
+                Tailored Just For You
+              </span>
+            </h2>
+
+            <p className="text-sm sm:text-base md:text-lg text-white/80 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
+              Let us create a custom travel experience tailored to your interests, budget, and schedule. 
+              Your perfect adventure awaits!
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+                <Button
+                  onClick={handleWhatsAppCustom}
+                  size="lg"
+                  className="w-full sm:w-auto bg-admin-gradient text-white hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg"
+                >
+                  <WhatsAppIcon className="mr-2 h-5 w-5" />
+                  Plan via WhatsApp
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+                <Button
+                  onClick={handleCallNow}
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold bg-white/5 backdrop-blur-md transition-all duration-300 rounded-lg"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Call Now
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

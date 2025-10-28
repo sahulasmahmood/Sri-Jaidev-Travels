@@ -12,13 +12,13 @@ export default function FloatingContactButtons() {
 
   const handleWhatsAppClick = () => {
     const message = "Hi! I'm interested in your travel services. Please provide more details.";
-    const whatsappNumber = contactInfo?.whatsappNumber || "919003782966";
+    const whatsappNumber = contactInfo?.whatsappNumber || "919360290811";
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleCallClick = () => {
-    const phoneNumber = contactInfo?.primaryPhone || "+919003782966";
+    const phoneNumber = contactInfo?.primaryPhone || "+919360290811";
     window.open(`tel:${phoneNumber}`, '_self');
   };
 

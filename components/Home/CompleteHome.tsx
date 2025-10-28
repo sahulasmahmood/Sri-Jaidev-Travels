@@ -56,13 +56,13 @@ export default function CompleteHome() {
 
   const handleBookPackage = (packageTitle: string) => {
     const message = `Hi, I'm interested in the ${packageTitle} package. Please provide more details and availability.`;
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   }
 
   const handleCallNow = () => {
-    const phoneNumber = contactInfo?.primaryPhone || '+919003782966';
+    const phoneNumber = contactInfo?.primaryPhone || '+919360290811';
     window.open(`tel:${phoneNumber}`, "_self")
   }
 
@@ -649,8 +649,59 @@ export default function CompleteHome() {
       </section>
 
       {/* Quick Book Form Section */}
-      <section id="quick-book-form" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
+      <section id="quick-book-form" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-yellow-200/20 to-orange-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-r from-orange-200/20 to-yellow-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-12 sm:mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="mb-4 sm:mb-6 inline-flex items-center gap-2 bg-white/20 text-gray-900 border border-gray-200/50 backdrop-blur-md px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:bg-white/30 hover:scale-105 transition-all duration-300">
+              <Car className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="font-semibold">Book Your Ride</span>
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+              Start Your Journey
+              <span className="block text-transparent bg-clip-text bg-admin-gradient mt-2">In Just 2 Minutes</span>
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Fill in your travel details and get instant confirmation via WhatsApp
+            </p>
+          </motion.div>
+
+          {/* Form */}
           <div className="max-w-4xl mx-auto">
             <QuickBookForm />
           </div>
@@ -893,14 +944,15 @@ export default function CompleteHome() {
       {/* Dynamic Testimonials Section */}
       {renderTestimonials()}
 
-      {/* CTA Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-admin-gradient relative overflow-hidden">
-        {/* Animated overlay gradients */}
-        <div className="absolute inset-0 overflow-hidden">
+      {/* CTA Section - Redesigned with Dark Background */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-yellow-600/30 via-transparent to-orange-600/30"
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full blur-3xl"
             animate={{
-              opacity: [0.3, 0.7, 0.3],
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
               duration: 8,
@@ -909,82 +961,69 @@ export default function CompleteHome() {
             }}
           />
           <motion.div
-            className="absolute inset-0 bg-gradient-to-bl from-orange-500/20 via-transparent to-yellow-500/20"
+            className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-full blur-3xl"
             animate={{
-              opacity: [0.7, 0.3, 0.7],
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
-              duration: 6,
+              duration: 10,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
+              delay: 1,
             }}
           />
         </div>
 
-        {/* Small floating bubbles like About section */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating bubbles */}
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={`bubble-${i}`}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-white/30 rounded-full"
-              style={{
-                left: `${5 + i * 8}%`,
-                top: `${10 + (i % 4) * 20}%`,
-              }}
-              animate={{
-                y: [-15, 15, -15],
-                x: [-10, 10, -10],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.5, 1.2, 0.5],
-              }}
-              transition={{
-                duration: 5 + i * 0.3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 text-center relative z-10 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-7xl">
           <motion.div
-            variants={{
-              initial: { opacity: 0, y: 60 },
-              animate: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-            initial="initial"
-            whileInView="animate"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
           >
-            <Badge className="mb-3 sm:mb-4 md:mb-6 bg-admin-secondary text-white border-white/30 backdrop-blur-sm px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 text-xs sm:text-sm md:text-base">
-              <Plane className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+            {/* Icon */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mb-6"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-admin-gradient rounded-2xl mb-4 shadow-2xl">
+                <Plane className="h-8 w-8 text-white" />
+              </div>
+            </motion.div>
+
+            <Badge className="mb-4 sm:mb-6 bg-white/10 text-white border-white/20 backdrop-blur-md px-4 sm:px-6 py-2 text-xs sm:text-sm shadow-lg">
               Ready to Travel?
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white">
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white leading-tight">
               Start Your Journey
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
+              <span className="block text-transparent bg-clip-text bg-admin-gradient mt-2">
                 With Us Today
               </span>
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
+
+            <p className="text-sm sm:text-base md:text-lg text-white/80 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
               Experience the comfort and reliability of our travel services. Book your journey across Tamil Nadu and
               discover the beauty of the state with our professional team.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
                 <Button
                   onClick={() => {
-                    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+                    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
                     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=Hi, I would like to book a trip. Please provide more details.`;
                     window.open(whatsappUrl, '_blank');
                   }}
                   size="lg"
-                  className="w-full sm:w-auto bg-white text-admin-secondary hover:bg-gray-100 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+                  className="w-full sm:w-auto bg-admin-gradient text-white hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg"
                 >
-                  <WhatsAppIcon className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  <WhatsAppIcon className="mr-2 h-5 w-5" />
                   Book via WhatsApp
                 </Button>
               </motion.div>
@@ -993,9 +1032,9 @@ export default function CompleteHome() {
                   onClick={handleCallNow}
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold bg-transparent backdrop-blur-sm"
+                  className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold bg-white/5 backdrop-blur-md transition-all duration-300 rounded-lg"
                 >
-                  <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  <Phone className="mr-2 h-5 w-5" />
                   Call Now
                 </Button>
               </motion.div>

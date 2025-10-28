@@ -94,19 +94,20 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
 
   const handleBookRoute = (routeName: string) => {
     const message = `Hi, I'd like to book ${routeName}. Please provide availability and confirm the fare.`;
-    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919003782966';
+    const whatsappNumber = contactInfo?.whatsappNumber || contactInfo?.primaryPhone || '919360290811';
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-admin-gradient relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute inset-0 bg-gradient-to-tr from-yellow-600/30 via-transparent to-orange-600/30"
+          className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-yellow-200/30 to-orange-200/30 rounded-full blur-3xl"
           animate={{
-            opacity: [0.3, 0.7, 0.3],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
             duration: 8,
@@ -115,70 +116,47 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
           }}
         />
         <motion.div
-          className="absolute inset-0 bg-gradient-to-bl from-orange-500/20 via-transparent to-yellow-500/20"
+          className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-r from-orange-200/30 to-yellow-200/30 rounded-full blur-3xl"
           animate={{
-            opacity: [0.7, 0.3, 0.7],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
-            duration: 6,
+            duration: 10,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
+            delay: 1,
           }}
         />
       </div>
 
-
-
-      {/* Small floating bubbles like About section */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={`bubble-${i}`}
-            className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-white/30 rounded-full"
-            style={{
-              left: `${5 + i * 8}%`,
-              top: `${10 + (i % 4) * 20}%`,
-            }}
-            animate={{
-              y: [-15, 15, -15],
-              x: [-10, 10, -10],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.5, 1.2, 0.5],
-            }}
-            transition={{
-              duration: 5 + i * 0.3,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-              delay: i * 0.2,
-            }}
-          />
-        ))}
-      </div>
       <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
         <motion.div
-          className="text-center mb-12 sm:mb-16 md:mb-20"
+          className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 sm:mb-6 bg-white/20 text-white border-white/30 backdrop-blur-sm px-4 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm">
-            <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-            Popular Routes
+          <Badge className="mb-4 sm:mb-6 inline-flex items-center gap-2 bg-white/20 text-gray-900 border border-gray-200/50 backdrop-blur-md px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm shadow-lg hover:bg-white/30 hover:scale-105 transition-all duration-300">
+            <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="font-semibold">Popular Routes</span>
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 md:mb-8 px-2">
-            <span className="text-yellow-200">
-              Most Traveled Routes
-            </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+            Most Traveled
+            <span className="block text-transparent bg-clip-text bg-admin-gradient mt-2">Destinations</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto px-2">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Book taxi services to popular destinations with professional drivers
           </p>
         </motion.div>
 
         {isLoading ? (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <div className="flex flex-col items-center gap-4">
+              <div className="animate-spin rounded-full h-10 w-10 border-4 border-admin-primary border-t-transparent"></div>
+              <p className="text-gray-500 text-sm animate-pulse">Loading routes...</p>
+            </div>
           </div>
         ) : (
           <div className={`grid gap-3 sm:gap-4 justify-center ${
@@ -191,38 +169,53 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
             {displayRoutes.map((route, index) => (
               <motion.div
                 key={route._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.03 }}
                 viewport={{ once: true }}
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Button
+                <button
                   onClick={() => handleBookRoute(route.name)}
-                  variant="outline"
-                  className="w-full h-full min-h-[80px] p-3 sm:p-4 text-center border-2 border-gray-200 
-                      hover:border-admin-primary hover:bg-admin-gradient hover:text-white 
-                      transition-all duration-300 text-xs sm:text-sm font-medium text-gray-700 
-                      rounded-lg flex flex-col items-center justify-center gap-2 overflow-hidden"
+                  className="w-full h-full min-h-[90px] p-4 text-center bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 rounded-xl flex flex-col items-center justify-center gap-2.5 overflow-hidden group relative"
                 >
-                  <Car className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                  <span className="line-clamp-2 text-center break-words">
-    {route.name}
-  </span>
-                </Button>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon container with gradient background */}
+                  <div className="relative z-10 w-10 h-10 bg-gradient-to-br from-orange-100 to-yellow-100 group-hover:from-white/20 group-hover:to-white/10 rounded-lg flex items-center justify-center transition-all duration-300 shadow-md group-hover:shadow-lg">
+                    <Car className="h-5 w-5 text-admin-primary group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  
+                  {/* Route name */}
+                  <span className="relative z-10 line-clamp-2 text-center break-words text-sm font-semibold text-gray-900 group-hover:text-white transition-colors duration-300">
+                    {route.name}
+                  </span>
+                  
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-orange-400/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl pointer-events-none"></div>
+                </button>
               </motion.div>
             ))}
           </div>
         )}
 
         {!showAll && routesToDisplay.length > limit && (
-          <div className="text-center mt-8">
+          <motion.div
+            className="text-center mt-10 sm:mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <Link href="/tariff">
-              <Button className="bg-admin-gradient text-white hover:opacity-90 px-6 py-2 text-base font-medium">
+              <Button className="bg-admin-gradient text-white hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 transition-all duration-300 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold rounded-lg group">
                 View All Routes
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
