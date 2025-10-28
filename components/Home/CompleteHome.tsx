@@ -32,7 +32,7 @@ export default function CompleteHome() {
         setTestimonialsLoading(true)
         const response = await fetch('/api/admin/testimonial?status=published')
         const result = await response.json()
-        
+
         if (result.success) {
           setTestimonials(result.data)
         }
@@ -77,54 +77,94 @@ export default function CompleteHome() {
         {tariffData.slice(0, 6).map((service, index) => (
           <motion.div
             key={service._id || `service-${index}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: index * 0.1,
+              ease: "easeOut"
+            }}
             viewport={{ once: true }}
           >
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:scale-105 h-full">
-              <CardContent className="p-0 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.vehicleName}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20" />
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 shadow-xl bg-white hover:scale-[1.03] h-full relative overflow-hidden hover:-translate-y-2">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-400/20 to-yellow-400/20 blur-xl" />
+              </div>
+
+              <CardContent className="p-0 h-full flex flex-col relative z-10">
+                <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden rounded-t-lg">
+                  {/* Image with enhanced hover effect */}
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Image
+                      src={service.image || "/placeholder.svg"}
+                      alt={service.vehicleName}
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Enhanced multi-layer overlay for better contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
+
+                  {/* Enhanced glassmorphic price badge */}
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                    <Badge className="bg-white/10 text-white border border-white/30 backdrop-blur-md shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300 px-3 py-1.5 text-xs sm:text-sm font-semibold">
                       ₹{service.oneWayRate ? service.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim() : 'N/A'}+
                     </Badge>
                   </div>
+
+                  {/* Enhanced featured badge with glassmorphism */}
                   {service.featured && (
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-green-500 text-white">
-                        ⭐ Featured
+                    <motion.div
+                      className="absolute top-4 left-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                      viewport={{ once: true }}
+                    >
+                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 shadow-lg backdrop-blur-sm px-3 py-1.5 text-xs sm:text-sm font-semibold hover:scale-110 transition-transform duration-300">
+                        <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1 inline fill-current" />
+                        Featured
                       </Badge>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
-                <div className="p-4 sm:p-6 md:p-8 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
+
+                <div className="p-5 sm:p-6 md:p-7 lg:p-8 flex flex-col flex-grow">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-300">
                     {service.vehicleName}
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 md:mb-6 line-clamp-2 flex-grow">
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-5 md:mb-6 line-clamp-2 flex-grow leading-relaxed">
                     {service.description}
                   </p>
-                  <div className="flex items-center justify-between mt-auto">
-                    <Button
-                      onClick={() => handleBookNow(service.vehicleName)}
-                      className="bg-admin-gradient text-white hover:opacity-90 text-sm sm:text-base py-2 sm:py-2.5"
+
+                  {/* Enhanced button layout with better spacing */}
+                  <div className="flex items-center justify-between gap-3 mt-auto">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1"
                     >
-                      Book Now
-                    </Button>
+                      <Button
+                        onClick={() => handleBookNow(service.vehicleName)}
+                        className="w-full bg-admin-gradient text-white hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/30 text-sm sm:text-base py-2.5 sm:py-3 font-semibold transition-all duration-300 rounded-lg group/btn"
+                      >
+                        <span>Book Now</span>
+                        <ArrowRight className="h-4 w-4 ml-1.5 inline group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </Button>
+                    </motion.div>
                     <Link
                       href="/tariff"
-                      className="text-admin-primary hover:text-admin-secondary transition-colors font-medium text-xs sm:text-sm"
+                      className="text-admin-primary hover:text-admin-secondary transition-colors font-semibold text-xs sm:text-sm flex items-center gap-1 hover:gap-2 transition-all duration-300 whitespace-nowrap"
                     >
-                      View Details
-                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1 inline" />
+                      <span>Details</span>
+                      <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </Link>
                   </div>
                 </div>
@@ -147,61 +187,109 @@ export default function CompleteHome() {
         {packagesData.slice(0, 6).map((pkg, index) => (
           <motion.div
             key={pkg._id || `package-${index}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: index * 0.1,
+              ease: "easeOut"
+            }}
             viewport={{ once: true }}
           >
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg hover:scale-105 h-full">
-              <CardContent className="p-0 h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <Image src={pkg.image || "/placeholder.svg"} alt={pkg.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/20" />
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 shadow-xl bg-white hover:scale-[1.03] h-full relative overflow-hidden hover:-translate-y-2">
+              {/* Glow effect on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-400/20 to-yellow-400/20 blur-xl" />
+              </div>
+
+              <CardContent className="p-0 h-full flex flex-col relative z-10">
+                <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden rounded-t-lg">
+                  {/* Image with enhanced hover effect */}
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Image
+                      src={pkg.image || "/placeholder.svg"}
+                      alt={pkg.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Enhanced multi-layer overlay for better contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500" />
+
+                  {/* Enhanced glassmorphic duration badge */}
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                    <Badge className="bg-white/10 text-white border border-white/30 backdrop-blur-md shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300 px-3 py-1.5 text-xs sm:text-sm font-semibold flex items-center gap-1.5">
+                      <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                       {pkg.duration}
                     </Badge>
                   </div>
+
+                  {/* Enhanced featured badge with gradient and animation */}
                   {pkg.featured && (
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-green-500 text-white">
-                        ⭐ Bestseller
+                    <motion.div
+                      className="absolute top-4 left-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                      viewport={{ once: true }}
+                    >
+                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 shadow-lg backdrop-blur-sm px-3 py-1.5 text-xs sm:text-sm font-semibold hover:scale-110 transition-transform duration-300 flex items-center gap-1.5">
+                        <Star className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current" />
+                        Bestseller
                       </Badge>
-                    </div>
+                    </motion.div>
                   )}
                 </div>
-                <div className="p-4 sm:p-6 md:p-8 flex flex-col flex-grow">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
+
+                <div className="p-5 sm:p-6 md:p-7 lg:p-8 flex flex-col flex-grow">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-300">
                     {pkg.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 md:mb-6 line-clamp-2 flex-grow">
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-5 md:mb-6 line-clamp-2 flex-grow leading-relaxed">
                     {pkg.description}
                   </p>
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <span className="text-lg sm:text-xl md:text-2xl font-bold text-admin-primary">
+
+                  {/* Price and rating section with better spacing */}
+                  <div className="flex items-center justify-between mb-4 sm:mb-5 md:mb-6">
+                    <span className="text-xl sm:text-2xl md:text-3xl font-bold text-admin-primary">
                       {pkg.price}
                     </span>
-                    <div className="flex items-center text-yellow-500">
-                      <Star className="h-4 w-4 fill-current" />
-                      <Star className="h-4 w-4 fill-current" />
-                      <Star className="h-4 w-4 fill-current" />
-                      <Star className="h-4 w-4 fill-current" />
-                      <Star className="h-4 w-4 fill-current" />
+                    <div className="flex items-center gap-0.5 text-yellow-500">
+                      <Star className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current drop-shadow-sm" />
+                      <Star className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current drop-shadow-sm" />
+                      <Star className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current drop-shadow-sm" />
+                      <Star className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current drop-shadow-sm" />
+                      <Star className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current drop-shadow-sm" />
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mt-auto">
-                    <Button
-                      onClick={() => handleBookPackage(pkg.title)}
-                      className="bg-admin-gradient text-white hover:opacity-90 text-sm sm:text-base py-2 sm:py-2.5"
+
+                  {/* Enhanced button layout with better spacing */}
+                  <div className="flex items-center justify-between gap-3 mt-auto">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1"
                     >
-                      Book Now
-                    </Button>
+                      <Button
+                        onClick={() => handleBookPackage(pkg.title)}
+                        className="w-full bg-admin-gradient text-white hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/30 text-sm sm:text-base py-2.5 sm:py-3 font-semibold transition-all duration-300 rounded-lg group/btn"
+                      >
+                        <span>Book Now</span>
+                        <ArrowRight className="h-4 w-4 ml-1.5 inline group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </Button>
+                    </motion.div>
                     <Link
                       href={pkg.slug ? `/packages/${pkg.slug}` : "/packages"}
-                      className="text-admin-primary hover:text-admin-secondary transition-colors font-medium text-xs sm:text-sm"
+                      className="text-admin-primary hover:text-admin-secondary transition-colors font-semibold text-xs sm:text-sm flex items-center gap-1 hover:gap-2 transition-all duration-300 whitespace-nowrap"
                     >
-                      View Details
-                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1 inline" />
+                      <span>Details</span>
+                      <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </Link>
                   </div>
                 </div>
@@ -255,7 +343,8 @@ export default function CompleteHome() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Banner Images */}
-      <section className="relative flex items-center justify-center overflow-hidden">
+      <section className="relative flex items-center justify-center overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[700px]">
+        {/* Background Image and Overlay Layers */}
         <div className="absolute inset-0">
           <div className="absolute inset-0">
             {/* Image Layer */}
@@ -264,21 +353,21 @@ export default function CompleteHome() {
                 src={banner?.status === "active" && banner?.image ? banner.image : "/placeholder.svg"}
                 alt={banner?.title || "Home banner"}
                 fill
-                className={`object-cover ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                className={`object-cover object-center ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 priority
               />
             </div>
-            
+
             {/* Dark Overlay Layer */}
             <div className="absolute inset-0 bg-black/50" />
-            
+
             {/* Gradient Overlay Layer */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-transparent" />
-            
+
             {/* Admin Gradient Layer */}
             <div className="absolute inset-0 bg-admin-gradient/20" />
-            
-            {/* Optional: Animated Gradient Layer */}
+
+            {/* Subtle Animated Gradient Layer */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-tr from-yellow-600/20 via-transparent to-orange-600/20"
               animate={{
@@ -293,139 +382,262 @@ export default function CompleteHome() {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:py-20 xl:px-8 relative z-10 max-w-7xl">
-          <div className="max-w-5xl mx-auto text-center text-white">
-            <div>
-              <Badge className="mb-4 sm:mb-6 md:mb-8 hover:bg-admin-secondary bg-white/20 text-white border-white/30 backdrop-blur-sm px-3 py-1.5 sm:px-6 sm:py-2 md:px-8 md:py-3 text-xs sm:text-sm md:text-base rounded-full shadow-lg">
-                <Car className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 mr-2 sm:mr-3" />
-                Welcome to Sri Jaidev Tours & Travels
+        {/* Content Container */}
+        <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 md:py-20 lg:py-24 xl:px-8 relative z-10 max-w-7xl">
+          <motion.div
+            className="max-w-5xl mx-auto text-center text-white"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Enhanced Glassmorphic Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Badge className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-3 bg-white/10 text-white border border-white/20 backdrop-blur-md px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 text-xs sm:text-sm md:text-base rounded-full shadow-2xl hover:bg-white/20 hover:scale-105 transition-all duration-300">
+                <Car className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                <span className="font-medium">Welcome to Sri Jaidev Tours & Travels</span>
               </Badge>
-            </div>
+            </motion.div>
 
-            {/* Optional dynamic banner title (keeps existing headline below) */}
+            {/* Optional dynamic banner title */}
             {banner?.title && (
-              <p className="text-white/90 text-base sm:text-lg md:text-xl mb-2 sm:mb-3">{banner.title}</p>
+              <motion.p
+                className="text-white/90 text-base sm:text-lg md:text-xl mb-2 sm:mb-3 font-light"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                {banner.title}
+              </motion.p>
             )}
 
-            <div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 sm:mb-6 leading-tight">
-                <span className="block">Travel With Us</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400">
+            {/* Enhanced Typography - Main Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
+                <span className="block mb-2 sm:mb-3">Travel With Us</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 drop-shadow-2xl">
                   In Comfort
                 </span>
               </h1>
-            </div>
+            </motion.div>
 
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-4 sm:mb-6 text-white/90 font-light">
-              Since 2020
-            </p>
-
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-8 sm:mb-10 md:mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4">
+            {/* Description with Better Spacing */}
+            <motion.p
+              className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-8 sm:mb-10 md:mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               Experience professional travel services with comfort and reliability. From airport transfers to
               complete tour packages, we ensure safe, comfortable, and memorable journeys to your destinations.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-              <div className="w-full sm:w-auto">
+            {/* Enhanced CTA Buttons with Better Layout */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <motion.div
+                className="w-full sm:w-auto"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   onClick={() => handleBookNow()}
                   size="lg"
-                  className="w-full sm:w-auto bg-admin-gradient text-white border-0 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-semibold transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+                  className="w-full sm:w-auto bg-admin-gradient text-white border-0 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-semibold transition-all duration-300 shadow-2xl hover:shadow-yellow-500/50 rounded-full group"
                 >
-                  Book Now
-                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+                  <span>Book Now</span>
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </div>
+              </motion.div>
 
-              <div className="w-full sm:w-auto">
+              <motion.div
+                className="w-full sm:w-auto"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   onClick={handleCallNow}
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-semibold bg-transparent backdrop-blur-sm shadow-2xl hover:shadow-white/10"
+                  className="w-full sm:w-auto border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 text-base sm:text-lg font-semibold bg-white/10 backdrop-blur-md shadow-2xl hover:shadow-white/30 rounded-full transition-all duration-300 group"
                 >
-                  <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Call Now
+                  <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-12 transition-transform" />
+                  <span>Call Now</span>
                 </Button>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* Replace the old banner indicators with a simple loading or no-banner indicator */}
+        {/* Loading/No Banner Indicator - Centered */}
         {!banner && !isLoading && (
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-              <p className="text-white/80 text-sm">No banner available</p>
-            </div>
+          <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
+              <div className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-xl">
+                <p className="text-white/80 text-sm font-medium">No banner available</p>
+              </div>
+            </motion.div>
           </div>
         )}
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white relative">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        {/* Glassmorphic background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-yellow-200/30 to-orange-200/30 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-r from-orange-200/30 to-yellow-200/30 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8"
             variants={{
               animate: {
                 transition: {
-                  staggerChildren: 0.1,
+                  staggerChildren: 0.15,
                 },
               },
             }}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             {[
               {
-                number: "1000+",
+                number: "3000+",
                 label: "Happy Customers",
                 icon: <Users className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
+                gradient: "from-blue-500 to-cyan-500",
               },
               {
-                number: "50+",
+                number: "100+",
                 label: "Destinations",
                 icon: <MapPin className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
+                gradient: "from-purple-500 to-pink-500",
               },
               {
-                number: "5+",
+                number: "10+",
                 label: "Years Experience",
                 icon: <Clock className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
+                gradient: "from-green-500 to-emerald-500",
               },
               {
                 number: "99%",
                 label: "Customer Satisfaction",
                 icon: <Star className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />,
+                gradient: "from-yellow-500 to-orange-500",
               },
             ].map((stat, index) => (
               <motion.div
                 key={index}
                 variants={{
-                  initial: { opacity: 0, scale: 0.8 },
-                  animate: { opacity: 1, scale: 1 },
+                  initial: { opacity: 0, y: 50, scale: 0.8 },
+                  animate: { 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: 1,
+                    transition: {
+                      duration: 0.6,
+                      ease: "easeOut",
+                    }
+                  },
                 }}
-                transition={{ duration: 0.6 }}
               >
-                <Card className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-white to-gray-50 h-full">
+                <Card className="group hover:shadow-2xl transition-all duration-500 border-0 shadow-xl bg-white/80 backdrop-blur-sm h-full hover:-translate-y-2 hover:scale-105">
                   <CardContent className="p-3 sm:p-4 md:p-6 lg:p-8 text-center">
+                    {/* Enhanced animated icon container */}
                     <motion.div
-                      className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto mb-3 sm:mb-4 md:mb-6 bg-admin-gradient rounded-full flex items-center justify-center shadow-lg"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
+                      className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-3 sm:mb-4 md:mb-5"
+                      whileHover={{ 
+                        scale: 1.15, 
+                        rotate: 360,
+                      }}
+                      transition={{ 
+                        duration: 0.6,
+                        ease: "easeInOut",
+                      }}
                     >
-                      <div className="text-white">{stat.icon}</div>
+                      {/* Glassmorphic background ring */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-lg" />
+                      
+                      {/* Gradient background */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-300`} />
+                      
+                      {/* Animated glow effect */}
+                      <motion.div
+                        className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300`}
+                        animate={{
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      
+                      {/* Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center text-white z-10">
+                        {stat.icon}
+                      </div>
                     </motion.div>
+
+                    {/* Animated number with counter effect */}
                     <motion.div
                       className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-admin-gradient bg-clip-text text-transparent mb-1 sm:mb-2"
                       initial={{ opacity: 0, scale: 0.5 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.15 + 0.3,
+                        ease: "easeOut",
+                      }}
+                      viewport={{ once: true }}
                     >
                       {stat.number}
                     </motion.div>
-                    <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium leading-tight">
+
+                    {/* Label with better typography */}
+                    <div className="text-xs sm:text-sm md:text-base text-gray-600 font-semibold leading-tight">
                       {stat.label}
                     </div>
                   </CardContent>
@@ -445,14 +657,15 @@ export default function CompleteHome() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-admin-gradient relative overflow-hidden">
-        {/* Animated overlay gradients */}
-        <div className="absolute inset-0 overflow-hidden">
+      {/* About Section - Modern Glassmorphic Design */}
+      <section className="relative w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+        {/* Subtle animated background gradient */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-yellow-600/30 via-transparent to-orange-600/30"
+            className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-200/20 to-yellow-200/20 rounded-full blur-3xl"
             animate={{
-              opacity: [0.3, 0.7, 0.3],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
               duration: 8,
@@ -461,141 +674,47 @@ export default function CompleteHome() {
             }}
           />
           <motion.div
-            className="absolute inset-0 bg-gradient-to-bl from-orange-500/20 via-transparent to-yellow-500/20"
+            className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-yellow-200/20 to-orange-200/20 rounded-full blur-3xl"
             animate={{
-              opacity: [0.7, 0.3, 0.7],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
-              duration: 6,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-          />
-
-          {/* Straight line animations */}
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={`line-${i}`}
-              className="absolute w-px h-20 bg-gradient-to-b from-transparent via-white/20 to-transparent"
-              style={{
-                left: `${10 + i * 12}%`,
-                top: `${20 + (i % 3) * 20}%`,
-              }}
-              animate={{
-                scaleY: [0, 1, 0],
-                opacity: [0, 0.6, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: i * 0.4,
-              }}
-            />
-          ))}
-
-          {/* Horizontal lines */}
-          {[...Array(4)].map((_, i) => (
-            <motion.div
-              key={`hline-${i}`}
-              className="absolute h-px w-16 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              style={{
-                left: `${15 + i * 20}%`,
-                top: `${30 + i * 15}%`,
-              }}
-              animate={{
-                scaleX: [0, 1, 0],
-                opacity: [0, 0.5, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: i * 0.6,
-              }}
-            />
-          ))}
-
-          {/* Floating bubbles */}
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={`bubble-${i}`}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-white/30 rounded-full"
-              style={{
-                left: `${5 + i * 8}%`,
-                top: `${10 + (i % 4) * 20}%`,
-              }}
-              animate={{
-                y: [-15, 15, -15],
-                x: [-10, 10, -10],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.5, 1.2, 0.5],
-              }}
-              transition={{
-                duration: 5 + i * 0.3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-
-          {/* Larger floating orbs */}
-          <motion.div
-            className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-white/10 to-yellow-300/20 rounded-full blur-xl"
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.4, 0.7, 0.4],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-orange-300/20 to-white/10 rounded-full blur-xl"
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.4, 0.7, 0.4],
-            }}
-            transition={{
-              duration: 7,
+              duration: 10,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
               delay: 1,
             }}
           />
         </div>
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 relative max-w-7xl z-10">
+
+        <div className="container px-6 md:px-8 relative z-10">
+          {/* Modern Header */}
           <motion.div
-            className="max-w-4xl mx-auto text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20"
-            variants={{
-              initial: { opacity: 0, y: 60 },
-              animate: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-            initial="initial"
-            whileInView="animate"
+            className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 md:mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
           >
-            <Badge className="mb-4 sm:mb-6 bg-admin-gradient text-white px-4 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm">
-              <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-              Since 2020
+            <Badge className="mb-4 sm:mb-6 inline-flex items-center gap-2 bg-white/10 text-gray-900 border border-gray-200/50 backdrop-blur-md px-4 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full shadow-lg hover:bg-white/20 hover:scale-105 transition-all duration-300">
+              <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="font-semibold">About Us</span>
             </Badge>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 md:mb-8">
-              Travel Excellence
-              <span className="block text-yellow-200">Since 2020</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 px-2 leading-tight">
+              Why Choose
+              <span className="block text-transparent bg-clip-text bg-admin-gradient mt-2">
+                Sri Jaidev Tours
+              </span>
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 leading-relaxed px-2 sm:px-4">
-              Sri Jaidev Tours & Travels is your trusted travel partner, specializing in comfortable
-              and reliable travel services that make every journey memorable with professional drivers and
-              well-maintained vehicles.
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-2 max-w-3xl mx-auto leading-relaxed">
+              Your trusted travel partner for comfortable and reliable journeys across Tamil Nadu with professional service and well-maintained vehicles.
             </p>
           </motion.div>
 
+          {/* Modern Glassmorphic Cards Grid */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
+            className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             variants={{
               animate: {
                 transition: {
@@ -609,49 +728,60 @@ export default function CompleteHome() {
           >
             {[
               {
-                icon: <Shield className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+                icon: <Shield className="h-10 w-10" />,
                 title: "Our Mission",
                 description:
                   "To provide safe, comfortable, and reliable travel services across Tamil Nadu, ensuring every journey is memorable and stress-free for our valued customers.",
-                gradient: "from-blue-600 to-purple-600",
+                color: "text-orange-500",
+                borderColor: "border-orange-500/30",
+                hoverBorderColor: "hover:border-orange-500/60",
               },
               {
-                icon: <Award className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+                icon: <Award className="h-10 w-10" />,
                 title: "Our Vision",
                 description:
                   "To be the most trusted travel partner in Tamil Nadu, recognized for our commitment to excellence, customer satisfaction, and professional service standards.",
-                gradient: "from-purple-600 to-pink-600",
+                color: "text-yellow-500",
+                borderColor: "border-yellow-500/30",
+                hoverBorderColor: "hover:border-yellow-500/60",
               },
               {
-                icon: <Heart className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+                icon: <Heart className="h-10 w-10" />,
                 title: "Our Values",
                 description:
                   "Safety, reliability, customer satisfaction, and integrity are the core values that guide our services, ensuring exceptional travel experiences for every customer.",
-                gradient: "from-green-600 to-teal-600",
+                color: "text-orange-600",
+                borderColor: "border-orange-600/30",
+                hoverBorderColor: "hover:border-orange-600/60",
               },
-            ].map((item, index) => (
+            ].map((feature, index) => (
               <motion.div
                 key={index}
                 variants={{
-                  initial: { opacity: 0, y: 60 },
-                  animate: { opacity: 1, y: 0 },
+                  initial: { opacity: 0, y: 20 },
+                  animate: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                  },
                 }}
-                transition={{ duration: 0.6 }}
-                className="md:col-span-2 lg:col-span-1 md:last:col-start-1 md:last:col-end-3 lg:last:col-start-auto lg:last:col-end-auto"
               >
-                <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full border-0 shadow-lg overflow-hidden">
-                  <CardContent className="p-4 sm:p-6 md:p-8 text-center relative">
-                    <motion.div
-                      className={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br ${item.gradient} rounded-xl sm:rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-3 sm:mb-4 md:mb-6 shadow-lg`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="text-white">{item.icon}</div>
-                    </motion.div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
+                <Card
+                  className={`h-full bg-white/60 backdrop-blur-sm border ${feature.borderColor} ${feature.hoverBorderColor} overflow-hidden group transition-all duration-300 hover:scale-[1.03] hover:shadow-xl`}
+                >
+                  <CardContent className="p-6 space-y-4">
+                    <div className="p-2 rounded-xl w-fit bg-gray-100/50 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                      <div className={feature.color}>{feature.icon}</div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold tracking-tight text-gray-900 relative">
+                        {feature.title}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-admin-gradient transition-all duration-300 group-hover:w-full"></span>
+                      </h3>
+                    </div>
+                    <p className="text-base text-gray-600 leading-relaxed transition-opacity duration-300 group-hover:text-gray-900">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>

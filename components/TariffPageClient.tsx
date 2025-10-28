@@ -166,101 +166,156 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
               {tariffData.map((tariff, index) => (
                 <motion.div
                   key={tariff.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: [0.25, 0.4, 0.25, 1]
+                  }}
+                  className="h-full"
                 >
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg overflow-hidden group flex flex-col">
-                    <div className="relative h-56 sm:h-64 overflow-hidden flex-shrink-0">
-                      <img
-                        src={tariff.image || '/toyota-innova-crysta-luxury-taxi.png'}
-                        alt={tariff.vehicleName}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
-                      <div className="absolute top-4 left-4">
-                        <Badge className={`${
-                          tariff.featured 
-                            ? 'bg-yellow-500 text-yellow-900' 
-                            : 'bg-admin-gradient text-white'
-                        } backdrop-blur-sm`}>
-                          {tariff.featured ? '⭐ Featured' : tariff.vehicleType}
-                        </Badge>
+                  <Card className={`h-full transition-all duration-500 border-0 shadow-xl overflow-hidden group flex flex-col relative ${
+                    tariff.featured 
+                      ? 'hover:shadow-2xl hover:shadow-yellow-500/20' 
+                      : 'hover:shadow-2xl hover:shadow-orange-500/10'
+                  }`}>
+                    {/* Gradient border for featured items */}
+                    {tariff.featured && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" 
+                           style={{ padding: '2px' }}>
+                        <div className="absolute inset-[2px] bg-white rounded-lg"></div>
                       </div>
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
-                          ₹{formatCurrency(tariff.oneWayRate)}/km
-                        </Badge>
-                      </div>
-                    </div>
+                    )}
                     
-                    <CardContent className="p-4 sm:p-6 md:p-8 flex flex-col flex-grow">
-                      <div className="text-center mb-4 sm:mb-6 md:mb-8">
-                        <div className="flex items-center justify-center gap-2 mb-2 sm:mb-3">
-                          <Car className="h-4 w-4 text-admin-primary flex-shrink-0" />
-                          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 transition-colors line-clamp-2">
-                            {tariff.vehicleName}
-                          </h3>
-                        </div>
-                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed line-clamp-3">
-                          {tariff.description}
-                        </p>
-                      </div>
+                    {/* Hover glow effect */}
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${
+                      tariff.featured 
+                        ? 'bg-gradient-to-br from-yellow-500/5 via-orange-500/5 to-yellow-600/5' 
+                        : 'bg-gradient-to-br from-orange-500/5 via-yellow-500/5 to-orange-600/5'
+                    }`}></div>
 
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-transparent bg-clip-text bg-admin-gradient">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                      className="h-full flex flex-col"
+                    >
+                      <div className="relative h-48 sm:h-52 overflow-hidden flex-shrink-0">
+                        <motion.img
+                          src={tariff.image || '/toyota-innova-crysta-luxury-taxi.png'}
+                          alt={tariff.vehicleName}
+                          className="w-full h-full object-cover"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.6, ease: "easeOut" }}
+                        />
+                        
+                        {/* Enhanced multi-layer overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                        
+                        {/* Badges with enhanced glassmorphism */}
+                        <div className="absolute top-3 left-3">
+                          <Badge className={`${
+                            tariff.featured 
+                              ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 shadow-lg shadow-yellow-500/50' 
+                              : 'bg-admin-gradient text-white shadow-lg'
+                          } backdrop-blur-md border-white/20 px-2.5 py-1 text-xs font-semibold`}>
+                            {tariff.featured ? '⭐ Featured' : tariff.vehicleType}
+                          </Badge>
+                        </div>
+                        <div className="absolute top-3 right-3">
+                          <Badge className="bg-white/30 text-white border-white/40 backdrop-blur-md shadow-lg px-2.5 py-1 text-xs font-semibold">
                             ₹{formatCurrency(tariff.oneWayRate)}/km
-                          </div>
-                          <div className="text-xs text-gray-500">One Way</div>
-                          <div className="text-xs text-gray-400">Min: {formatDistance(tariff.minimumKmOneWay)} km</div>
+                          </Badge>
                         </div>
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-transparent bg-clip-text bg-admin-gradient">
-                            ₹{formatCurrency(tariff.roundTripRate)}/km
-                          </div>
-                          <div className="text-xs text-gray-500">Round Trip</div>
-                          <div className="text-xs text-gray-400">Min: {formatDistance(tariff.minimumKmRoundTrip)} km</div>
-                        </div>
-                      </div>
 
-                      <div className="space-y-3 mb-6">
-                        <div className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                          <span className="text-sm text-gray-600">Driver Allowance: ₹{formatDriverAllowance(tariff.driverAllowance)}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                          <span className="text-sm text-gray-600">Professional Driver</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                          <span className="text-sm text-gray-600">Clean & Comfortable Vehicle</span>
-                        </div>
-                        {tariff.additionalCharges && tariff.additionalCharges.length > 0 && (
-                          <div className="flex items-center space-x-2">
-                            <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{tariff.additionalCharges[0]}</span>
+                        {/* Bottom gradient overlay for better text contrast */}
+                        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/80 to-transparent"></div>
+                      </div>
+                      
+                      <CardContent className="p-5 flex flex-col flex-grow relative">
+                        <div className="text-center mb-5">
+                          <div className="flex items-center justify-center gap-2 mb-2">
+                            <div className="p-1.5 rounded-full bg-gradient-to-br from-orange-100 to-yellow-100 group-hover:from-orange-200 group-hover:to-yellow-200 transition-colors duration-300">
+                              <Car className="h-4 w-4 text-admin-primary flex-shrink-0" />
+                            </div>
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-300 line-clamp-1">
+                              {tariff.vehicleName}
+                            </h3>
                           </div>
-                        )}
-                      </div>
+                          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+                            {tariff.description}
+                          </p>
+                        </div>
 
-                      {/* Button Container - Fixed at bottom */}
-                      <div className="mt-auto space-y-3">
-                        <Button
-                          onClick={() => handleBookNow(tariff.vehicleName)}
-                          className="w-full bg-admin-gradient text-white hover:opacity-90 transition-all duration-300"
-                        >
-                          Book Now
-                        </Button>
-                        <Link
-                          href={`/tariff/${tariff.slug}`}
-                          className="block text-center text-admin-primary hover:text-admin-secondary transition-colors font-medium text-sm py-2"
-                        >
-                          View Details →
-                        </Link>
-                      </div>
-                    </CardContent>
+                        {/* Enhanced pricing display with gradient backgrounds */}
+                        <div className="grid grid-cols-2 gap-3 mb-5">
+                          <div className="text-center p-3 rounded-lg bg-gradient-to-br from-blue-50 to-blue-100 group-hover:from-blue-100 group-hover:to-blue-200 transition-all duration-300 shadow-sm">
+                            <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                              ₹{formatCurrency(tariff.oneWayRate)}
+                            </div>
+                            <div className="text-xs font-semibold text-blue-700">per km</div>
+                            <div className="text-xs text-blue-600 mt-0.5">One Way</div>
+                            <div className="text-xs text-blue-500">Min: {formatDistance(tariff.minimumKmOneWay)} km</div>
+                          </div>
+                          <div className="text-center p-3 rounded-lg bg-gradient-to-br from-green-50 to-green-100 group-hover:from-green-100 group-hover:to-green-200 transition-all duration-300 shadow-sm">
+                            <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-800">
+                              ₹{formatCurrency(tariff.roundTripRate)}
+                            </div>
+                            <div className="text-xs font-semibold text-green-700">per km</div>
+                            <div className="text-xs text-green-600 mt-0.5">Round Trip</div>
+                            <div className="text-xs text-green-500">Min: {formatDistance(tariff.minimumKmRoundTrip)} km</div>
+                          </div>
+                        </div>
+
+                        {/* Enhanced features list */}
+                        <div className="space-y-2 mb-5">
+                          <div className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <div className="p-1 rounded-full bg-green-100">
+                              <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                            </div>
+                            <span className="text-sm text-gray-700 font-medium">Driver: ₹{formatDriverAllowance(tariff.driverAllowance)}</span>
+                          </div>
+                          <div className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <div className="p-1 rounded-full bg-green-100">
+                              <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                            </div>
+                            <span className="text-sm text-gray-700 font-medium">Professional Driver</span>
+                          </div>
+                          <div className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                            <div className="p-1 rounded-full bg-green-100">
+                              <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                            </div>
+                            <span className="text-sm text-gray-700 font-medium">Clean & Comfortable</span>
+                          </div>
+                          {tariff.additionalCharges && tariff.additionalCharges.length > 0 && (
+                            <div className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                              <div className="p-1 rounded-full bg-green-100">
+                                <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                              </div>
+                              <span className="text-sm text-gray-700 font-medium line-clamp-1">{tariff.additionalCharges[0]}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Enhanced CTA buttons matching packages style */}
+                        <div className="mt-auto space-y-3">
+                          <Button
+                            onClick={() => handleBookNow(tariff.vehicleName)}
+                            className="w-full bg-admin-gradient text-white hover:shadow-xl hover:shadow-orange-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 text-sm sm:text-base h-11 sm:h-12 font-semibold"
+                          >
+                            Book Now
+                          </Button>
+                          <Link
+                            href={`/tariff/${tariff.slug}`}
+                            className="block text-center text-admin-primary hover:text-white bg-white hover:bg-admin-gradient border-2 border-orange-200 hover:border-transparent rounded-md transition-all duration-300 font-semibold text-sm sm:text-base py-2.5 sm:py-3 group/link"
+                          >
+                            <span>View Full Details</span>
+                            <span className="inline-block ml-1 group-hover/link:translate-x-1 transition-transform duration-300">→</span>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </motion.div>
                   </Card>
                 </motion.div>
               ))}

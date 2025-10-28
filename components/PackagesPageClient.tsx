@@ -134,98 +134,138 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="h-full hover:shadow-xl hover:text-admin-primary transition-all duration-300 group overflow-hidden border-0 shadow-lg flex flex-col">
+                <Card className={`h-full hover:shadow-2xl transition-all duration-500 group overflow-hidden border-0 shadow-xl flex flex-col relative ${
+                  pkg.featured ? 'ring-2 ring-green-500/50' : ''
+                }`}>
+                  {/* Gradient border for featured items */}
+                  {pkg.featured && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg -z-10" 
+                         style={{ padding: '2px' }}>
+                      <div className="absolute inset-[2px] bg-white rounded-lg"></div>
+                    </div>
+                  )}
+                  
                   <div className="aspect-[3/2] overflow-hidden relative flex-shrink-0">
+                    {/* Enhanced image with better overlay */}
                     <img
                       src={pkg.image || `/kodaikanal-hill-station.png`}
                       alt={pkg.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-black/20"></div>
+                    
+                    {/* Multi-layer overlay for better contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500"></div>
+                    
+                    {/* Redesigned badge with glassmorphism */}
                     <div className="absolute top-4 left-4">
                       <Badge className={`${
                         pkg.featured 
-                          ? 'bg-green-500 text-white' 
-                          : 'bg-admin-gradient text-white'
-                      } backdrop-blur-sm`}>
+                          ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 shadow-lg shadow-green-500/30' 
+                          : 'bg-white/20 text-white border-white/30'
+                      } backdrop-blur-md px-3 py-1.5 font-semibold text-xs sm:text-sm`}>
                         {pkg.featured ? '⭐ Bestseller' : pkg.category}
                       </Badge>
                     </div>
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <div className="flex items-center space-x-4 text-sm">
-                        <div className="flex items-center space-x-1">
-                          <Clock className="h-4 w-4" />
-                          <span>{pkg.duration}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <MapPin className="h-4 w-4" />
-                          <span>{pkg.category}</span>
-                        </div>
-                      </div>
+                    
+                    {/* Duration badge - glassmorphic design */}
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-3 py-1.5 font-medium text-xs sm:text-sm">
+                        <Clock className="h-3 w-3 mr-1.5" />
+                        {pkg.duration}
+                      </Badge>
+                    </div>
+                    
+                    {/* Category badge at bottom */}
+                    <div className="absolute bottom-4 left-4">
+                      <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-3 py-1.5 font-medium text-xs sm:text-sm">
+                        <MapPin className="h-3 w-3 mr-1.5" />
+                        {pkg.category}
+                      </Badge>
                     </div>
                   </div>
 
-                  <CardContent className="p-3 sm:p-4 md:p-6 flex flex-col flex-grow">
-                    <div className="mb-3 sm:mb-4">
-                      <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-gray-900 transition-colors line-clamp-2">
+                  <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow bg-white group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-orange-50/30 transition-all duration-500">
+                    <div className="mb-4">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-300 line-clamp-2">
                         {pkg.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed line-clamp-3 flex-grow">
+                      <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed line-clamp-3">
                         {pkg.description}
                       </p>
                     </div>
 
-                    {/* Price */}
-                    <div className="mb-4">
-                      <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-admin-gradient">
-                        {pkg.price}
+                    {/* Enhanced Price Display */}
+                    <div className="mb-5 p-4 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border border-orange-100/50 group-hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-baseline justify-between">
+                        <div>
+                          <div className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-admin-gradient">
+                            {pkg.price}
+                          </div>
+                          <div className="text-xs sm:text-sm text-gray-500 font-medium">per person</div>
+                        </div>
+                        {pkg.featured && (
+                          <div className="flex items-center gap-1 text-green-600">
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <span className="text-xs font-semibold">Popular</span>
+                          </div>
+                        )}
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500">per person</div>
                     </div>
 
-                    {/* Highlights */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="font-semibold text-gray-900 mb-2 text-xs sm:text-sm">Top Highlights:</h4>
-                      <div className="flex flex-wrap gap-1 sm:gap-2">
+                    {/* Highlights with improved badges */}
+                    <div className="mb-5">
+                      <h4 className="font-bold text-gray-900 mb-3 text-sm sm:text-base flex items-center">
+                        <span className="w-1 h-4 bg-admin-gradient rounded-full mr-2"></span>
+                        Top Highlights
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
                         {pkg.highlights.slice(0, 3).map((highlight, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
+                          <Badge key={idx} variant="outline" className="text-xs border-orange-200 text-gray-700 hover:bg-orange-50 transition-colors duration-200">
                             {highlight}
                           </Badge>
                         ))}
                         {pkg.highlights.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-xs border-orange-300 bg-orange-50 text-orange-700 font-semibold">
                             +{pkg.highlights.length - 3} more
                           </Badge>
                         )}
                       </div>
                     </div>
 
-                    {/* Inclusions */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="font-semibold text-gray-900 mb-2 text-xs sm:text-sm">Package Includes:</h4>
-                      <div className="text-xs sm:text-sm text-gray-600 line-clamp-2">
+                    {/* Inclusions with better styling */}
+                    <div className="mb-6">
+                      <h4 className="font-bold text-gray-900 mb-3 text-sm sm:text-base flex items-center">
+                        <span className="w-1 h-4 bg-admin-gradient rounded-full mr-2"></span>
+                        Package Includes
+                      </h4>
+                      <div className="text-xs sm:text-sm text-gray-600 line-clamp-2 leading-relaxed">
                         {pkg.inclusions.join(' • ')}
                       </div>
                     </div>
 
-                    {/* Button Container - Fixed at bottom */}
-                    <div className="mt-auto space-y-2 sm:space-y-3">
+                    {/* Enhanced CTA Buttons */}
+                    <div className="mt-auto space-y-3">
                       <Button
                         onClick={() => handleBookPackage(pkg.title)}
-                        className="w-full bg-admin-gradient text-white group-hover:shadow-lg text-xs sm:text-sm h-8 sm:h-10"
+                        className="w-full bg-admin-gradient text-white hover:shadow-xl hover:shadow-orange-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 text-sm sm:text-base h-11 sm:h-12 font-semibold"
                       >
                         <span className="hidden sm:inline">Book This Package</span>
                         <span className="sm:hidden">Book Now</span>
                       </Button>
                       <Link
                         href={`/packages/${pkg.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}`}
-                        className="block text-center text-admin-primary hover:text-admin-secondary transition-colors font-medium text-xs sm:text-sm py-1 sm:py-2"
+                        className="block text-center text-admin-primary hover:text-white bg-white hover:bg-admin-gradient border-2 border-orange-200 hover:border-transparent rounded-md transition-all duration-300 font-semibold text-sm sm:text-base py-2.5 sm:py-3 group/link"
                       >
-                        <span className="hidden sm:inline">View Full Details →</span>
-                        <span className="sm:hidden">Details →</span>
+                        <span className="hidden sm:inline">View Full Details</span>
+                        <span className="sm:hidden">Details</span>
+                        <span className="inline-block ml-1 group-hover/link:translate-x-1 transition-transform duration-300">→</span>
                       </Link>
                     </div>
                   </CardContent>

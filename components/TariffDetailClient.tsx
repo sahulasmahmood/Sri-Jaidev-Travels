@@ -81,9 +81,36 @@ Thank you!`;
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-admin-gradient text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 sm:py-20 lg:py-28 overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-orange-500/20 to-pink-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,45 +118,75 @@ Thank you!`;
           >
             <Link
               href="/tariff"
-              className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors"
+              className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors group"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Tariff
+              <div className="p-2 rounded-lg bg-white/10 backdrop-blur-sm mr-2 group-hover:bg-white/20 transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+              </div>
+              <span className="font-medium">Back to Tariff</span>
             </Link>
             
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <Badge className="mb-4 bg-white/20 text-white border-white/30 px-4 py-2">
-                  <Car className="h-4 w-4 mr-2" />
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-center">
+              <div className="lg:pr-8">
+                <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-md px-5 py-2.5 text-sm shadow-lg inline-flex items-center gap-2">
+                  <div className="p-1 rounded-full bg-white/20">
+                    <Car className="h-4 w-4" />
+                  </div>
                   {tariffData.vehicleType}
                 </Badge>
-                <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                
+                <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight break-words">
                   {tariffData.vehicleName}
+                  {tariffData.featured && (
+                    <span className="block text-2xl sm:text-3xl mt-3 text-yellow-400 flex items-center gap-2">
+                      <Star className="h-6 w-6 fill-current" />
+                      Featured Vehicle
+                    </span>
+                  )}
                 </h1>
-                <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                
+                <p className="text-lg sm:text-xl text-white/80 mb-10 leading-relaxed">
                   {tariffData.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-6 mb-8">
-                  <div className="flex items-center">
-                    <MapPin className="h-5 w-5 mr-2" />
-                    <span className="font-semibold">₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km One-way</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="h-5 w-5 mr-2" />
-                    <span className="font-semibold">₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km Round Trip</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Star className="h-5 w-5 mr-2 text-yellow-400" />
-                    <span className="font-semibold">Professional Service</span>
-                  </div>
+                {/* Pricing highlights */}
+                <div className="grid grid-cols-2 gap-4 mb-10">
+                  <motion.div 
+                    className="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <MapPin className="h-5 w-5 text-blue-400" />
+                      <span className="text-xs text-white/70 font-medium uppercase tracking-wide">One-way</span>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">
+                      ₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                    </div>
+                    <div className="text-sm text-white/60">per kilometer</div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <Clock className="h-5 w-5 text-green-400" />
+                      <span className="text-xs text-white/70 font-medium uppercase tracking-wide">Round Trip</span>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white">
+                      ₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                    </div>
+                    <div className="text-sm text-white/60">per kilometer</div>
+                  </motion.div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
                     onClick={handleBookNow}
                     size="lg"
-                    className="bg-white text-admin-primary hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+                    className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
                   >
                     <WhatsAppIcon className="h-5 w-5 mr-2" />
                     Book via WhatsApp
@@ -138,7 +195,7 @@ Thank you!`;
                     onClick={handleCallNow}
                     size="lg"
                     variant="outline"
-                    className="border-white/50 text-white hover:bg-white hover:text-admin-primary hover:border-white px-8 py-3 text-lg font-semibold transition-all duration-300 bg-white/10 backdrop-blur-sm"
+                    className="border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 hover:border-white px-8 py-6 text-lg font-semibold transition-all duration-300 bg-white/5 backdrop-blur-sm"
                   >
                     <Phone className="h-5 w-5 mr-2" />
                     Call Now
@@ -147,22 +204,45 @@ Thank you!`;
               </div>
 
               <div className="relative">
-                <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <motion.div 
+                  className="relative h-[400px] sm:h-[500px] rounded-3xl overflow-hidden shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   <Image
                     src={tariffData.image || "/toyota-innova-crysta-luxury-taxi.png"}
                     alt={tariffData.vehicleName}
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  {tariffData.featured && (
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-yellow-500 text-yellow-900">
-                        ⭐ Featured Vehicle
-                      </Badge>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                  
+                  {/* Floating badge */}
+                  <motion.div
+                    className="absolute bottom-6 left-6 right-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    <div className="p-4 rounded-2xl bg-white/95 backdrop-blur-md shadow-xl flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 rounded-xl bg-admin-gradient">
+                          <Star className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900">Professional Service</div>
+                          <div className="text-xs text-gray-600">Trusted by 2000+ travelers</div>
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </motion.div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -170,9 +250,37 @@ Thank you!`;
       </section>
 
       {/* Pricing Details */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12">
+      <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-64 h-64 bg-gradient-to-r from-orange-200/20 to-pink-200/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1.1, 1, 1.1],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">
               {/* Pricing Information */}
@@ -182,31 +290,155 @@ Thank you!`;
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg border-0">
-                  <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <Car className="h-6 w-6 mr-3 text-admin-primary" />
-                      Pricing Details
-                    </h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
-                        <h3 className="text-lg font-semibold text-blue-900 mb-2">One-way Trip</h3>
-                        <div className="text-3xl font-bold text-blue-600 mb-2">₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km</div>
-                        <p className="text-blue-700 text-sm">Minimum {tariffData.minimumKmOneWay.replace(/km/gi, '').trim()} km</p>
-                      </div>
-                      <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
-                        <h3 className="text-lg font-semibold text-green-900 mb-2">Round Trip</h3>
-                        <div className="text-3xl font-bold text-green-600 mb-2">₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km</div>
-                        <p className="text-green-700 text-sm">Minimum {tariffData.minimumKmRoundTrip.replace(/km/gi, '').trim()} km</p>
-                      </div>
+                <Card className="shadow-xl border-0 overflow-hidden relative group">
+                  {/* Gradient accent border on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" 
+                       style={{ padding: '2px' }}>
+                    <div className="absolute inset-[2px] bg-white rounded-lg"></div>
+                  </div>
+                  
+                  <CardContent className="p-6 sm:p-8 lg:p-10">
+                    <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
+                        <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-100 to-purple-100 mr-3 group-hover:from-blue-200 group-hover:to-purple-200 transition-colors duration-300">
+                          <Car className="h-6 w-6 text-admin-primary" />
+                        </div>
+                        Pricing Details
+                      </h2>
+                      <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 px-3 py-1 text-xs font-semibold shadow-lg">
+                        Transparent Pricing
+                      </Badge>
                     </div>
-                    <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
-                      <div className="flex items-center mb-2">
-                        <Users className="h-5 w-5 text-yellow-600 mr-2" />
-                        <span className="font-semibold text-yellow-900">Driver Allowance</span>
-                      </div>
-                      <p className="text-yellow-800">₹{tariffData.driverAllowance.replace(/[₹$]/g, '').trim()} per day</p>
+
+                    {/* Enhanced pricing cards with better gradients and hover effects */}
+                    <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
+                      <motion.div 
+                        className="relative bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group/card overflow-hidden"
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Animated gradient overlay */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-tr from-blue-400/20 via-transparent to-indigo-400/20"
+                          animate={{
+                            opacity: [0.3, 0.6, 0.3],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                          }}
+                        />
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg sm:text-xl font-bold text-blue-900">One-way Trip</h3>
+                            <div className="p-2 rounded-lg bg-white/50 backdrop-blur-sm">
+                              <MapPin className="h-5 w-5 text-blue-600" />
+                            </div>
+                          </div>
+                          <div className="mb-4">
+                            <div className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 mb-1">
+                              ₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                            </div>
+                            <div className="text-sm font-semibold text-blue-700">per kilometer</div>
+                          </div>
+                          <div className="flex items-center p-3 bg-white/60 backdrop-blur-sm rounded-lg">
+                            <div className="p-1.5 rounded-full bg-blue-200 mr-2">
+                              <CheckCircle className="h-4 w-4 text-blue-700" />
+                            </div>
+                            <div>
+                              <div className="text-xs text-blue-600 font-medium">Minimum Distance</div>
+                              <div className="text-sm font-bold text-blue-900">{tariffData.minimumKmOneWay.replace(/km/gi, '').trim()} km</div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+
+                      <motion.div 
+                        className="relative bg-gradient-to-br from-green-50 via-green-100 to-emerald-100 p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 group/card overflow-hidden"
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Animated gradient overlay */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-tr from-green-400/20 via-transparent to-emerald-400/20"
+                          animate={{
+                            opacity: [0.3, 0.6, 0.3],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "easeInOut",
+                            delay: 0.5,
+                          }}
+                        />
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg sm:text-xl font-bold text-green-900">Round Trip</h3>
+                            <div className="p-2 rounded-lg bg-white/50 backdrop-blur-sm">
+                              <Clock className="h-5 w-5 text-green-600" />
+                            </div>
+                          </div>
+                          <div className="mb-4">
+                            <div className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-700 mb-1">
+                              ₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                            </div>
+                            <div className="text-sm font-semibold text-green-700">per kilometer</div>
+                          </div>
+                          <div className="flex items-center p-3 bg-white/60 backdrop-blur-sm rounded-lg">
+                            <div className="p-1.5 rounded-full bg-green-200 mr-2">
+                              <CheckCircle className="h-4 w-4 text-green-700" />
+                            </div>
+                            <div>
+                              <div className="text-xs text-green-600 font-medium">Minimum Distance</div>
+                              <div className="text-sm font-bold text-green-900">{tariffData.minimumKmRoundTrip.replace(/km/gi, '').trim()} km</div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
                     </div>
+
+                    {/* Enhanced driver allowance section */}
+                    <motion.div 
+                      className="relative p-6 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden group/allowance"
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Animated gradient overlay */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-tr from-yellow-400/10 via-transparent to-orange-400/10"
+                        animate={{
+                          opacity: [0.2, 0.5, 0.2],
+                        }}
+                        transition={{
+                          duration: 5,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      
+                      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex items-center">
+                          <div className="p-3 rounded-xl bg-gradient-to-br from-yellow-200 to-orange-200 mr-4 group-hover/allowance:from-yellow-300 group-hover/allowance:to-orange-300 transition-colors duration-300">
+                            <Users className="h-6 w-6 text-yellow-800" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-medium text-yellow-700 mb-1">Driver Allowance</div>
+                            <div className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-700 to-orange-700">
+                              ₹{tariffData.driverAllowance.replace(/[₹$]/g, '').trim()}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center p-3 bg-white/70 backdrop-blur-sm rounded-lg">
+                          <Clock className="h-5 w-5 text-yellow-600 mr-2" />
+                          <span className="text-sm font-semibold text-yellow-900">per day</span>
+                        </div>
+                      </div>
+                    </motion.div>
+
+
                   </CardContent>
                 </Card>
               </motion.div>
@@ -218,48 +450,69 @@ Thank you!`;
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="shadow-lg border-0">
-                  <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <Shield className="h-6 w-6 mr-3 text-admin-primary" />
-                      What's Included
-                    </h2>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">Professional & Experienced Driver</span>
+                <Card className="shadow-xl border-0 overflow-hidden relative group bg-white/80 backdrop-blur-sm">
+                  {/* Gradient accent on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <CardContent className="p-8 sm:p-10 relative z-10">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 group-hover:from-green-200 group-hover:to-emerald-200 transition-colors duration-300">
+                        <Shield className="h-7 w-7 text-green-600" />
                       </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">Clean & Well-maintained Vehicle</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">24/7 Customer Support</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">On-time Pickup & Drop</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">GPS Tracking for Safety</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-700">Comfortable Seating</span>
+                      <div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">What's Included</h2>
+                        <p className="text-sm text-gray-600">Premium features for your comfort</p>
                       </div>
                     </div>
                     
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {[
+                        "Professional & Experienced Driver",
+                        "Clean & Well-maintained Vehicle",
+                        "24/7 Customer Support",
+                        "On-time Pickup & Drop",
+                        "GPS Tracking for Safety",
+                        "Comfortable Seating"
+                      ].map((feature, index) => (
+                        <motion.div
+                          key={index}
+                          className="flex items-center p-3 rounded-xl hover:bg-green-50 transition-colors duration-200 group/item"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                        >
+                          <div className="p-1.5 rounded-full bg-green-100 mr-3 flex-shrink-0 group-hover/item:bg-green-200 transition-colors">
+                            <CheckCircle className="h-5 w-5 text-green-600" />
+                          </div>
+                          <span className="text-gray-700 font-medium">{feature}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
                     {tariffData.additionalCharges && tariffData.additionalCharges.length > 0 && (
-                      <div className="mt-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Additional Services</h3>
-                        <div className="space-y-2">
+                      <div className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                          <div className="p-1.5 rounded-lg bg-blue-200 mr-2">
+                            <Star className="h-4 w-4 text-blue-700" />
+                          </div>
+                          Additional Services
+                        </h3>
+                        <div className="space-y-3">
                           {tariffData.additionalCharges.map((charge, index) => (
-                            <div key={index} className="flex items-center">
-                              <CheckCircle className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
-                              <span className="text-gray-700">{charge}</span>
-                            </div>
+                            <motion.div 
+                              key={index} 
+                              className="flex items-center p-2 rounded-lg hover:bg-white/50 transition-colors"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.4, delay: index * 0.1 }}
+                              viewport={{ once: true }}
+                            >
+                              <div className="p-1 rounded-full bg-blue-100 mr-3 flex-shrink-0">
+                                <CheckCircle className="h-4 w-4 text-blue-600" />
+                              </div>
+                              <span className="text-gray-700 font-medium">{charge}</span>
+                            </motion.div>
                           ))}
                         </div>
                       </div>
@@ -280,35 +533,73 @@ Thank you!`;
                 viewport={{ once: true }}
                 className="sticky top-8"
               >
-                <Card className="shadow-2xl border-0">
-                  <CardContent className="p-8">
-                    <div className="text-center mb-8">
-                      <div className="text-2xl font-bold text-admin-primary mb-1">
-                        ₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km
-                      </div>
-                      <div className="text-gray-600">One-way rate</div>
-                      <div className="text-lg font-semibold text-admin-primary mt-2">
-                        ₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}/km
-                      </div>
-                      <div className="text-gray-600">Round trip rate</div>
+                <Card className="shadow-2xl border-0 overflow-hidden relative group/sidebar">
+                  {/* Gradient accent on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-yellow-500 to-orange-600 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-500 -z-10" 
+                       style={{ padding: '2px' }}>
+                    <div className="absolute inset-[2px] bg-white rounded-lg"></div>
+                  </div>
+                  
+                  <CardContent className="p-6 sm:p-8">
+                    {/* Enhanced pricing display with gradient backgrounds */}
+                    <div className="text-center mb-8 space-y-4">
+                      <motion.div 
+                        className="p-6 bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100 rounded-2xl shadow-md"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">One-way Rate</div>
+                        <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 mb-1">
+                          ₹{tariffData.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                        </div>
+                        <div className="text-sm font-medium text-blue-700">per kilometer</div>
+                      </motion.div>
+                      
+                      <motion.div 
+                        className="p-6 bg-gradient-to-br from-green-50 via-green-100 to-emerald-100 rounded-2xl shadow-md"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="text-xs font-semibold text-green-600 uppercase tracking-wide mb-2">Round Trip Rate</div>
+                        <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-700 mb-1">
+                          ₹{tariffData.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim()}
+                        </div>
+                        <div className="text-sm font-medium text-green-700">per kilometer</div>
+                      </motion.div>
                     </div>
 
-                    <div className="space-y-4 mb-8">
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Vehicle Type</span>
-                        <span className="font-semibold">{tariffData.vehicleType}</span>
+                    {/* Enhanced details list with gradient accents */}
+                    <div className="space-y-3 mb-8">
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <Car className="h-4 w-4 mr-2 text-gray-400 group-hover/item:text-admin-primary transition-colors" />
+                          Vehicle Type
+                        </span>
+                        <span className="font-bold text-gray-900">{tariffData.vehicleType}</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Driver Allowance</span>
-                        <span className="font-semibold">₹{tariffData.driverAllowance.replace(/[₹$]/g, '').trim()}/day</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <Users className="h-4 w-4 mr-2 text-yellow-500 group-hover/item:text-yellow-600 transition-colors" />
+                          Driver Allowance
+                        </span>
+                        <span className="font-bold text-gray-900">₹{tariffData.driverAllowance.replace(/[₹$]/g, '').trim()}/day</span>
                       </div>
-                      <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                        <span className="text-gray-600">Min Distance (One-way)</span>
-                        <span className="font-semibold">{tariffData.minimumKmOneWay.replace(/km/gi, '').trim()} km</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <MapPin className="h-4 w-4 mr-2 text-purple-500 group-hover/item:text-purple-600 transition-colors" />
+                          Min Distance
+                        </span>
+                        <span className="font-bold text-gray-900">{tariffData.minimumKmOneWay.replace(/km/gi, '').trim()} km</span>
                       </div>
-                      <div className="flex justify-between items-center py-3">
-                        <span className="text-gray-600">Availability</span>
-                        <span className="font-semibold text-green-600">Available</span>
+                      <div className="flex justify-between items-center py-4 px-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all duration-300 group/item">
+                        <span className="text-sm font-medium text-gray-600 flex items-center">
+                          <CheckCircle className="h-4 w-4 mr-2 text-green-500 group-hover/item:text-green-600 transition-colors" />
+                          Availability
+                        </span>
+                        <span className="font-bold text-green-600 flex items-center">
+                          <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                          Available
+                        </span>
                       </div>
                     </div>
 
