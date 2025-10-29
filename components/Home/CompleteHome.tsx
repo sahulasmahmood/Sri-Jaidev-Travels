@@ -739,7 +739,7 @@ export default function CompleteHome() {
           />
         </div>
 
-        <div className="container px-6 md:px-8 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl relative z-10">
           {/* Modern Header */}
           <motion.div
             className="flex flex-col items-center justify-center text-center mb-12 sm:mb-16 md:mb-20"

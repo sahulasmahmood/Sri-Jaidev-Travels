@@ -374,7 +374,7 @@ export const Contact = ({ services: propServices }: ContactProps) => {
                           onValueChange={(value) => handleInputChange("service", value)}
                           required
                         >
-                          <SelectTrigger className="h-11 sm:h-12 text-sm sm:text-base border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none transition-all duration-200 bg-white hover:border-orange-300 hover:bg-orange-50/30 rounded-lg shadow-sm focus:shadow-md">
+                          <SelectTrigger className="h-11 sm:h-12 text-sm sm:text-base border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 focus:ring-offset-0 focus:outline-none transition-all duration-200 bg-white hover:border-orange-300 hover:bg-orange-50/30 rounded-lg shadow-sm focus:shadow-md">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
