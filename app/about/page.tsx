@@ -762,12 +762,12 @@ export default function AboutPage() {
                   transition: { duration: 0.3 }
                 }}
               >
-                <Card className="h-full group relative bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <Card className="h-full group relative bg-white border-0 shadow-lg hover:shadow-2xl hover:shadow-admin-primary/20 transition-all duration-300 overflow-hidden">
                   {/* Gradient left border accent */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${item.gradient} transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500`}></div>
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-admin-gradient transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
                   
                   {/* Subtle gradient overlay on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
                   
                   <CardContent className="p-6 sm:p-8 relative z-10">
                     {/* Horizontal layout: Icon on left, content on right */}
@@ -775,7 +775,7 @@ export default function AboutPage() {
                       {/* Icon container with number badge */}
                       <div className="flex-shrink-0 relative">
                         <motion.div
-                          className={`w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 relative overflow-hidden`}
+                          className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-admin-gradient rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-admin-primary/30 transition-all duration-300 relative overflow-hidden"
                           whileHover={{ 
                             rotate: [0, -5, 5, -5, 0],
                             scale: 1.05,
@@ -788,7 +788,7 @@ export default function AboutPage() {
                         </motion.div>
                         
                         {/* Number badge - positioned at top-right of icon */}
-                        <div className={`absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white text-xs font-bold shadow-md ring-2 ring-white`}>
+                        <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-admin-gradient flex items-center justify-center text-white text-xs font-bold shadow-md ring-2 ring-white">
                           {index + 1}
                         </div>
                       </div>
@@ -806,7 +806,7 @@ export default function AboutPage() {
                   </CardContent>
                   
                   {/* Decorative corner element */}
-                  <div className={`absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl ${item.gradient} opacity-0 group-hover:opacity-10 rounded-tl-full transition-opacity duration-500`}></div>
+                  <div className="absolute bottom-0 right-0 w-20 h-20 bg-admin-gradient opacity-0 group-hover:opacity-10 rounded-tl-full transition-opacity duration-500"></div>
                 </Card>
               </motion.div>
             ))}
