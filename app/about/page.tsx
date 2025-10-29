@@ -234,7 +234,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+      <section className="pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-10 md:pb-12 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -320,7 +320,7 @@ export default function AboutPage() {
       </section>
 
       {/* Company Story - Timeline Journey Style */}
-      <section id="story" className="py-20 sm:py-24 md:py-28 lg:py-32 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
+      <section id="story" className="pt-8 sm:pt-10 md:pt-12 pb-12 sm:pb-16 md:pb-20 lg:pb-24 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
         {/* Animated background elements */}
         <motion.div
           className="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-br from-yellow-300/10 to-orange-300/10 rounded-full blur-3xl"
@@ -524,7 +524,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission, Vision, Values */}
-      <section className="py-14 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+      <section className="pt-4 sm:pt-6 md:pt-8 pb-14 sm:pb-16 md:pb-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
