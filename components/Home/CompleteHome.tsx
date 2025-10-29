@@ -382,70 +382,88 @@ export default function CompleteHome() {
           </div>
         </div>
 
-        {/* Content Container */}
+        {/* Content Container - Left Aligned with Stats */}
         <div className="container mx-auto px-4 py-12 sm:px-6 sm:py-16 md:py-20 lg:py-24 xl:px-8 relative z-10 max-w-7xl">
-          <motion.div
-            className="max-w-5xl mx-auto text-center text-white"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            {/* Enhanced Glassmorphic Badge */}
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            {/* Left Content */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              className="lg:col-span-7 text-left text-white"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <Badge className="mb-4 sm:mb-6 md:mb-8 inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-                <Car className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
-                <span className="font-semibold">Welcome to Sri Jaidev Tours & Travels</span>
-              </Badge>
-            </motion.div>
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mb-6"
+              >
+                <Badge className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 py-2.5 text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  <Car className="h-4 w-4" />
+                  <span className="font-semibold">Premium Travel Services</span>
+                </Badge>
+              </motion.div>
 
-            {/* Optional dynamic banner title */}
-            {banner?.title && (
+              {/* Main Heading - Different Structure */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                  <span className="block text-white">Experience Travel</span>
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-admin-primary via-orange-400 to-yellow-400 mt-2">
+                    Like Never Before
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Description - Shorter and Punchier */}
               <motion.p
-                className="text-white/90 text-base sm:text-lg md:text-xl mb-2 sm:mb-3 font-light"
+                className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed max-w-2xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-                {banner.title}
+                Your trusted partner for comfortable journeys across Tamil Nadu. 
+                Professional drivers, modern vehicles, and unmatched service quality.
               </motion.p>
-            )}
 
-            {/* Enhanced Typography - Main Heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
-                <span className="block mb-2 sm:mb-3">Your Journey Begins</span>
-                <span className="block text-transparent bg-clip-text bg-admin-gradient drop-shadow-2xl">
-                  With Excellence
-                </span>
-              </h1>
-            </motion.div>
+              {/* Stats Row - Inline */}
+              <motion.div
+                className="flex flex-wrap gap-6 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Users className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">2000+</div>
+                    <div className="text-xs text-white/70">Happy Clients</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">4.9/5</div>
+                    <div className="text-xs text-white/70">Rating</div>
+                  </div>
+                </div>
+              </motion.div>
 
-            {/* Description with Better Spacing */}
-            <motion.p
-              className="text-sm sm:text-base md:text-lg lg:text-xl mb-8 sm:mb-10 md:mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              Discover seamless travel experiences across Tamil Nadu with our premium taxi services and curated tour packages.
-              We deliver comfort, safety, and reliability on every journey.
-            </motion.p>
-
-            {/* Enhanced CTA Buttons with Better Layout */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
+              {/* CTA Buttons - Left Aligned */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
               <motion.div
                 className="w-full sm:w-auto"
                 whileHover={{ scale: 1.05 }}
@@ -477,7 +495,11 @@ export default function CompleteHome() {
                 </Button>
               </motion.div>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            {/* Right Side - Empty for image visibility on desktop */}
+            <div className="hidden lg:block lg:col-span-5"></div>
+          </div>
         </div>
 
         {/* Loading/No Banner Indicator - Centered */}

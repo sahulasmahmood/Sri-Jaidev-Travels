@@ -102,10 +102,15 @@ export const Testimonials = ({ testimonials = [] }: TestimonialsProps) => {
                 key={`${testimonial._id}-${index}`}
                 className="flex-shrink-0 w-[320px] sm:w-[380px]"
               >
-                <Card className="h-full border-0 shadow-xl bg-white">
-                  <CardContent className="p-6 sm:p-7 relative">
+                <Card className="h-full border-0 shadow-xl bg-white hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-500 group relative overflow-hidden">
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-yellow-400/20 to-orange-400/20 blur-xl" />
+                  </div>
+                  
+                  <CardContent className="p-6 sm:p-7 relative z-10">
                     {/* Quote icon */}
-                    <div className="absolute top-4 right-4 opacity-10">
+                    <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
                       <Quote className="h-16 w-16 text-admin-primary" />
                     </div>
 
@@ -127,7 +132,7 @@ export const Testimonials = ({ testimonials = [] }: TestimonialsProps) => {
                       </div>
 
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 truncate">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient mb-1 truncate transition-all duration-300">
                           {testimonial.name}
                         </h3>
                         <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 mb-2">
