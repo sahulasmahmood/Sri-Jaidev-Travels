@@ -20,7 +20,9 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { useState } from "react";
 import { useContact } from "@/hooks/use-contact";
+import BookingModal from "@/components/BookingModal";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -67,7 +69,12 @@ interface PackageDetailClientProps {
 }
 
 export default function PackageDetailClient({ packageData }: PackageDetailClientProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { contactInfo } = useContact();
+
+  const handleModalBooking = () => {
+    setIsModalOpen(true);
+  };
 
   const handleBookPackage = () => {
     const message = `🏖️ *Package Booking Request*
@@ -637,9 +644,16 @@ Thank you!`;
                         Book via WhatsApp
                       </Button>
                       <Button
-                        onClick={handleCallNow}
+                        onClick={handleModalBooking}
                         variant="outline"
                         className="w-full border-2 border-admin-primary text-admin-primary hover:bg-admin-primary hover:text-white py-6 text-lg font-semibold transition-all duration-300"
+                      >
+                        Quick Booking Form
+                      </Button>
+                      <Button
+                        onClick={handleCallNow}
+                        variant="outline"
+                        className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 py-6 text-lg font-semibold transition-all duration-300"
                       >
                         <Phone className="h-5 w-5 mr-2" />
                         Call for Details
@@ -680,6 +694,13 @@ Thank you!`;
           </div>
         </div>
       </section>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        prefilledService={packageData.title}
+      />
     </div>
   );
 }
