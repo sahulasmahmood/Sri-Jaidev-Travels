@@ -302,7 +302,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <div className="text-base font-semibold text-gray-300">UPI ID:</div>
                 <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors group">
-                  <span className="text-base font-mono text-gray-300 flex-1">vinusree@sbi</span>
+                  <span className="text-base font-mono text-gray-300 flex-1">abc@sbi</span>
                   <Button 
                     variant="ghost" 
                     size="icon" 
