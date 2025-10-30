@@ -4,6 +4,9 @@ import Footer from "@/components/footer";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
 import TariffDetailClient from "@/components/TariffDetailClient";
 
+// Force dynamic rendering to get fresh SEO data on every request
+export const dynamic = 'force-dynamic';
+
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -88,33 +91,4 @@ export default async function TariffDetailPage({ params }: { params: Promise<{ s
       <FloatingContactButtons />
     </div>
   );
-}
-
-// Generate static params for better performance (optional)
-export async function generateStaticParams() {
-  try {
-    // Construct absolute URL for server-side fetching
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/tariff`, {
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to fetch tariffs for static params');
-      return [];
-    }
-    
-    const data = await response.json();
-    const tariffs = data.success ? data.data : [];
-    
-    return tariffs.map((tariff: any) => ({
-      slug: tariff.slug,
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
 }
