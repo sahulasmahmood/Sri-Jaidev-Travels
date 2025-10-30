@@ -392,7 +392,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
-                  {recentLeads.length > 0 ? recentLeads.map((lead) => (
+                  {recentLeads.length > 0 ? recentLeads.slice(0, 3).map((lead) => (
                     <div
                       key={lead._id}
                       className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg hover:shadow-md transition-all duration-200"
