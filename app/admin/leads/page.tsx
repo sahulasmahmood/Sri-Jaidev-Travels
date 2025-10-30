@@ -401,6 +401,8 @@ export default function LeadManager() {
           phone: updatedLead.phone,
           serviceType: updatedLead.serviceType,
           travelDate: updatedLead.travelDate,
+          travelTime: updatedLead.travelTime,
+          returnDate: updatedLead.returnDate,
           pickupLocation: updatedLead.pickupLocation,
           dropLocation: updatedLead.dropLocation,
           passengers: updatedLead.passengers,
@@ -1375,7 +1377,7 @@ Your feedback helps us serve you better! 🙏`;
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="editTravelDate" className="text-sm font-medium text-gray-600">Travel Date</Label>
+                      <Label htmlFor="editTravelDate" className="text-sm font-medium text-gray-600">Pickup Date</Label>
                       <Input
                         id="editTravelDate"
                         type="date"
@@ -1385,7 +1387,7 @@ Your feedback helps us serve you better! 🙏`;
                     </div>
                     {selectedLead.travelTime && (
                       <div className="space-y-2">
-                        <Label htmlFor="editTravelTime" className="text-sm font-medium text-gray-600">Travel Time</Label>
+                        <Label htmlFor="editTravelTime" className="text-sm font-medium text-gray-600">Pickup Time</Label>
                         <Input
                           id="editTravelTime"
                           type="time"
