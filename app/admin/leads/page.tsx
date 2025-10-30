@@ -1287,60 +1287,149 @@ Your feedback helps us serve you better! 🙏`;
             <DialogHeader>
               <DialogTitle className="text-2xl bg-admin-gradient bg-clip-text text-transparent font-bold flex items-center gap-2">
                 <Edit className="h-6 w-6" />
-                Update Lead Status & Details
+                Update Lead Details
               </DialogTitle>
               <p className="text-gray-600 text-sm mt-2">
-                Customer information is read-only. You can only update administrative fields.
+                Edit customer information and administrative details for this lead.
               </p>
             </DialogHeader>
             {selectedLead && (
               <div className="space-y-6 py-4">
-                {/* Read-only Customer Information */}
+                {/* Editable Customer Information */}
                 <div className="bg-gray-50 p-6 rounded-lg border">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                     <User className="h-5 w-5" />
-                    Customer Information (Read-only)
+                    Customer Information (Editable)
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Customer Name</Label>
-                      <p className="text-lg font-semibold text-gray-900">{selectedLead.fullName}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editFullName" className="text-sm font-medium text-gray-600">Customer Name</Label>
+                      <Input
+                        id="editFullName"
+                        value={selectedLead.fullName}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, fullName: e.target.value })}
+                        placeholder="Enter customer name"
+                      />
                     </div>
                     {selectedLead.email && (
-                      <div>
-                        <Label className="text-sm font-medium text-gray-600">Email</Label>
-                        <p className="text-gray-900">{selectedLead.email}</p>
+                      <div className="space-y-2">
+                        <Label htmlFor="editEmail" className="text-sm font-medium text-gray-600">Email</Label>
+                        <Input
+                          id="editEmail"
+                          type="email"
+                          value={selectedLead.email || ""}
+                          onChange={(e) => setSelectedLead({ ...selectedLead, email: e.target.value })}
+                          placeholder="Enter email address"
+                        />
                       </div>
                     )}
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Phone</Label>
-                      <p className="text-gray-900">{selectedLead.phone}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editPhone" className="text-sm font-medium text-gray-600">Phone</Label>
+                      <Input
+                        id="editPhone"
+                        type="tel"
+                        value={selectedLead.phone}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, phone: e.target.value })}
+                        placeholder="Enter phone number"
+                      />
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Service Type</Label>
-                      <p className="text-gray-900">{selectedLead.serviceType}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editServiceType" className="text-sm font-medium text-gray-600">Service Type</Label>
+                      <Select
+                        value={selectedLead.serviceType}
+                        onValueChange={(value) => setSelectedLead({ ...selectedLead, serviceType: value })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder={selectedLead.serviceType || "Select service type"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="One-way Trip">One-way Trip</SelectItem>
+                          <SelectItem value="Round Trip">Round Trip</SelectItem>
+                          <SelectItem value="Airport Taxi">Airport Taxi</SelectItem>
+                          <SelectItem value="Day Rental">Day Rental</SelectItem>
+                          <SelectItem value="Hourly Package">Hourly Package</SelectItem>
+                          <SelectItem value="Local Pickup/Drop">Local Pickup/Drop</SelectItem>
+                          <SelectItem value="Tour Package">Tour Package</SelectItem>
+                          {selectedLead.serviceType && !["One-way Trip", "Round Trip", "Airport Taxi", "Day Rental", "Hourly Package", "Local Pickup/Drop", "Tour Package"].includes(selectedLead.serviceType) && (
+                            <SelectItem value={selectedLead.serviceType}>{selectedLead.serviceType}</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Travel Date</Label>
-                      <p className="text-gray-900">{new Date(selectedLead.travelDate).toLocaleDateString()}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editPickupLocation" className="text-sm font-medium text-gray-600">Pickup Location</Label>
+                      <Input
+                        id="editPickupLocation"
+                        value={selectedLead.pickupLocation}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, pickupLocation: e.target.value })}
+                        placeholder="Enter pickup location"
+                      />
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Passengers</Label>
-                      <p className="text-gray-900">{selectedLead.passengers}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editDropLocation" className="text-sm font-medium text-gray-600">Drop Location</Label>
+                      <Input
+                        id="editDropLocation"
+                        value={selectedLead.dropLocation || ""}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, dropLocation: e.target.value })}
+                        placeholder="Enter drop location"
+                      />
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Pickup Location</Label>
-                      <p className="text-gray-900">{selectedLead.pickupLocation}</p>
+                    <div className="space-y-2">
+                      <Label htmlFor="editTravelDate" className="text-sm font-medium text-gray-600">Travel Date</Label>
+                      <Input
+                        id="editTravelDate"
+                        type="date"
+                        value={selectedLead.travelDate.split('T')[0]}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, travelDate: e.target.value })}
+                      />
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-600">Drop Location</Label>
-                      <p className="text-gray-900">{selectedLead.dropLocation || "Not specified"}</p>
+                    {selectedLead.travelTime && (
+                      <div className="space-y-2">
+                        <Label htmlFor="editTravelTime" className="text-sm font-medium text-gray-600">Travel Time</Label>
+                        <Input
+                          id="editTravelTime"
+                          type="time"
+                          value={selectedLead.travelTime || ""}
+                          onChange={(e) => setSelectedLead({ ...selectedLead, travelTime: e.target.value })}
+                        />
+                      </div>
+                    )}
+                    {selectedLead.returnDate && (
+                      <div className="space-y-2">
+                        <Label htmlFor="editReturnDate" className="text-sm font-medium text-gray-600">Return Date</Label>
+                        <Input
+                          id="editReturnDate"
+                          type="date"
+                          value={selectedLead.returnDate.split('T')[0]}
+                          onChange={(e) => setSelectedLead({ ...selectedLead, returnDate: e.target.value })}
+                        />
+                      </div>
+                    )}
+                    <div className="space-y-2">
+                      <Label htmlFor="editPassengers" className="text-sm font-medium text-gray-600">Passengers</Label>
+                      <Input
+                        id="editPassengers"
+                        type="number"
+                        min="1"
+                        max="50"
+                        value={selectedLead.passengers}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, passengers: parseInt(e.target.value) || 1 })}
+                        placeholder="Number of passengers"
+                      />
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <Label className="text-sm font-medium text-gray-600">Customer Message</Label>
-                    <p className="mt-1 p-3 bg-white rounded border text-gray-900">{selectedLead.message}</p>
-                  </div>
+                  {selectedLead.message && !selectedLead.message.startsWith("Quick booking request") && !selectedLead.message.startsWith("Modal booking request") && (
+                    <div className="mt-4 space-y-2">
+                      <Label htmlFor="editMessage" className="text-sm font-medium text-gray-600">Customer Message</Label>
+                      <Textarea
+                        id="editMessage"
+                        value={selectedLead.message}
+                        onChange={(e) => setSelectedLead({ ...selectedLead, message: e.target.value })}
+                        placeholder="Customer message"
+                        rows={3}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Editable Administrative Fields */}
