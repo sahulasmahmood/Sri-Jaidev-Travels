@@ -283,6 +283,11 @@ export default function PackagesPage() {
       submitFormData.append('featured', formData.featured.toString());
       submitFormData.append('status', formData.status);
       
+      // Add SEO fields
+      submitFormData.append('seoTitle', formData.seoTitle.trim());
+      submitFormData.append('seoDescription', formData.seoDescription.trim());
+      submitFormData.append('seoKeywords', formData.seoKeywords.trim());
+      
       // Add existing image URL if no new file selected
       if (!selectedFiles.mainImage && formData.image) {
         submitFormData.append('existingImage', formData.image);

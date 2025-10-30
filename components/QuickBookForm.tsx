@@ -19,6 +19,7 @@ export default function QuickBookForm() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    passengers: "",
     service: "",
     pickupLocation: "",
     dropLocation: "",
@@ -72,8 +73,8 @@ export default function QuickBookForm() {
         returnDate: formData.returnDate || "",
         pickupLocation: formData.pickupLocation,
         dropLocation: formData.dropLocation,
-        passengers: 1, // Default value
-        message: `Quick booking request for ${formData.service}. Pickup: ${formData.pickupLocation}, Drop: ${formData.dropLocation}, Date: ${formData.travelDate}${formData.travelTime ? `, Time: ${formData.travelTime}` : ''}${formData.returnDate ? `, Return: ${formData.returnDate}` : ''}`,
+        passengers: formData.passengers ? parseInt(formData.passengers) : 1,
+        message: `Quick booking request for ${formData.service}. Pickup: ${formData.pickupLocation}, Drop: ${formData.dropLocation}, Date: ${formData.travelDate}${formData.travelTime ? `, Time: ${formData.travelTime}` : ''}${formData.returnDate ? `, Return: ${formData.returnDate}` : ''}${formData.passengers ? `, Passengers: ${formData.passengers}` : ''}`,
         status: "new",
         priority: "high",
         source: "website",
@@ -121,6 +122,7 @@ Please provide availability and pricing details.`;
       setFormData({
         name: "",
         phone: "",
+        passengers: "",
         service: "",
         pickupLocation: "",
         dropLocation: "",
@@ -369,34 +371,64 @@ Please provide availability and pricing details.`;
               </div>
             </div>
 
-            {/* Return Date (Optional) */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="returnDate"
-                className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-2"
-              >
-                <div className="p-1 rounded-md bg-gradient-to-br from-orange-100 to-yellow-200">
-                  <Calendar className="h-3.5 w-3.5 text-orange-600" />
-                </div>
-                Return Date
-                {formData.service === "Round Trip" ? (
-                  <span className="text-red-500">*</span>
-                ) : (
+            {/* Return Date and Passengers Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {/* Number of Passengers (Optional) */}
+              <div className="space-y-2">
+                <Label
+                  htmlFor="passengers"
+                  className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-2"
+                >
+                  <div className="p-1 rounded-md bg-gradient-to-br from-blue-100 to-blue-200">
+                    <User className="h-3.5 w-3.5 text-blue-600" />
+                  </div>
+                  Number of Passengers
                   <span className="text-gray-400 text-xs font-normal">(Optional)</span>
-                )}
-              </Label>
-              <div className="relative group/input">
-                <Input
-                  id="returnDate"
-                  type="date"
-                  required={formData.service === "Round Trip"}
-                  value={formData.returnDate}
-                  onChange={(e) => handleInputChange("returnDate", e.target.value)}
-                  className="h-11 sm:h-12 text-sm sm:text-base border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none transition-all duration-200 bg-white hover:border-orange-300 hover:bg-orange-50/30 rounded-lg shadow-sm focus:shadow-md pl-4"
-                  min={formData.travelDate || new Date().toISOString().split('T')[0]}
-                  placeholder="Select return date if needed"
-                />
+                </Label>
+                <div className="relative group/input">
+                  <Input
+                    id="passengers"
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={formData.passengers}
+                    onChange={(e) => handleInputChange("passengers", e.target.value)}
+                    placeholder="Enter number of passengers"
+                    className="h-11 sm:h-12 text-sm sm:text-base border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none transition-all duration-200 bg-white hover:border-orange-300 hover:bg-orange-50/30 rounded-lg shadow-sm focus:shadow-md pl-4"
+                  />
+                </div>
               </div>
+              {/* Return Date (Optional) */}
+              <div className="space-y-2">
+                <Label
+                  htmlFor="returnDate"
+                  className="text-gray-800 font-bold text-sm sm:text-base flex items-center gap-2"
+                >
+                  <div className="p-1 rounded-md bg-gradient-to-br from-orange-100 to-yellow-200">
+                    <Calendar className="h-3.5 w-3.5 text-orange-600" />
+                  </div>
+                  Return Date
+                  {formData.service === "Round Trip" ? (
+                    <span className="text-red-500">*</span>
+                  ) : (
+                    <span className="text-gray-400 text-xs font-normal">(Optional)</span>
+                  )}
+                </Label>
+                <div className="relative group/input">
+                  <Input
+                    id="returnDate"
+                    type="date"
+                    required={formData.service === "Round Trip"}
+                    value={formData.returnDate}
+                    onChange={(e) => handleInputChange("returnDate", e.target.value)}
+                    className="h-11 sm:h-12 text-sm sm:text-base border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none transition-all duration-200 bg-white hover:border-orange-300 hover:bg-orange-50/30 rounded-lg shadow-sm focus:shadow-md pl-4"
+                    min={formData.travelDate || new Date().toISOString().split('T')[0]}
+                    placeholder="Select return date if needed"
+                  />
+                </div>
+              </div>
+
+            
             </div>
 
             {/* Info box */}

@@ -25,6 +25,7 @@ export default function BookingModal({ isOpen, onClose, prefilledService, prefil
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    passengers: "",
     service: prefilledService || "",
     pickupLocation: "",
     dropLocation: "",
@@ -109,8 +110,8 @@ export default function BookingModal({ isOpen, onClose, prefilledService, prefil
         returnDate: formData.returnDate || "",
         pickupLocation: formData.pickupLocation,
         dropLocation: formData.dropLocation,
-        passengers: 1, // Default value
-        message: `Modal booking request for ${formData.service}. Pickup: ${formData.pickupLocation}, Drop: ${formData.dropLocation}, Date: ${formData.travelDate}${formData.travelTime ? `, Time: ${formData.travelTime}` : ''}${formData.returnDate ? `, Return: ${formData.returnDate}` : ''}`,
+        passengers: formData.passengers ? parseInt(formData.passengers) : 1,
+        message: `Modal booking request for ${formData.service}. Pickup: ${formData.pickupLocation}, Drop: ${formData.dropLocation}, Date: ${formData.travelDate}${formData.travelTime ? `, Time: ${formData.travelTime}` : ''}${formData.returnDate ? `, Return: ${formData.returnDate}` : ''}${formData.passengers ? `, Passengers: ${formData.passengers}` : ''}`,
         status: "new",
         priority: "high",
         source: "website",
@@ -165,6 +166,7 @@ Please confirm availability and provide final pricing.`;
       setFormData({
         name: "",
         phone: "",
+        passengers: "",
         service: "",
         pickupLocation: "",
         dropLocation: "",
@@ -344,29 +346,54 @@ Please confirm availability and provide final pricing.`;
             </div>
           </div>
 
-          {/* Return Date (Optional) */}
-          <div className="space-y-1.5">
-            <Label htmlFor="returnDate" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
-              <div className="p-0.5 rounded bg-gradient-to-br from-orange-100 to-yellow-200">
-                <Calendar className="h-3 w-3 text-orange-600" />
-              </div>
-              Return Date
-              {formData.service === "Round Trip" ? (
-                <span className="text-red-500 ml-0.5">*</span>
-              ) : (
+          {/* Return Date and Passengers Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+             {/* Number of Passengers (Optional) */}
+            <div className="space-y-1.5">
+              <Label htmlFor="passengers" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-blue-100 to-blue-200">
+                  <User className="h-3 w-3 text-blue-600" />
+                </div>
+                Number of Passengers
                 <span className="text-gray-400 text-xs font-normal ml-0.5">(Optional)</span>
-              )}
-            </Label>
-            <Input
-              id="returnDate"
-              type="date"
-              required={formData.service === "Round Trip"}
-              value={formData.returnDate}
-              onChange={(e) => handleInputChange("returnDate", e.target.value)}
-              className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
-              min={formData.travelDate || new Date().toISOString().split('T')[0]}
-              placeholder="Select return date if needed"
-            />
+              </Label>
+              <Input
+                id="passengers"
+                type="number"
+                min="1"
+                max="50"
+                value={formData.passengers}
+                onChange={(e) => handleInputChange("passengers", e.target.value)}
+                placeholder="Enter number of passengers"
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
+              />
+            </div>
+            {/* Return Date (Optional) */}
+            <div className="space-y-1.5">
+              <Label htmlFor="returnDate" className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+                <div className="p-0.5 rounded bg-gradient-to-br from-orange-100 to-yellow-200">
+                  <Calendar className="h-3 w-3 text-orange-600" />
+                </div>
+                Return Date
+                {formData.service === "Round Trip" ? (
+                  <span className="text-red-500 ml-0.5">*</span>
+                ) : (
+                  <span className="text-gray-400 text-xs font-normal ml-0.5">(Optional)</span>
+                )}
+              </Label>
+              <Input
+                id="returnDate"
+                type="date"
+                required={formData.service === "Round Trip"}
+                value={formData.returnDate}
+                onChange={(e) => handleInputChange("returnDate", e.target.value)}
+                className="h-10 text-sm border-2 border-gray-200 focus:border-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 hover:border-orange-300 rounded-lg"
+                min={formData.travelDate || new Date().toISOString().split('T')[0]}
+                placeholder="Select return date if needed"
+              />
+            </div>
+
+           
           </div>
 
           {/* Info box */}

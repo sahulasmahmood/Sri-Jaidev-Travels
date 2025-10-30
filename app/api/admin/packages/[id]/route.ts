@@ -113,6 +113,9 @@ export async function PUT(
         exclusions: JSON.parse(formData.get("exclusions") as string || "[]"),
         highlights: JSON.parse(formData.get("highlights") as string || "[]"),
         itinerary: JSON.parse(formData.get("itinerary") as string || "[]"),
+        seoTitle: formData.get("seoTitle") as string || "",
+        seoDescription: formData.get("seoDescription") as string || "",
+        seoKeywords: formData.get("seoKeywords") as string || "",
       };
 
       // Extract existing gallery URLs
