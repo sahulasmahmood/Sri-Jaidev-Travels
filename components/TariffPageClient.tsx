@@ -162,13 +162,13 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
         <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
           <div className="text-center mb-12 sm:mb-16 md:mb-20">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 px-2">
-              Our Service
+              Explore Our
               <span className="block text-transparent bg-clip-text bg-admin-gradient">
-                Tariff
+                Vehicle Fleet & Rates
               </span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-xs sm:max-w-xl md:max-w-2xl mx-auto px-2">
-              Choose from our range of travel services with transparent pricing
+              Discover competitive rates for our premium vehicles with clear, upfront pricing
             </p>
           </div>
 
