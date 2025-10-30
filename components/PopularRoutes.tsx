@@ -159,42 +159,58 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
             </div>
           </div>
         ) : (
-          <div className={`grid gap-3 sm:gap-4 justify-center ${
+          <div className={`grid gap-4 sm:gap-5 md:gap-6 justify-center ${
             displayRoutes.length <= 2 
-              ? 'grid-cols-2 max-w-md mx-auto' 
+              ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto' 
               : displayRoutes.length <= 4
-              ? 'grid-cols-2 sm:grid-cols-4 max-w-2xl mx-auto'
-              : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6'
+              ? 'grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto'
+              : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           }`}>
             {displayRoutes.map((route, index) => (
               <motion.div
                 key={route._id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.03 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <button
                   onClick={() => handleBookRoute(route.name)}
-                  className="w-full h-full min-h-[90px] p-4 text-center bg-white border-0 shadow-lg hover:shadow-2xl transition-all duration-300 rounded-xl flex flex-col items-center justify-center gap-2.5 overflow-hidden group relative"
+                  className="w-full h-full p-6 bg-white border border-gray-100 hover:border-transparent shadow-md hover:shadow-2xl transition-all duration-500 rounded-2xl flex items-center gap-4 overflow-hidden group relative"
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Animated gradient border on hover */}
+                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+                  <div className="absolute inset-[2px] bg-white rounded-2xl"></div>
                   
-                  {/* Icon container with gradient background */}
-                  <div className="relative z-10 w-10 h-10 bg-gradient-to-br from-orange-100 to-yellow-100 group-hover:from-white/20 group-hover:to-white/10 rounded-lg flex items-center justify-center transition-all duration-300 shadow-md group-hover:shadow-lg">
-                    <Car className="h-5 w-5 text-admin-primary group-hover:text-white transition-colors duration-300" />
+                  {/* Content */}
+                  <div className="relative z-10 flex items-center gap-4 w-full">
+                    {/* Icon with animated background */}
+                    <motion.div 
+                      className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-admin-primary group-hover:to-admin-secondary rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:shadow-lg relative overflow-hidden"
+                      whileHover={{ rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/50 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                      <MapPin className="h-6 w-6 text-admin-primary group-hover:text-white transition-colors duration-500 relative z-10" />
+                    </motion.div>
+                    
+                    {/* Text content */}
+                    <div className="flex-1 text-left min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-500 truncate">
+                        {route.name}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
+                        Book Now
+                      </p>
+                    </div>
+                    
+                    {/* Arrow icon */}
+                    <ArrowRight className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-admin-primary group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                   
-                  {/* Route name */}
-                  <span className="relative z-10 line-clamp-2 text-center break-words text-sm font-semibold text-gray-900 group-hover:text-white transition-colors duration-300">
-                    {route.name}
-                  </span>
-                  
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-orange-400/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl pointer-events-none"></div>
+                  {/* Subtle glow effect */}
+                  <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"></div>
                 </button>
               </motion.div>
             ))}
