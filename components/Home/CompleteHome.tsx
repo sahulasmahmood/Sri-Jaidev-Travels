@@ -401,7 +401,7 @@ export default function CompleteHome() {
               >
                 <Badge className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white border-0 px-5 py-2.5 text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                   <Car className="h-4 w-4" />
-                  <span className="font-semibold">Premium Travel Services</span>
+                  <span className="font-semibold">Madurai Travel Services</span>
                 </Badge>
               </motion.div>
 

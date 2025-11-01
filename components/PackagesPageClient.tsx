@@ -151,16 +151,7 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className={`h-full hover:shadow-2xl transition-all duration-500 group overflow-hidden border-0 shadow-xl flex flex-col relative ${
-                  pkg.featured ? 'ring-2 ring-green-500/50' : ''
-                }`}>
-                  {/* Gradient border for featured items */}
-                  {pkg.featured && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg -z-10" 
-                         style={{ padding: '2px' }}>
-                      <div className="absolute inset-[2px] bg-white rounded-lg"></div>
-                    </div>
-                  )}
+                <Card className="h-full hover:shadow-2xl transition-all duration-500 group overflow-hidden border-0 shadow-xl flex flex-col relative">
                   
                   <div className="aspect-[3/2] overflow-hidden relative flex-shrink-0">
                     {/* Enhanced image with better overlay */}
@@ -170,36 +161,17 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     
-                    {/* Multi-layer overlay for better contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors duration-500"></div>
+                    {/* Subtle overlay for better contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                     
-                    {/* Redesigned badge with glassmorphism */}
-                    <div className="absolute top-4 left-4">
-                      <Badge className={`${
-                        pkg.featured 
-                          ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 shadow-lg shadow-green-500/30' 
-                          : 'bg-white/20 text-white border-white/30'
-                      } backdrop-blur-md px-3 py-1.5 font-semibold text-xs sm:text-sm`}>
-                        {pkg.featured ? '⭐ Bestseller' : pkg.category}
-                      </Badge>
-                    </div>
-                    
-                    {/* Duration badge - glassmorphic design */}
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-3 py-1.5 font-medium text-xs sm:text-sm">
-                        <Clock className="h-3 w-3 mr-1.5" />
-                        {pkg.duration}
-                      </Badge>
-                    </div>
-                    
-                    {/* Category badge at bottom */}
-                    <div className="absolute bottom-4 left-4">
-                      <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-3 py-1.5 font-medium text-xs sm:text-sm">
-                        <MapPin className="h-3 w-3 mr-1.5" />
-                        {pkg.category}
-                      </Badge>
-                    </div>
+                    {/* Featured badge only */}
+                    {pkg.featured && (
+                      <div className="absolute top-4 left-4">
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0 shadow-lg shadow-green-500/30 backdrop-blur-md px-3 py-1.5 font-semibold text-xs sm:text-sm">
+                          ⭐ Bestseller
+                        </Badge>
+                      </div>
+                    )}
                   </div>
 
                   <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow bg-white group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-orange-50/30 transition-all duration-500">
@@ -214,21 +186,8 @@ export default function PackagesPageClient({ packagesData }: PackagesPageClientP
 
                     {/* Enhanced Price Display */}
                     <div className="mb-5 p-4 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border border-orange-100/50 group-hover:shadow-md transition-shadow duration-300">
-                      <div className="flex items-baseline justify-between">
-                        <div>
-                          <div className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-admin-gradient">
-                            {pkg.price}
-                          </div>
-                          <div className="text-xs sm:text-sm text-gray-500 font-medium">per person</div>
-                        </div>
-                        {pkg.featured && (
-                          <div className="flex items-center gap-1 text-green-600">
-                            <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <span className="text-xs font-semibold">Popular</span>
-                          </div>
-                        )}
+                      <div className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-admin-gradient">
+                        {pkg.price}
                       </div>
                     </div>
 

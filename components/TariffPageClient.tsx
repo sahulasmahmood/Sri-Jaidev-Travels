@@ -216,17 +216,13 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
                       transition={{ duration: 0.3 }}
                       className="h-full flex flex-col"
                     >
-                      <div className="relative h-48 sm:h-52 overflow-hidden flex-shrink-0">
-                        <motion.img
-                          src={tariff.image || '/toyota-innova-crysta-luxury-taxi.png'}
+                      <div className="relative h-56 sm:h-64 overflow-hidden flex-shrink-0">
+                        <img
+                          src={tariff.image}
                           alt={tariff.vehicleName}
-                          className="w-full h-full object-cover"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.6, ease: "easeOut" }}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        
-                        {/* Enhanced multi-layer overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                         
                         {/* Badges with enhanced glassmorphism */}
                         <div className="absolute top-3 left-3">
@@ -240,7 +236,7 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
                         </div>
                         <div className="absolute top-3 right-3">
                           <Badge className="bg-white/30 text-white border-white/40 backdrop-blur-md shadow-lg px-2.5 py-1 text-xs font-semibold">
-                            ₹{formatCurrency(tariff.oneWayRate)}/km
+                            ₹{formatCurrency(tariff.roundTripRate)}/km
                           </Badge>
                         </div>
 
@@ -258,7 +254,7 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
                               {tariff.vehicleName}
                             </h3>
                           </div>
-                          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+                          <p className="text-sm sm:text-base text-gray-600 leading-relaxed line-clamp-3">
                             {tariff.description}
                           </p>
                         </div>
@@ -303,14 +299,6 @@ export default function TariffPageClient({ tariffData }: TariffPageClientProps) 
                             </div>
                             <span className="text-sm text-gray-700 font-medium">Clean & Comfortable</span>
                           </div>
-                          {tariff.additionalCharges && tariff.additionalCharges.length > 0 && (
-                            <div className="flex items-center space-x-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                              <div className="p-1 rounded-full bg-green-100">
-                                <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                              </div>
-                              <span className="text-sm text-gray-700 font-medium line-clamp-1">{tariff.additionalCharges[0]}</span>
-                            </div>
-                          )}
                         </div>
 
                         {/* Enhanced CTA buttons matching packages style */}

@@ -151,7 +151,7 @@ async function sendBookingNotification(lead: any) {
     `;
 
     // Send email to admin
-    const adminEmail = process.env.SMTP_FROM_EMAIL || smtpConfig.fromEmail;
+    const adminEmail =  smtpConfig.fromEmail || process.env.SMTP_FROM_EMAIL
 
     const mailOptions = {
       from: `"${smtpConfig.fromName}" <${smtpConfig.fromEmail}>`,
