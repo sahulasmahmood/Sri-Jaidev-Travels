@@ -201,7 +201,7 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
                         {route.name}
                       </h3>
                       <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
-                        Book Now
+                        Drop Taxi
                       </p>
                     </div>
                     

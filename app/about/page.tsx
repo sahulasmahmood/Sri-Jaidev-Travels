@@ -226,7 +226,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
-              Experience premium travel services that blend comfort, safety, and reliability. 
+              Experience travel services that blend comfort, safety, and reliability. 
               We're committed to making every journey memorable with personalized care and professional service.
             </p>
           </motion.div>

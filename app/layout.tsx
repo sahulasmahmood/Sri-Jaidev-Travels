@@ -13,8 +13,8 @@ import { getThemeServer, hexToHsl } from "@/lib/get-theme-server"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Sri Jaidev Tours & Travels - Premium Travel Services in Tamil Nadu",
-  description: "Experience Tamil Nadu with Sri Jaidev Tours & Travels. Premium travel services including tour packages, airport taxi, day rentals, and more.",
+  title: "Sri Jaidev Tours & Travels - Madurai Travel Services in TamilNadu",
+  description: "Experience Tamil Nadu with Sri Jaidev Tours & Travels. Madurai travel services including tour packages, airport taxi, day rentals, and more.",
   keywords: "Tamil Nadu travel, tour packages, airport taxi, day rental, travel services, Sri Jaidev Travels",
   generator: 'v0.dev'
 }

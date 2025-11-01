@@ -167,7 +167,7 @@ export default function BannersPage() {
 
               <div className="flex items-center gap-3">
                 <Button type="button" onClick={onChooseImage} className="bg-admin-gradient text-white">
-                  <Upload className="mr-2 h-4 w-4 animate-spin" />
+                  <Upload className="mr-2 h-4 w-4" />
                   Choose Image
                 </Button>
                 <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={onFileChange} />
