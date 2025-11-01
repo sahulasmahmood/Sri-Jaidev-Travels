@@ -115,7 +115,7 @@ export default function CompleteHome() {
                   {/* Enhanced glassmorphic price badge */}
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-white/10 text-white border border-white/30 backdrop-blur-md shadow-lg hover:bg-white/20 hover:scale-110 transition-all duration-300 px-3 py-1.5 text-xs sm:text-sm font-semibold">
-                      ₹{service.oneWayRate ? service.oneWayRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim() : 'N/A'}+
+                      ₹{service.roundTripRate ? service.roundTripRate.replace(/[₹$]/g, '').replace(/per\s*km/gi, '').replace(/\/km/gi, '').trim() : 'N/A'}+
                     </Badge>
                   </div>
 
