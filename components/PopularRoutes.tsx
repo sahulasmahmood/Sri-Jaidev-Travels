@@ -161,10 +161,10 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
         ) : (
           <div className={`grid gap-4 sm:gap-5 md:gap-6 justify-center ${
             displayRoutes.length <= 2 
-              ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto' 
+              ? 'grid-cols-2 max-w-2xl mx-auto' 
               : displayRoutes.length <= 4
               ? 'grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto'
-              : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+              : 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
           }`}>
             {displayRoutes.map((route, index) => (
               <motion.div
@@ -176,37 +176,37 @@ export default function PopularRoutes({ showAll = false, limit = 12 }: PopularRo
               >
                 <button
                   onClick={() => handleBookRoute(route.name)}
-                  className="w-full h-full p-6 bg-white border border-gray-100 hover:border-transparent shadow-md hover:shadow-2xl transition-all duration-500 rounded-2xl flex items-center gap-4 overflow-hidden group relative"
+                  className="w-full h-full min-h-[80px] p-3 sm:p-4 bg-white border border-gray-100 hover:border-transparent shadow-md hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden group relative"
                 >
                   {/* Animated gradient border on hover */}
                   <div className="absolute inset-0 bg-admin-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                   <div className="absolute inset-[2px] bg-white rounded-2xl"></div>
                   
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center gap-4 w-full">
+                  {/* Content - Vertical on mobile, horizontal on larger screens */}
+                  <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-2 w-full h-full">
                     {/* Icon with animated background */}
                     <motion.div 
-                      className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-admin-primary group-hover:to-admin-secondary rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:shadow-lg relative overflow-hidden"
+                      className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:from-admin-primary group-hover:to-admin-secondary rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm group-hover:shadow-lg relative overflow-hidden"
                       whileHover={{ rotate: [0, -5, 5, 0] }}
                       transition={{ duration: 0.5 }}
                     >
                       {/* Shine effect */}
                       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/50 to-white/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      <MapPin className="h-6 w-6 text-admin-primary group-hover:text-white transition-colors duration-500 relative z-10" />
+                      <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-admin-primary group-hover:text-white transition-colors duration-500 relative z-10" />
                     </motion.div>
                     
                     {/* Text content */}
-                    <div className="flex-1 text-left min-w-0">
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-500 truncate">
+                    <div className="flex-1 text-center md:text-left min-w-0">
+                      <h3 className="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-admin-gradient transition-all duration-500 line-clamp-2 leading-tight">
                         {route.name}
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300">
+                      <p className="text-[10px] sm:text-xs text-gray-500 group-hover:text-gray-600 transition-colors duration-300 mt-0.5">
                         Drop Taxi
                       </p>
                     </div>
                     
-                    {/* Arrow icon */}
-                    <ArrowRight className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-admin-primary group-hover:translate-x-1 transition-all duration-300" />
+                    {/* Arrow icon - hidden on mobile, visible on larger screens */}
+                    <ArrowRight className="hidden md:block flex-shrink-0 h-4 w-4 text-gray-400 group-hover:text-admin-primary group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                   
                   {/* Subtle glow effect */}
