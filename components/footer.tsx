@@ -274,7 +274,7 @@ export default function Footer() {
             {/* Desktop QR Code - Enhanced with Better Styling */}
             <div className="hidden md:block bg-white/95 backdrop-blur-sm p-5 rounded-2xl mb-6 w-fit shadow-2xl border border-white/20 hover:scale-105 transition-transform duration-300">
               <QRCodeSVG
-                value={`upi://pay?pa=vinusree@sbi&pn=${encodeURIComponent("Sri Jaidev Tours and Travels")}`}
+                value={`upi://pay?pa=9159508242@ybl&pn=${encodeURIComponent("Sri Jaidev Tours and Travels")}`}
                 size={160}
                 level="H"
                 className="rounded-lg"
@@ -285,7 +285,7 @@ export default function Footer() {
             <div className="space-y-4">
               {/* Mobile UPI App Link with Enhanced Styling */}
               <a
-                href="upi://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels"
+                href="upi://pay?pa=9159508242@ybl&pn=SriJaidev%20Tours%20and%20Travels"
                 className="md:hidden flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 hover:from-green-500/20 hover:to-emerald-500/20 rounded-xl transition-all duration-300 border border-green-500/30 hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/20 group"
               >
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -302,13 +302,13 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <div className="text-base font-semibold text-gray-300">UPI ID:</div>
                 <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/10 hover:border-white/20 transition-colors group">
-                  <span className="text-base font-mono text-gray-300 flex-1">abc@sbi</span>
+                  <span className="text-base font-mono text-gray-300 flex-1">9159508242@ybl</span>
                   <Button 
                     variant="ghost" 
                     size="icon" 
                     className="h-9 w-9 hover:bg-white/10 rounded-lg group-hover:scale-110 transition-transform duration-300"
                     onClick={() => {
-                      navigator.clipboard.writeText("vinusree@sbi");
+                      navigator.clipboard.writeText("9159508242@ybl");
                       toast({
                         title: "UPI ID Copied",
                         description: "UPI ID has been copied to clipboard",
@@ -323,21 +323,21 @@ export default function Footer() {
               {/* Payment Apps Links with Enhanced Styling */}
               <div className="flex flex-wrap gap-3">
                 <a
-                 /*  href="phonepe://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
+                  href="phonepe://pay?pa=9159508242@ybl&pn=SriJaidev%20Tours%20and%20Travels"
                   className="flex items-center gap-2 px-5 py-3 bg-admin-gradient hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/30 rounded-xl transition-all duration-300 group hover:scale-105"
                 >
                   <span className="text-sm font-semibold text-white">PhonePe</span>
                   <ArrowRight className="h-4 w-4 text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
                 <a
-                  /* href="gpay://upi/pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
+                  href="gpay://upi/pay?pa=9159508242@ybl&pn=SriJaidev%20Tours%20and%20Travels"
                   className="flex items-center gap-2 px-5 py-3 bg-admin-gradient hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/30 rounded-xl transition-all duration-300 group hover:scale-105"
                 >
                   <span className="text-sm font-semibold text-white">Google Pay</span>
                   <ArrowRight className="h-4 w-4 text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
                 <a
-                  /* href="paytmmp://pay?pa=vinusree@sbi&pn=SriJaidev%20Tours%20and%20Travels" */
+                  href="paytmmp://pay?pa=9159508242@ybl&pn=SriJaidev%20Tours%20and%20Travels"
                   className="flex items-center gap-2 px-5 py-3 bg-admin-gradient hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/30 rounded-xl transition-all duration-300 group hover:scale-105"
                 >
                   <span className="text-sm font-semibold text-white">Paytm</span>
